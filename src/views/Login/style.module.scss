@@ -1,0 +1,33 @@
+@import '@scss/_global.scss';
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.body{
+    height: 100vh;
+    width: 100vw;
+    // background-color: #76b852;
+    background-color: $green;
+    .loginBox{
+        position: absolute;
+        height: 500px;
+        width: 400px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        box-shadow: 10px 10px 12px 0px #507b39;
+        .login_form{
+            height: 100%;
+            width: 100%;
+            // background-color: rebeccapurple;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .input{
+                width: 220px;
+            }
+        }
+    }
+}
