@@ -1,10 +1,9 @@
-import axios from 'axios';
 import getApi from "../base/request";
 import ApiConstants from '../constants/apiConstants';
 
-export const getUserInfo = (params, callback) => {
-    return getApi(ApiConstants.userInfo, params, "POST")
+export const Login = (params, callback) => {
+    return getApi(ApiConstants.login, params, "POST")
 }
-export const load = (params, callback) => {
-    return getApi(ApiConstants.allUser, params, "POST")
+export const userList = (params, callback) => {
+    return getApi(ApiConstants.userList, params, "POST")
 }

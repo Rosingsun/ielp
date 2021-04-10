@@ -1,22 +1,6 @@
 @charset "utf-8";
 
-//主要色调--冷色调
-$green:#76b852;//绿色
-$white:"#fff";//白色
-$gray:"#efefef";//灰色
-$blue:"#03a9f4";//蓝色
-$purple:"#e9bfff";
-
+$shadow:#072a4a;
+//重新定义样式
 :global{
-    .ant-btn-primary{
-        background-color: $green;
-        border-color: $green;
-    }
-    a{
-        color: $green;
-    }
-    .ant-checkbox-checked .ant-checkbox-inner{
-        background-color: $green;
-        border-color: $green;
-    }
 }

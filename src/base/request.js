@@ -1,7 +1,5 @@
 import axios from 'axios';
-import qs from 'qs';
 import { message } from 'antd';
-import * as state from "../constants/statusCode.js";
 //开发环境与产品环境的url
 // const devBaseURL = 'localhost:9981';
 // const proBaseURL = 'localhost:9981';
@@ -50,9 +48,10 @@ const getApi = (url, params, method) => {
         .then((res) => {
             return res;
         }).catch((err) => {
+            message.error('接口发生错误');
             return err;
         });
-        // return data
+        return data
 }
 // const spacialGetApi(url,params,method){
 

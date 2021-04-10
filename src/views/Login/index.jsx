@@ -1,27 +1,45 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Checkbox, message } from 'antd';
-import s from "./style.module.scss";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { createHashHistory } from 'history'; // hash路由
+import { withRouter } from 'react-router-dom';
+import moment from 'moment';
+import s from "./style.module.scss";
 import * as user from "../../actions/user";
-const history = createHashHistory();
-
-export default class Login extends Component {
+let storage = window.localStorage;
+ class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
     }
   }
+  componentWillMount() {
+  }
+  
   onFinish = (values) => {
-   user.getUserInfo(values).then((res)=>{
-      if(res.data.state=="登录成功"){
-        // history.push('/Intro');
-        this.props.history.push("/Intro")
-      }else{
+   let data={
+     'username':values.username,
+     'password':values.password,
+     'loadTime':moment().format('YYYY-MM-DD hh:mm:ss')
+   };
+    user.Login(data).then((res) => {
+      console.log("resres",res)
+      if (res && res.data.state == "登录成功") {
+        message.success(res.data.state)
+        this.props.onLoaded(true);
+        this.props.history.push("/Home");
+        // return(<Redirect to="/Home"/>)
+      } else {
         message.warning(res.data.state);
+        this.props.onLoaded(false);
       }
-   });
+    });
+    if (values.remember) {
+      storage.username = values.username;
+      storage.password = values.password;
+    } else {
+      storage.removeItem("username");
+      storage.removeItem("password");
+    }
   };
   render() {
     return (
@@ -32,6 +50,8 @@ export default class Login extends Component {
             className={s.login_form}
             initialValues={{
               remember: true,
+              username:storage.username,
+              password:storage.password
             }}
             onFinish={this.onFinish}
           >
@@ -43,12 +63,13 @@ export default class Login extends Component {
                   message: '请输入用户名!',
                 },
               ]}
-
             >
               <Input
                 className={s.input}
                 prefix={<UserOutlined className={s.site_form_item_icon} />}
-                placeholder="用户名" />
+                placeholder="用户名"
+                // defaultValue={this.state.username}
+              />
             </Form.Item>
             <Form.Item
               name="password"
@@ -64,6 +85,7 @@ export default class Login extends Component {
                 prefix={<LockOutlined className={s.site_form_item_icon} />}
                 type="password"
                 placeholder="密码"
+                // defaultValue={this.state.password}
               />
             </Form.Item>
             <Form.Item>
@@ -82,3 +104,4 @@ export default class Login extends Component {
     )
   }
 }
+export default withRouter(Login)

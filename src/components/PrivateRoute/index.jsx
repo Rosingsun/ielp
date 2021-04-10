@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import routesConfig from "@src/route";
-import { Login } from "@views/index";
 // function PageConfig() {
 class PageConfig extends Component {
   render() {
@@ -13,6 +12,7 @@ class PageConfig extends Component {
               return (
                 <Route
                   path={route.path}
+                  history={route.path}
                   render={props => (
                     <route.component {...props} routes={route.routes} />
                   )}
