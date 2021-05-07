@@ -29,8 +29,6 @@ public class UserController {
         page.setRecords(list);
         return page;
     }
-
-
     @RequestMapping("/selectUserList")
     public List<User> selectUserList() {
         return userService.selectUserList();

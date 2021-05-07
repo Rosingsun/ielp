@@ -6,7 +6,3 @@ export const HTTP_STATUS = {
     PAGE_NOT_FOUND: 404, // 页面未找到
     OPERATER_ERROR: 500,//操作失败
 }
-//到时候再看两种导出类型不同之处
-// module.exports={
-
-// }

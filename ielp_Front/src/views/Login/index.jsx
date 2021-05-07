@@ -6,7 +6,7 @@ import moment from 'moment';
 import s from "./style.module.scss";
 import * as user from "../../actions/user";
 let storage = window.localStorage;
- class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -14,32 +14,33 @@ let storage = window.localStorage;
   }
   componentWillMount() {
   }
-  
+
   onFinish = (values) => {
-   let data={
-     'username':values.username,
-     'password':values.password,
-     'loadTime':moment().format('YYYY-MM-DD hh:mm:ss')
-   };
-    user.Login(data).then((res) => {
-      console.log("resres",res)
-      if (res && res.data.state == "登录成功") {
-        message.success(res.data.state)
-        this.props.onLoaded(true);
-        this.props.history.push("/Home");
-        // return(<Redirect to="/Home"/>)
-      } else {
-        message.warning(res.data.state);
-        this.props.onLoaded(false);
-      }
-    });
-    if (values.remember) {
-      storage.username = values.username;
-      storage.password = values.password;
-    } else {
-      storage.removeItem("username");
-      storage.removeItem("password");
-    }
+    this.props.onLoaded(true);
+    // let data = {
+    //   'username': values.username,
+    //   'password': values.password,
+    //   'loadTime': moment().format('YYYY-MM-DD hh:mm:ss')
+    // };
+    // user.Login(data).then((res) => {
+    //   console.log("resres", res)
+    //   if (res && res.data.state == "登录成功") {
+    //     message.success(res.data.state)
+    //     this.props.onLoaded(true);
+    //     this.props.history.push("/Home");
+    //     // return(<Redirect to="/Home"/>)
+    //   } else {
+    //     message.warning(res.data.state);
+    //     this.props.onLoaded(false);
+    //   }
+    // });
+    // if (values.remember) {
+    //   storage.username = values.username;
+    //   storage.password = values.password;
+    // } else {
+    //   storage.removeItem("username");
+    //   storage.removeItem("password");
+    // }
   };
   render() {
     return (
@@ -50,8 +51,8 @@ let storage = window.localStorage;
             className={s.login_form}
             initialValues={{
               remember: true,
-              username:storage.username,
-              password:storage.password
+              username: storage.username,
+              password: storage.password
             }}
             onFinish={this.onFinish}
           >
@@ -68,7 +69,7 @@ let storage = window.localStorage;
                 className={s.input}
                 prefix={<UserOutlined className={s.site_form_item_icon} />}
                 placeholder="用户名"
-                // defaultValue={this.state.username}
+              // defaultValue={this.state.username}
               />
             </Form.Item>
             <Form.Item
@@ -85,7 +86,7 @@ let storage = window.localStorage;
                 prefix={<LockOutlined className={s.site_form_item_icon} />}
                 type="password"
                 placeholder="密码"
-                // defaultValue={this.state.password}
+              // defaultValue={this.state.password}
               />
             </Form.Item>
             <Form.Item>

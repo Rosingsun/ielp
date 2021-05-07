@@ -7,3 +7,5 @@ export { default as Data } from './Data/index.jsx';//介绍
 export {default as userList} from './userList/index.jsx';//用户列表
 
 export{default as loginOute} from "./loginOute/index.jsx"//账号登录出去
+
+export{default as translate} from "./translate/index.jsx"//账号登录出去

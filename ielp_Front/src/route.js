@@ -36,6 +36,12 @@ const routesConfig = [
     component: page.loginOute,
     title:"退出登录",
     acehe:true,
+  },
+  {
+    path: "/translate",
+    component: page.translate,
+    title:"翻译页面",
+    acehe:true,
   }
 ];
 export default routesConfig;
