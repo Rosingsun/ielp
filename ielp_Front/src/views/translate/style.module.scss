@@ -1,1 +1,68 @@
-@import '@scss/_global.scss';
+@import "@scss/_global.scss";
+.body {
+  height: 100vh;
+  background-color: rgba(68, 57, 109, 1);
+  overflow: hidden;
+  position: relative;
+  padding-top: 0px;
+}
+.translateBox {
+  height: 50vh;
+  width: 60vw;
+  margin-left: 20vw;
+  background-color: #fff;
+  border-radius: 20px;
+  margin-top: 20vh;
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  .left {
+    width: 50%;
+    height: 100%;
+    /* background: red; */
+    border-right: inset;
+    :global{
+      .ant-btn-primary{
+        background-color: rgb(41,0,100);
+        border: none;
+        border-radius: 3px;
+      }
+    }
+    .leftTop {
+      height: 50%;
+      width: 100%;
+      border-bottom: inset;
+
+      .topChoic {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 95%;
+      }
+      .Input {
+      }
+    }
+  }
+  .right {
+    width: 50%;
+    height: 100%;
+
+    // background: red;
+    // border-right:inset;
+    .rightTop {
+      height: 70%;
+      width: 100%;
+      border-bottom: inset;
+      .content {
+        margin-left: 5%;
+        height: 95%;
+        width: 90%;
+        border:1px solid #cacaca;
+        border-radius: 5px;
+        padding: 20px;
+      }
+    }
+    .rightBtm {
+    }
+  }
+}
