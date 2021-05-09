@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="post" th:action="@{/admin/login}">
+    管理员登陆测试
+    <br/>
+    <label>
+        账号
+        <input type="text" name="adminName">
+        <br />
+        密码
+        <input type="password" name="adminPassWord">
+    </label>
+    <br />
+    <button type="submit">登录</button>
+</form>
+
+<br/>
+<br/>
+<br/>
+
+<form method="post" th:action="@{/admin/register}">
+    管理员注册测试
+    <br/>
+    <label>
+        账号（邮箱或者手机）<br/>
+        <input type="text" name="adminName">
+        <br />
+        密码
+        <input type="password" name="adminPassWord">
+    </label>
+    <br />
+    <button type="submit">注册</button>
+</form>
+
+</body>
+</html>

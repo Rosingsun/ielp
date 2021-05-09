@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminServiceImpl implements AdminService {
 
-    @Autowired
-    AdminMapper adminMapper;
+    final AdminMapper adminMapper;
+
+    public AdminServiceImpl(AdminMapper adminMapper) {
+        this.adminMapper = adminMapper;
+    }
 
     @Override
     public Boolean login(String accNumber, String passWord) {

@@ -27,6 +27,7 @@ public class TranslateServiceImpl implements TranslateService {
     public void translateWord(User user, String from, String to, String translatedWords) {
         Translate translate = new Translate();
 
+        // 将一些数据放入
         translate.setLanguageFrom(from);
         translate.setLanguageTo(to);
 

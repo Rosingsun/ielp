@@ -1,20 +1,38 @@
 package com.company.ielp.app.controller;
 
+import com.company.ielp.app.model.Admin;
 import com.company.ielp.app.service.AdminService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@RestController
+@Slf4j
+@Controller
 public class AdminController {
-    @Autowired
-    AdminService adminService;
+    final AdminService adminService;
 
-    @GetMapping("/admin/login")
-    boolean login(
-            @RequestParam(name = "accNumber") String accNumber,
-            @RequestParam(name = "passWord") String passWord) {
-        return adminService.login(accNumber, passWord);
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
+    }
+
+    @GetMapping("/admin/testPage")
+    public String testPage() {
+        return "test";
+    }
+
+    @PostMapping("/admin/login")
+    @ResponseBody
+    public String login(Admin admin) {
+        log.info(admin.toString());
+        return admin.toString();
+    }
+
+    @PostMapping("/admin/register")
+    @ResponseBody
+    public String register(Admin admin) {
+        log.info(admin.toString());
+        return admin.toString();
     }
 }
