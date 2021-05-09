@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.ielp.app.mapper.UserMapper">
+
+    <select id="login" resultType="com.company.ielp.app.model.User">
+        SELECT * FROM `user` WHERE email = #{accNumber} AND pass_word = #{passWord}
+    </select>
+    <!--检验邮箱或者手机号是否被使用-->
+    <select id="beUsed" resultType="com.company.ielp.app.model.User">
+        SELECT * FROM `user` WHERE email = #{accNumber} OR phone_number = #{accNumber}
+    </select>
+    <!--读取最后一行，为实现一些奇怪的想法-->
+    <select id="lastId" resultType="int">
+        SELECT id FROM `user` ORDER BY id DESC LIMIT 1
+    </select>
+<!--可能会被用于优化性能，但貌似没必要-->
+<!--    &lt;!&ndash;加一&ndash;&gt;-->
+<!--    <select id="addClockInContinuity" resultType="int">-->
+<!--        UPDATE `user` SET clock_in_continuity=clock_in_continuity+1 WHERE id=#{id}-->
+<!--    </select>-->
+<!--    &lt;!&ndash;清零&ndash;&gt;-->
+<!--    <select id="clearClockInContinuity" resultType="int">-->
+<!--        UPDATE `user` SET clock_in_continuity=0 WHERE id=#{id}-->
+<!--    </select>-->
+<!--    &lt;!&ndash;加一&ndash;&gt;-->
+<!--    <select id="addClockInTotal" resultType="int">-->
+<!--        UPDATE `user` SET clock_in_total=clock_in_total+1 WHERE id=#{id}-->
+<!--    </select>-->
+<!--    &lt;!&ndash;加一&ndash;&gt;-->
+<!--    <select id="addStudyTime" resultType="int">-->
+<!--        UPDATE `user` SET study_time=study_time+1 WHERE id=#{id}-->
+<!--    </select>-->
+<!--    &lt;!&ndash;加一&ndash;&gt;-->
+<!--    <select id="addIdentifyImg" resultType="int">-->
+<!--        UPDATE `user` SET identify_img=identify_img+1 WHERE id=#{id}-->
+<!--    </select>-->
+
+</mapper>
