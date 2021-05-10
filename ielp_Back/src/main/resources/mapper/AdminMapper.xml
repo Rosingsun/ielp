@@ -7,5 +7,13 @@
     <select id="login" resultType="com.company.ielp.app.model.Admin">
         SELECT * FROM `admin` WHERE admin_name = #{accNumber} AND pass_word = #{passWord}
     </select>
+    
+    <select id="isAdminExist" resultType="com.company.ielp.app.model.Admin">
+        SELECT * FROM `admin` WHERE admin_name = #{adminName}
+    </select>
+
+    <select id="lastAdmin" resultType="com.company.ielp.app.model.Admin">
+        SELECT id FROM `admin` ORDER BY id DESC LIMIT 1
+    </select>
 
 </mapper>

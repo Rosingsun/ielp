@@ -6,6 +6,12 @@
 2. 等待Maven仓库下载完成
 3. 运行即可
 
+## 管理员测试界面
+
+访问http://localhost:8080/admin/testPage
+
+登陆测试界面，进行各项测试
+
 ## 提供接口
 
 `AdminController`

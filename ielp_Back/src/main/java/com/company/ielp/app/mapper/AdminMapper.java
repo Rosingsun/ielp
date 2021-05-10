@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AdminMapper extends BaseMapper<Admin> {
     Admin login(String accNumber, String passWord);
+
+    Admin isAdminExist(String adminName);
 }

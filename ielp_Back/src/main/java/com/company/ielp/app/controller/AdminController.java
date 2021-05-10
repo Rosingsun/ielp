@@ -25,14 +25,33 @@ public class AdminController {
     @PostMapping("/admin/login")
     @ResponseBody
     public String login(Admin admin) {
-        log.info(admin.toString());
-        return admin.toString();
+        Admin login = adminService.login(admin);
+
+        boolean isLogin = (login != null);
+
+        String s = String.format("用户：{%s}登陆状态：" + isLogin, login);
+
+        log.info(s);
+        return s;
     }
 
     @PostMapping("/admin/register")
     @ResponseBody
     public String register(Admin admin) {
-        log.info(admin.toString());
-        return admin.toString();
+        log.info("注册信息：{}", admin.toString());
+
+        Admin registerAdmin = adminService.register(admin);
+
+        String s;
+
+        if (registerAdmin == null) {
+            s = "注册失败，用户已存在！";
+            log.info(s);
+            return s;
+        }
+
+        s = String.format("注册用户：{%s}", registerAdmin);
+        log.info(s);
+        return s;
     }
 }
