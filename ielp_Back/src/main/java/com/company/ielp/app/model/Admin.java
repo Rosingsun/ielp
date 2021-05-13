@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * 管理员
+ */
 @Data
 @ToString
 public class Admin {

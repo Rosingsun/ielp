@@ -1,6 +1,8 @@
 package com.company.ielp.app;
 
 import cn.hutool.core.lang.Validator;
+import com.company.ielp.app.model.translate.Translate;
+import com.company.ielp.app.model.translate.TranslateCollection;
 import com.company.ielp.app.utils.CheckUtil;
 import org.junit.jupiter.api.Test;
 
@@ -30,4 +32,11 @@ public class UtilsTest {
         Date date = new Date();
         System.out.println(date);
     }
+
+    @Test
+    public void translateTest() {
+        Translate t = new TranslateCollection();
+    }
+
+
 }

@@ -99,5 +99,38 @@
     <button type="submit">提交</button>
 </form>
 
+<br/>
+<br/>
+<br/>
+
+<form method="post" th:action="@{/collection}">
+    收藏一条历史记录
+    <br/>
+    <label>
+        历史记录ID<br/>
+        <input type="text" name="translateHistoryId"> <br/>
+    </label>
+    <br />
+    <button type="submit">提交</button>
+</form>
+
+<br/>
+<br/>
+<br/>
+
+<form method="get" th:action="@{/admin/getUserTranslateCollection}">
+    获取用户所有收藏
+    <br/>
+    <label>
+        用户ID<br/>
+        <input type="text" name="userId"> <br/>
+    </label>
+    <br />
+    <button type="submit">提交</button>
+</form>
+
+
+
+
 </body>
 </html>
