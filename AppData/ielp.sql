@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 10/05/2021 15:46:16
+ Date: 13/05/2021 17:02:49
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,7 @@ CREATE TABLE `admin`  (
   `admin_name` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `pass_word` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
@@ -36,10 +36,40 @@ INSERT INTO `admin` VALUES (2, 'zzddadmin', '123456');
 INSERT INTO `admin` VALUES (7, '1', '1');
 
 -- ----------------------------
--- Table structure for translate
+-- Table structure for translate_collection
 -- ----------------------------
-DROP TABLE IF EXISTS `translate`;
-CREATE TABLE `translate`  (
+DROP TABLE IF EXISTS `translate_collection`;
+CREATE TABLE `translate_collection`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '收藏信息，与翻译保持一致',
+  `language_from` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '翻译语种（我输入的语种）',
+  `language_to` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '目标语种（我想翻译成什么语言）',
+  `translated_words` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '翻译内容（我想翻译的内容）',
+  `translated_time` datetime NULL DEFAULT NULL COMMENT '翻译的时间（我翻译的时间）',
+  `pic_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '对应图片的路径（翻译查询到的图片）',
+  `user_id` int UNSIGNED NULL DEFAULT NULL COMMENT '用户id（谁翻译的）',
+  `collection_time` datetime NULL DEFAULT NULL COMMENT '收藏时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `uid`(`user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of translate_collection
+-- ----------------------------
+INSERT INTO `translate_collection` VALUES (1, 'english', '中文', 'a', '2021-05-09 17:12:15', NULL, 1, '2021-05-13 13:33:39');
+INSERT INTO `translate_collection` VALUES (2, '中文', 'English', 'hello', '2021-05-09 18:52:12', '', 1, '2021-05-13 13:33:41');
+INSERT INTO `translate_collection` VALUES (3, '中文', 'English', 'hello', '2021-05-09 18:54:10', '', 1, '2021-05-13 13:33:41');
+INSERT INTO `translate_collection` VALUES (5, '中文', 'English', 'hello', '2021-05-13 09:49:21', NULL, 1, '2021-05-13 13:33:41');
+INSERT INTO `translate_collection` VALUES (6, '中文', 'English', 'hello', '2021-05-13 09:49:26', NULL, 2, '2021-05-13 13:33:41');
+INSERT INTO `translate_collection` VALUES (7, '中文', '英文', 'hello', '2021-05-13 09:49:10', NULL, 2, '2021-05-13 13:33:41');
+INSERT INTO `translate_collection` VALUES (8, '中文', 'English', 'hello', '2021-05-13 13:34:08', NULL, 1, '2021-05-13 13:33:41');
+INSERT INTO `translate_collection` VALUES (9, '中文', 'English', 'hello', '2021-05-13 12:53:11', NULL, 1, '2021-05-13 13:33:41');
+INSERT INTO `translate_collection` VALUES (10, '中文', 'Engilish', '你好666', '2021-05-13 13:36:09', NULL, 1, '2021-05-13 13:36:31');
+
+-- ----------------------------
+-- Table structure for translate_history
+-- ----------------------------
+DROP TABLE IF EXISTS `translate_history`;
+CREATE TABLE `translate_history`  (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '翻译词条的id（该条翻译的id）',
   `language_from` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '翻译语种（我输入的语种）',
   `language_to` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '目标语种（我想翻译成什么语言）',
@@ -49,14 +79,20 @@ CREATE TABLE `translate`  (
   `user_id` int UNSIGNED NULL DEFAULT NULL COMMENT '用户id（谁翻译的）',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `uid`(`user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of translate
+-- Records of translate_history
 -- ----------------------------
-INSERT INTO `translate` VALUES (1, 'english', '中文', 'a', '2021-05-09 17:12:15', NULL, 1);
-INSERT INTO `translate` VALUES (2, '6', '7', 'hello', '2021-05-09 18:52:12', '', 1);
-INSERT INTO `translate` VALUES (3, '6', '7', 'hello', '2021-05-09 18:54:10', '', 1);
+INSERT INTO `translate_history` VALUES (1, 'english', '中文', 'a', '2021-05-09 17:12:15', NULL, 1);
+INSERT INTO `translate_history` VALUES (2, '中文', 'English', 'hello', '2021-05-09 18:52:12', '', 1);
+INSERT INTO `translate_history` VALUES (3, '中文', 'English', 'hello', '2021-05-09 18:54:10', '', 1);
+INSERT INTO `translate_history` VALUES (5, '中文', 'English', 'hello', '2021-05-13 09:49:21', NULL, 1);
+INSERT INTO `translate_history` VALUES (6, '中文', 'English', 'hello', '2021-05-13 09:49:26', NULL, 2);
+INSERT INTO `translate_history` VALUES (7, '中文', '英文', 'hello', '2021-05-13 09:49:10', NULL, 2);
+INSERT INTO `translate_history` VALUES (8, '中文', 'English', 'hello', NULL, NULL, 1);
+INSERT INTO `translate_history` VALUES (9, '中文', 'English', 'hello', '2021-05-13 12:53:11', NULL, 1);
+INSERT INTO `translate_history` VALUES (10, '中文', 'Engilish', '你好666', '2021-05-13 13:36:09', NULL, 1);
 
 -- ----------------------------
 -- Table structure for translate_word_picture
@@ -72,6 +108,7 @@ CREATE TABLE `translate_word_picture`  (
 -- ----------------------------
 -- Records of translate_word_picture
 -- ----------------------------
+INSERT INTO `translate_word_picture` VALUES (1, '1', '2');
 
 -- ----------------------------
 -- Table structure for user

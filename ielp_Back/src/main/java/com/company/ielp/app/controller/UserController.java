@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
+/**
+ * 为前端的用户操作提供接口
+ * @author 幕冬儿
+ */
 @Slf4j
 @RestController
 public class UserController {
@@ -85,6 +89,4 @@ public class UserController {
         log.info(s);
         return s;
     }
-
-
 }

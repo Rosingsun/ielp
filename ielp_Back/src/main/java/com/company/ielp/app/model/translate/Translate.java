@@ -5,6 +5,13 @@ import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.util.Date;
 
+/**
+ * 翻译主类，包含了一条翻译记录的所有信息。
+ *
+ * @author 幕冬儿
+ * @see TranslateCollection
+ * @see TranslateHistory
+ */
 public class Translate {
     @TableId(type= IdType.AUTO)
     protected Integer id;

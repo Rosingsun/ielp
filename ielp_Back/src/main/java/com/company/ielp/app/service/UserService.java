@@ -4,6 +4,11 @@ import com.company.ielp.app.model.User;
 
 import java.util.List;
 
+/**
+ * 为用户提供相关服务
+ * @author 幕冬儿
+ * @see com.company.ielp.app.service.impl.UserServiceImpl
+ */
 public interface UserService {
 
     /**
@@ -27,10 +32,25 @@ public interface UserService {
      */
     Boolean login(String accNumber, String passWord);
 
+    /**
+     * 判断这个用户是否存在
+     * @param accNumber 用户名
+     * @return 成功与否
+     */
     Boolean beUsed(String accNumber);
 
+    /**
+     * 注册功能
+     * @param accNumber 账号
+     * @param passWord 密码
+     */
     void register(String accNumber, String passWord);
 
+    /**
+     * 更新
+     * @param user 用户
+     * @return 值
+     */
     int updateById(User user);
 
     // 持续打卡时间+1

@@ -3,7 +3,9 @@ package com.company.ielp.app.model.translate;
 import java.util.Date;
 
 /**
- * 用户收藏
+ * 用户收藏，继承自Translate，新增收藏时间
+ * @author 幕冬儿
+ * @see Translate
  */
 public class TranslateCollection extends Translate {
 

@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * 用户
+ * @author 幕冬儿
  */
 @Data
 public class User {
