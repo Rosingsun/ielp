@@ -13,6 +13,7 @@ public interface TranslateService {
      */
     List<Translate> getTranslateHistoryByUid(int userId);
 
-    void translateWord(User user, String from, String to, String translatedWords);
+    void translateWord(Translate translate);
+
 
 }

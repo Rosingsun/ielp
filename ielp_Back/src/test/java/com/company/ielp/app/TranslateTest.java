@@ -27,8 +27,6 @@ public class TranslateTest {
 
     @Test
     void insertTest() {
-        User user = userService.getUserById(1);
-
-        translateService.translateWord(user, "6", "7", "hello");
+//        User user = userService.getUserById(1);
     }
 }

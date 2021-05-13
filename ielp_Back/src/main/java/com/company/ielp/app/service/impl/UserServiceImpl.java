@@ -1,11 +1,9 @@
 package com.company.ielp.app.service.impl;
 
 import cn.hutool.core.lang.Validator;
-import com.company.ielp.app.model.User;
 import com.company.ielp.app.mapper.UserMapper;
+import com.company.ielp.app.model.User;
 import com.company.ielp.app.service.UserService;
-import com.company.ielp.app.utils.CheckUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

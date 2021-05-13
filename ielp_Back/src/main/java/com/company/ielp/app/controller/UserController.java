@@ -1,12 +1,15 @@
 package com.company.ielp.app.controller;
 
+import com.company.ielp.app.model.Translate;
 import com.company.ielp.app.model.User;
+import com.company.ielp.app.service.TranslateService;
 import com.company.ielp.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -14,28 +17,11 @@ import java.util.List;
 public class UserController {
 
     final UserService userService;
+    final TranslateService translateService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, TranslateService translateService) {
         this.userService = userService;
-    }
-
-    /**
-     * 获取所有用户
-     * @return 用户列表
-     */
-    @GetMapping("/getAllUser")
-    public List<User> getAllUser() {
-        return userService.getAllUser();
-    }
-
-    /**
-     * 根据ID获取用户
-     * @param id 用户ID
-     * @return 用户
-     */
-    @GetMapping("/getUserById")
-    public User getUserById(@RequestParam(name = "id") int id) {
-        return userService.getUserById(id);
+        this.translateService = translateService;
     }
 
     /**
@@ -65,4 +51,16 @@ public class UserController {
 
         return user.toString();
     }
+
+    @PostMapping("/translate")
+    @ResponseBody
+    public String translate(Translate t) {
+        t.setTranslatedTime(new Date());
+        translateService.translateWord(t);
+
+        String s = String.format("翻译记录传入：{%s}", t);
+        log.info(s);
+        return s;
+    }
+
 }

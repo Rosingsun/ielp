@@ -2,7 +2,6 @@ package com.company.ielp.app.service.impl;
 
 import com.company.ielp.app.mapper.TranslateMapper;
 import com.company.ielp.app.model.Translate;
-import com.company.ielp.app.model.User;
 import com.company.ielp.app.service.TranslateService;
 import org.springframework.stereotype.Service;
 
@@ -24,19 +23,7 @@ public class TranslateServiceImpl implements TranslateService {
     }
 
     @Override
-    public void translateWord(User user, String from, String to, String translatedWords) {
-        Translate translate = new Translate();
-
-        // 将一些数据放入
-        translate.setLanguageFrom(from);
-        translate.setLanguageTo(to);
-
-        translate.setTranslatedWords(translatedWords);
-        translate.setTranslatedTime(new Date());
-
-        translate.setPicUrl("");
-        translate.setUserId(user.getId());
-
+    public void translateWord(Translate translate) {
         // 插入历史记录
         translateMapper.insert(translate);
     }

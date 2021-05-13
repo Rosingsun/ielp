@@ -28,7 +28,7 @@
     管理员注册测试
     <br/>
     <label>
-        账号（邮箱或者手机）<br/>
+        账号
         <input type="text" name="adminName">
         <br />
         密码
@@ -36,6 +36,67 @@
     </label>
     <br />
     <button type="submit">注册</button>
+</form>
+
+<br/>
+<br/>
+<br/>
+
+<form method="get" th:action="@{/getAllUser}">
+    一键获取所有用户<br/>
+    <button type="submit">获取</button>
+</form>
+
+<br/>
+<br/>
+<br/>
+
+<form method="get" th:action="@{/getUserById}">
+    用户获取
+    <br/>
+    <label>
+        ID
+        <input type="text" name="id">
+    </label>
+    <br />
+    <button type="submit">获取</button>
+</form>
+
+<br/>
+<br/>
+<br/>
+
+<form method="post" th:action="@{/translate}">
+    导入翻译记录
+    <br/>
+    <label>
+        UserId
+        <input type="text" name="userId"> <br/>
+        FROM
+        <input type="text" name="languageFrom"> <br/>
+        TO
+        <input type="text" name="languageTo"> <br/>
+        TranslatedWords
+        <input type="text" name="translatedWords"> <br/>
+
+    </label>
+    <br />
+    <button type="submit">提交</button>
+</form>
+
+<br/>
+<br/>
+<br/>
+
+<form method="get" th:action="@{/admin/getUserTranslateHistory}">
+    获取用户的翻译记录
+    <br/>
+    <label>
+        UserId
+        <input type="text" name="userId"> <br/>
+    </label>
+    <br />
+    <button type="submit">提交</button>
 </form>
 
 </body>
