@@ -1,6 +1,7 @@
 package com.company.ielp.app.service.impl;
 
 import cn.hutool.core.lang.Validator;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.company.ielp.app.mapper.UserMapper;
 import com.company.ielp.app.model.User;
 import com.company.ielp.app.service.UserService;
@@ -28,9 +29,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean login(String accNumber, String passWord) {
-        User user = userMapper.login(accNumber, passWord);
-        return user != null;
+    public User login(User user) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.eq("email", user.getEmail()).eq("pass_word", user.getPassWord());
+        User getUser = userMapper.selectOne(queryWrapper);
+
+        // 通过邮箱无法验证
+        if (getUser == null) {
+            queryWrapper.clear();
+            queryWrapper.eq("phone_number", user.getPhoneNumber()).eq("pass_word", user.getPassWord());
+            getUser = userMapper.selectOne(queryWrapper);
+        }
+
+        return getUser;
     }
 
     @Override

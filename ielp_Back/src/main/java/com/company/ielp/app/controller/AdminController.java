@@ -5,8 +5,7 @@ import com.company.ielp.app.model.User;
 import com.company.ielp.app.model.translate.TranslateCollection;
 import com.company.ielp.app.model.translate.TranslateHistory;
 import com.company.ielp.app.service.AdminService;
-import com.company.ielp.app.service.TranslateCollectionService;
-import com.company.ielp.app.service.TranslateHistoryService;
+import com.company.ielp.app.service.TranslateService;
 import com.company.ielp.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -23,14 +22,12 @@ public class AdminController {
 
     final AdminService adminService;
     final UserService userService;
-    final TranslateHistoryService translateHistoryService;
-    final TranslateCollectionService translateCollectionService;
+    final TranslateService translateService;
 
-    public AdminController(AdminService adminService, UserService userService, TranslateHistoryService translateHistoryService, TranslateCollectionService translateCollectionService) {
+    public AdminController(AdminService adminService, UserService userService, TranslateService translateService) {
         this.adminService = adminService;
         this.userService = userService;
-        this.translateHistoryService = translateHistoryService;
-        this.translateCollectionService = translateCollectionService;
+        this.translateService = translateService;
     }
 
     @GetMapping("/admin/testPage")
@@ -95,7 +92,7 @@ public class AdminController {
     @GetMapping("/admin/getUserTranslateHistory")
     @ResponseBody
     public String getUserTranslateHistory(int userId) {
-        List<TranslateHistory> history = translateHistoryService.getTranslateHistoryByUid(userId);
+        List<TranslateHistory> history = translateService.getTranslateHistoryByUid(userId);
         StringBuilder s = new StringBuilder();
         for (TranslateHistory h : history) {
             s.append(h).append("<br/>");
@@ -106,7 +103,7 @@ public class AdminController {
     @GetMapping("/admin/getUserTranslateCollection")
     @ResponseBody
     public String getUserTranslateCollection(int userId) {
-        List<TranslateCollection> collections = translateCollectionService.getCollectionsByUid(userId);
+        List<TranslateCollection> collections = translateService.getCollectionsByUid(userId);
         StringBuilder s = new StringBuilder();
         for (TranslateCollection h : collections) {
             s.append(h).append("<br/>");

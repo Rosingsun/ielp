@@ -5,21 +5,36 @@ import com.company.ielp.app.mapper.TranslateCollectionMapper;
 import com.company.ielp.app.mapper.TranslateHistoryMapper;
 import com.company.ielp.app.model.translate.Translate;
 import com.company.ielp.app.model.translate.TranslateCollection;
-import com.company.ielp.app.service.TranslateCollectionService;
+import com.company.ielp.app.model.translate.TranslateHistory;
+import com.company.ielp.app.service.TranslateService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
-public class TranslateCollectionServiceImpl implements TranslateCollectionService {
+public class TranslateServiceImpl implements TranslateService {
 
-    final TranslateCollectionMapper translateCollectionMapper;
     final TranslateHistoryMapper translateHistoryMapper;
+    final TranslateCollectionMapper translateCollectionMapper;
 
-    public TranslateCollectionServiceImpl(TranslateCollectionMapper translateCollectionMapper, TranslateHistoryMapper translateHistoryMapper) {
-        this.translateCollectionMapper = translateCollectionMapper;
+    public TranslateServiceImpl(TranslateHistoryMapper translateHistoryMapper, TranslateCollectionMapper translateCollectionMapper) {
         this.translateHistoryMapper = translateHistoryMapper;
+        this.translateCollectionMapper = translateCollectionMapper;
+    }
+
+    @Override
+    public List<TranslateHistory> getTranslateHistoryByUid(int userId) {
+        QueryWrapper<TranslateHistory> queryWrapper = new QueryWrapper<>();
+        // 需要使用数据库中的名称
+        queryWrapper.eq("user_id", userId);
+        return translateHistoryMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public void translateWord(TranslateHistory translateHistory) {
+        // 插入历史记录
+        translateHistoryMapper.insert(translateHistory);
     }
 
     @Override

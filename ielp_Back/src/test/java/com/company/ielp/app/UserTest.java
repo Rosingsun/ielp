@@ -1,7 +1,7 @@
 package com.company.ielp.app;
 
-import com.company.ielp.app.model.User;
 import com.company.ielp.app.mapper.UserMapper;
+import com.company.ielp.app.model.User;
 import com.company.ielp.app.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,28 @@ public class UserTest {
      */
     @Test
     void userLoginTest() {
-        Boolean login1 = userService.login("1@zjsru.edu", "Admin666!?");
-        System.out.println(login1);
-        Boolean login2 = userService.login("1@2.edu", "667789!?");
-        System.out.println(login2);
+        User user = new User();
+
+        user.setEmail("66@qq.com");
+        user.setPassWord("666");
+
+        System.out.println(userService.login(user));
+
+        User user2 = new User();
+
+        user2.setEmail("62@qq.com");
+        user2.setPhoneNumber("19858161283");
+        user2.setPassWord("666");
+
+        System.out.println(userService.login(user2));
+
+        User user3 = new User();
+
+        user3.setEmail("61@qq.com");
+        user3.setPhoneNumber("19858161282");
+        user3.setPassWord("666");
+
+        System.out.println(userService.login(user3));
     }
     /**
      * 检验注册功能

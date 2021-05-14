@@ -26,11 +26,10 @@ public interface UserService {
 
     /**
      * 判断是否登陆成功
-     * @param accNumber 账号
-     * @param passWord 密码
+     * @param user 用户
      * @return 成功与否
      */
-    Boolean login(String accNumber, String passWord);
+    User login(User user);
 
     /**
      * 判断这个用户是否存在
