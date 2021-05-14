@@ -1,20 +1,14 @@
 package com.company.ielp.app.controller;
 
 import com.company.ielp.app.model.User;
-import com.company.ielp.app.model.translate.TranslateCollection;
-import com.company.ielp.app.model.translate.TranslateHistory;
 import com.company.ielp.app.service.TranslateService;
 import com.company.ielp.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * 为前端的用户操作提供接口
@@ -23,6 +17,7 @@ import java.util.Date;
  */
 @Slf4j
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     // 关于这个缓存的问题找个时间解决了
@@ -65,37 +60,12 @@ public class UserController {
     }
 
     /**
-     * 传入翻译并添加历史记录
-     *
-     * @param t 翻译内容
-     * @return 标识
+     * 上传图像
+     * @param profile 头像
+     * @return 上传成功
+     * @throws IOException 传输异常
      */
-    @PostMapping("/translate")
-    @ResponseBody
-    public String translate(TranslateHistory t) {
-        t.setTranslatedTime(new Date());
-        translateService.translateWord(t);
-        String s = String.format("翻译记录传入：{%s}", t);
-        log.info(s);
-        return s;
-    }
-
-    /**
-     * 收藏历史记录
-     *
-     * @param translateHistoryId 历史记录Id
-     * @return 标识
-     */
-    @PostMapping("/collection")
-    @ResponseBody
-    public String collection(int translateHistoryId) {
-        TranslateCollection translateCollection = translateService.collectionWord(translateHistoryId);
-        String s = String.format("收藏记录：{%s}", translateCollection);
-        log.info(s);
-        return s;
-    }
-
-    @PostMapping("/upload")
+    @PostMapping("/upload-profile")
     public String upload(MultipartFile profile) throws IOException {
         log.info("上传文件：{}，{}", profile.getOriginalFilename(), profile.getSize());
 

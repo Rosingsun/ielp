@@ -4,6 +4,7 @@ spring:
     username: root
     password: SqlADC015@
 
+
     druid:
       filters: stat,wall
       stat-view-servlet:
@@ -25,3 +26,6 @@ spring:
           config:
             drop-table-allow: false
       aop-patterns: com.company.ielp.app.*
+  servlet:
+    multipart:
+      max-file-size: 10MB

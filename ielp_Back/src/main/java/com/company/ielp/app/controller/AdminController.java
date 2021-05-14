@@ -9,15 +9,13 @@ import com.company.ielp.app.service.TranslateService;
 import com.company.ielp.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
     final AdminService adminService;
@@ -30,7 +28,7 @@ public class AdminController {
         this.translateService = translateService;
     }
 
-    @GetMapping("/admin/testPage")
+    @GetMapping("/testPage")
     public String testPage() {
         return "test";
     }
@@ -56,7 +54,7 @@ public class AdminController {
         return userService.getUserById(id);
     }
 
-    @PostMapping("/admin/login")
+    @PostMapping("/login")
     @ResponseBody
     public String login(Admin admin) {
         Admin login = adminService.login(admin);
@@ -69,7 +67,7 @@ public class AdminController {
         return s;
     }
 
-    @PostMapping("/admin/register")
+    @PostMapping("/register")
     @ResponseBody
     public String register(Admin admin) {
         log.info("注册信息：{}", admin.toString());
@@ -89,7 +87,7 @@ public class AdminController {
         return s;
     }
 
-    @GetMapping("/admin/getUserTranslateHistory")
+    @GetMapping("/getUserTranslateHistory")
     @ResponseBody
     public String getUserTranslateHistory(int userId) {
         List<TranslateHistory> history = translateService.getTranslateHistoryByUid(userId);
@@ -100,7 +98,7 @@ public class AdminController {
         return s.toString();
     }
 
-    @GetMapping("/admin/getUserTranslateCollection")
+    @GetMapping("/getUserTranslateCollection")
     @ResponseBody
     public String getUserTranslateCollection(int userId) {
         List<TranslateCollection> collections = translateService.getCollectionsByUid(userId);

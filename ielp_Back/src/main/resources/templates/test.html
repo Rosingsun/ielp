@@ -42,7 +42,7 @@
 <br/>
 <br/>
 
-<form method="get" th:action="@{/getAllUser}">
+<form method="get" th:action="@{/admin/getAllUser}">
     一键获取所有用户<br/>
     <button type="submit">获取</button>
 </form>
@@ -51,7 +51,7 @@
 <br/>
 <br/>
 
-<form method="get" th:action="@{/getUserById}">
+<form method="get" th:action="@{/admin/getUserById}">
     用户获取
     <br/>
     <label>
@@ -103,7 +103,7 @@
 <br/>
 <br/>
 
-<form method="post" th:action="@{/collection}">
+<form method="post" th:action="@{/translation/collection}">
     收藏一条历史记录
     <br/>
     <label>
@@ -133,9 +133,26 @@
 <br/>
 <br/>
 
-<form method="post" enctype="multipart/form-data" th:action="@{/upload}">
+<form method="post" enctype="multipart/form-data" th:action="@{user/upload-profile}">
     <p><input type="file" name="profile"></p>
     <p><button type="submit">提交</button></p>
+</form>
+
+<br/>
+<br/>
+<br/>
+
+<form method="post" enctype="multipart/form-data" th:action="@{/translation/upload}">
+    上传词图关系，用于识图
+    流程：上传图片->识图->获取单词->保存词图关系优化数据库
+    <br/>
+    <label>
+        单词<br/>
+        <input type="text" name="word"> <br/>
+        图像<br/>
+        <input type="file" name="picture"><br/>
+    </label>
+    <button type="submit">提交</button>
 </form>
 
 

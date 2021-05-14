@@ -38,8 +38,4 @@ public class UtilsTest {
         Translate t = new TranslateCollection();
     }
 
-    @Test
-    public void pathTest() {
-    }
-
 }
