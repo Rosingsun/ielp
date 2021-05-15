@@ -33,8 +33,8 @@ class App extends Component {
     return (
       <div className="App" >
         <header className="App-header">
-          {this.state.loaded == false ? <Login onLoaded={this.onLoaded} /> :<Translate /> }
-          <PageConfig />
+          {this.state.loaded == false ? <Login onLoaded={this.onLoaded} /> :<PageConfig /> }
+          {/* <PageConfig /> */}
         </header>
       </div>
     );

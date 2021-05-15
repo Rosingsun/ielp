@@ -26,22 +26,16 @@ const routesConfig = [
     acehe:true,
   },
   {
-    path: "/userList",
-    component: page.userList,
-    title:"用户列表",
-    acehe:true,
-  },
-  {
-    path: "/loginOute",
-    component: page.loginOute,
-    title:"退出登录",
-    acehe:true,
-  },
-  {
     path: "/translate",
     component: page.Translate,
     title:"翻译页面",
     acehe:true,
-  }
+  },
+  {
+    path: "/Chat",
+    component: page.Chat,
+    title:"翻译页面",
+    acehe:true,
+  },
 ];
 export default routesConfig;

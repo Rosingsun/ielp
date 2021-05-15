@@ -46,7 +46,7 @@ class Login extends Component {
     return (
       <div className={s.body}>
         <div className={s.topPic}>
-          <img src={require("@assets/images/login/top.png"),defaultStatus}/>
+          <img src={require("@assets/images/login/top.png").default}/>
         </div>
         <div className={s.loginBox}>
           <Form

@@ -1,0 +1,16 @@
+@import "@scss/_global.scss";
+*{
+  padding: 0px;
+  margin: 0px;
+}
+.body{
+  height: 100vh;
+  width: 100vw;
+  background-color: $ChatBackGround;
+  overflow: hidden;
+}
+.chatBox{
+  background-color: red;
+  width: 1310/$rem;
+  height: 698/$rem;
+}
