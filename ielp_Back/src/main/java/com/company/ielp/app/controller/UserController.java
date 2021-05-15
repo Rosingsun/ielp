@@ -50,13 +50,14 @@ public class UserController {
     @PostMapping("/login")
     @ResponseBody
     public String login(User user) {
+        User login = userService.login(user);
         log.info(user.toString());
 
-        // 检查user中的账号密码是否存在于数据库
-        // 然后……
-        // 嗯
+        boolean isLogin = (login != null);
 
-        return user.toString();
+        String s = String.format("用户：{%s}登陆状态：" + isLogin, login);
+        log.info(s);
+        return s;
     }
 
     /**

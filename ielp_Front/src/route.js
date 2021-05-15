@@ -39,7 +39,7 @@ const routesConfig = [
   },
   {
     path: "/translate",
-    component: page.translate,
+    component: page.Translate,
     title:"翻译页面",
     acehe:true,
   }

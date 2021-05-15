@@ -46,7 +46,7 @@ class Login extends Component {
     return (
       <div className={s.body}>
         <div className={s.topPic}>
-          <img src={require("../../assets/images/login/top.png")} />
+          <img src={require("@assets/images/login/top.png"),defaultStatus}/>
         </div>
         <div className={s.loginBox}>
           <Form
@@ -101,6 +101,10 @@ class Login extends Component {
             <Form.Item>
               <Button type="primary" htmlType="submit" className={s.login_form_button} onClick={() => { }}>
                 登录  </Button>
+            </Form.Item>
+            <Form.Item>
+              <Button className={s.regesit_form_button} onClick={() => { }}>
+                注册  </Button>
             </Form.Item>
           </Form>
         </div>

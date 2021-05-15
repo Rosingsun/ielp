@@ -8,7 +8,7 @@ import { PieChartOutlined } from '@ant-design/icons';
 import { createHashHistory } from 'history'; // hash路由
 import routesConfig from "@src/route";
 import { Link } from "react-router-dom";
-import { Login } from '@views/index';
+import { Login,Translate } from '@views/index';
 
 const history = createHashHistory();
 const { Header, Content, Footer, Sider } = Layout;
@@ -33,7 +33,8 @@ class App extends Component {
     return (
       <div className="App" >
         <header className="App-header">
-          {this.state.loaded == false ? <Login onLoaded={this.onLoaded} /> : <PageConfig />}
+          {this.state.loaded == false ? <Login onLoaded={this.onLoaded} /> :<Translate /> }
+          <PageConfig />
         </header>
       </div>
     );

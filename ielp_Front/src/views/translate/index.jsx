@@ -6,7 +6,7 @@ import { APPID, pass } from "@constants/apiConstants.js";
 import { MD5 } from "../../utils/MD5";
 const { TextArea } = Input;
 const { Option } = Select;
-class translate extends Component {
+class Translate extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -104,4 +104,4 @@ class translate extends Component {
     )
   }
 }
-export default translate
+export default Translate
