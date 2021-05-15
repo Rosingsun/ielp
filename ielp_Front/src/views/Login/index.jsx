@@ -45,6 +45,9 @@ class Login extends Component {
   render() {
     return (
       <div className={s.body}>
+        <div className={s.topPic}>
+          <img src={require("../../assets/images/login/top.png")} />
+        </div>
         <div className={s.loginBox}>
           <Form
             name="normal_login"
@@ -91,13 +94,13 @@ class Login extends Component {
             </Form.Item>
             <Form.Item>
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>记住密码</Checkbox>
+                <Checkbox style={{ color: "#Fff" }}>记住密码</Checkbox>
               </Form.Item>
               <a className={s.login_form_forgot} href=""> 忘记密码？ </a>
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" className={s.login_form_button} onClick={() => { }}>
-                登录  </Button>  或 <a>注册</a>
+                登录  </Button>
             </Form.Item>
           </Form>
         </div>
