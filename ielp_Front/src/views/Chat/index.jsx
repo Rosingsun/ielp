@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Row, Col, Divider } from 'antd';
 import s from "./style.module.scss";
 export default class Home extends Component {
   constructor(props) {
@@ -10,9 +11,11 @@ export default class Home extends Component {
   render() {
     return (
       <div className={s.body}>
-        <div className={s.chatBox}>
-
-        </div>
+        <Row justify="center" align="top">
+          <Col span={4}>
+            <div className={s.chatBox}></div>
+          </Col>
+        </Row>
       </div>
     );
   }

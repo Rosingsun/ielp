@@ -52,7 +52,7 @@ public class UserController {
     public String login(User user) {
         User login = userService.login(user);
         log.info(user.toString());
-
+ 
         boolean isLogin = (login != null);
 
         String s = String.format("用户：{%s}登陆状态：" + isLogin, login);
