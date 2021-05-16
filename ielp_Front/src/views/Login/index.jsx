@@ -100,11 +100,11 @@ class Login extends Component {
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" className={s.login_form_button} onClick={() => { }}>
-                登录|Login  </Button>
+                登录 | Login  </Button>
             </Form.Item>
             <Form.Item>
               <Button className={s.regesit_form_button} onClick={() => { }}>
-                注册|Regedit  </Button>
+                注册 | Regedit  </Button>
             </Form.Item>
           </Form>
         </div>
