@@ -1,8 +1,9 @@
 package com.company.ielp.app.controller;
 
-import com.company.ielp.app.model.translate.TranslateCollection;
-import com.company.ielp.app.model.translate.TranslateHistory;
-import com.company.ielp.app.model.translate.TranslateWordPicture;
+import com.company.ielp.app.model.dto.TranslateDTO;
+import com.company.ielp.app.model.entity.TranslateWordPicture;
+import com.company.ielp.app.model.params.TranslateParam;
+import com.company.ielp.app.model.vo.TranslateVO;
 import com.company.ielp.app.service.TranslateService;
 import com.company.ielp.app.utils.PictureFormatUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -12,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Collections;
 import java.util.Date;
 
 /**
  * 提供翻译方案
  * @author 幕冬
- * @see com.company.ielp.app.model.translate.Translate
+ * @see TranslateDTO
  */
 @Slf4j
 @Controller
@@ -32,17 +34,25 @@ public class TranslateController {
 
     /**
      * 传入翻译并添加历史记录
-     * @param t 翻译内容
+     * @param translateParam 翻译表单
      * @return 标识
      */
     @PostMapping("/translate")
     @ResponseBody
-    public String translate(TranslateHistory t) {
-        t.setTranslatedTime(new Date());
-        translateService.translateWord(t);
-        String s = String.format("翻译记录传入：{%s}", t);
+    public TranslateVO translate(TranslateParam translateParam) {
+
+
+        TranslateDTO translateDTO = translateService.translateWord(translateParam);
+        String s = String.format("翻译记录传入：{%s}", translateDTO);
         log.info(s);
-        return s;
+
+        TranslateVO vo = new TranslateVO();
+        vo.setTime(new Date());
+        vo.setMsg("翻译记录传入成功！");
+        vo.setState("成功！");
+        vo.setData(Collections.singletonList(translateDTO));
+
+        return vo;
     }
 
     /**
@@ -52,11 +62,18 @@ public class TranslateController {
      */
     @PostMapping("/collection")
     @ResponseBody
-    public String collection(int translateHistoryId) {
-        TranslateCollection translateCollection = translateService.collectionWord(translateHistoryId);
-        String s = String.format("收藏记录：{%s}", translateCollection);
+    public TranslateVO collection(int translateHistoryId) {
+        TranslateDTO translateDTO = translateService.collectionWord(translateHistoryId);
+        String s = String.format("收藏记录：{%s}", translateDTO);
         log.info(s);
-        return s;
+
+        TranslateVO vo = new TranslateVO();
+        vo.setTime(new Date());
+        vo.setMsg("翻译记录收藏成功！");
+        vo.setState("成功！");
+        vo.setData(Collections.singletonList(translateDTO));
+
+        return vo;
     }
 
     /**

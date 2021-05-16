@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 14/05/2021 20:57:05
+ Date: 16/05/2021 21:51:15
 */
 
 SET NAMES utf8mb4;
@@ -39,54 +39,54 @@ CREATE TABLE `enwords`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for translate_collection
+-- Table structure for follower
 -- ----------------------------
-DROP TABLE IF EXISTS `translate_collection`;
-CREATE TABLE `translate_collection`  (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '收藏信息，与翻译保持一致',
-  `language_from` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '翻译语种（我输入的语种）',
-  `language_to` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '目标语种（我想翻译成什么语言）',
-  `translated_words` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '翻译内容（我想翻译的内容）',
-  `translated_time` datetime NULL DEFAULT NULL COMMENT '翻译的时间（我翻译的时间）',
-  `pic_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '对应图片的路径（翻译查询到的图片）',
-  `user_id` int UNSIGNED NULL DEFAULT NULL COMMENT '用户id（谁翻译的）',
-  `collection_time` datetime NULL DEFAULT NULL COMMENT '收藏时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `uid`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+DROP TABLE IF EXISTS `follower`;
+CREATE TABLE `follower`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `u1` int NULL DEFAULT NULL COMMENT '用户1',
+  `u2` int NULL DEFAULT NULL COMMENT '用户2',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for translate_history
 -- ----------------------------
 DROP TABLE IF EXISTS `translate_history`;
 CREATE TABLE `translate_history`  (
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '翻译词条的id（该条翻译的id）',
   `language_from` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '翻译语种（我输入的语种）',
   `language_to` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '目标语种（我想翻译成什么语言）',
-  `translated_words` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '翻译内容（我想翻译的内容）',
-  `translated_time` datetime NULL DEFAULT NULL COMMENT '翻译的时间（我翻译的时间）',
+  `translated_word` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '翻译内容（我想翻译的内容）',
   `pic_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '对应图片的路径（翻译查询到的图片）',
   `user_id` int UNSIGNED NULL DEFAULT NULL COMMENT '用户id（谁翻译的）',
+  `is_collection` tinyint(1) NULL DEFAULT NULL COMMENT '是否收藏',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `uid`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for translate_word_picture
 -- ----------------------------
 DROP TABLE IF EXISTS `translate_word_picture`;
 CREATE TABLE `translate_word_picture`  (
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `word` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `picture_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '账户id',
   `nick_name` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
   `profile` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户头像',

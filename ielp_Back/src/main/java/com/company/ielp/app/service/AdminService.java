@@ -1,6 +1,6 @@
 package com.company.ielp.app.service;
 
-import com.company.ielp.app.model.Admin;
+import com.company.ielp.app.model.entity.Admin;
 
 /**
  * 为管理员提供相关服务

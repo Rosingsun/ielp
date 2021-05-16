@@ -1,14 +1,20 @@
 package com.company.ielp.app.controller;
 
-import com.company.ielp.app.model.User;
-import com.company.ielp.app.service.TranslateService;
+import com.company.ielp.app.model.dto.UserDTO;
+import com.company.ielp.app.model.params.LoginParam;
+import com.company.ielp.app.model.vo.UserVO;
 import com.company.ielp.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * 为前端的用户操作提供接口
@@ -16,7 +22,7 @@ import java.io.IOException;
  * @author 幕冬儿
  */
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
@@ -24,11 +30,9 @@ public class UserController {
     final static String PATH_NAME = "D:\\缓存\\ielp\\";
 
     final UserService userService;
-    final TranslateService translateService;
 
-    public UserController(UserService userService, TranslateService translateService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.translateService = translateService;
     }
 
     /**
@@ -38,26 +42,36 @@ public class UserController {
      */
     @GetMapping(value = {"/", "/loginPage"})
     public String loginPage() {
-        return "login";
+        return "login_page";
     }
 
     /**
-     * 尝试登陆
+     * 登陆
      *
-     * @param user 根据前端自动获取user
+     * @param loginParam 登陆表单
      * @return 用户
      */
     @PostMapping("/login")
     @ResponseBody
-    public String login(User user) {
-        User login = userService.login(user);
-        log.info(user.toString());
- 
-        boolean isLogin = (login != null);
+    public UserVO login(LoginParam loginParam) {
+        UserVO data = new UserVO();
 
-        String s = String.format("用户：{%s}登陆状态：" + isLogin, login);
-        log.info(s);
-        return s;
+        UserDTO userDTO = userService.login(loginParam);
+ 
+        data.setTime(new Date());
+        if (userDTO != null) {
+            data.setUser(userDTO);
+            data.setLogin(true);
+            data.setMsg("登陆成功！");
+            data.setState("成功");
+        } else {
+            data.setLogin(false);
+            data.setMsg("登陆失败，请检查账号密码！");
+            data.setState("失败");
+        }
+
+        return data;
+
     }
 
     /**
@@ -67,6 +81,7 @@ public class UserController {
      * @throws IOException 传输异常
      */
     @PostMapping("/upload-profile")
+    @ResponseBody
     public String upload(MultipartFile profile) throws IOException {
         log.info("上传文件：{}，{}", profile.getOriginalFilename(), profile.getSize());
 
