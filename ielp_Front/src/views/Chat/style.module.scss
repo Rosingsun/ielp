@@ -30,17 +30,25 @@
       flex-direction: row;
       justify-content: flex-end;
       color: #fff;
-      background-color: rebeccapurple;
       font-weight: 600;
     }
   }
-  .container {
+  .tab{
+    background-color: #e7a146;
+    height: 100%;
+    .ant-tabs-tab{
+      background-color: green;
+    }
   }
   .chatPage {
     display: flex;
     flex-direction: row;
+    height: 100%;
     .messageLine{
-
+      height: 100%;
+      width: 20%;
+      background-color: #fff;
+      overflow-y: scroll;
     }
     .chatContainer{
 
@@ -50,6 +58,17 @@
     }
   }
 }
-:gloabl(.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap) {
-  background-color: #e7a146;
+
+.demo_infinite_container {
+  height: 300px;
+  padding: 8px 24px;
+  overflow: auto;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+}
+.demo_loading_container {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
 }

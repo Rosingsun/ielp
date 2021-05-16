@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Divider, Avatar, List,Tabs , Spin } from 'antd';
+import { Row, Col, Divider, Avatar, List, Tabs, Spin } from 'antd';
 import { MessageOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 import s from "./style.module.scss";
 const { TabPane } = Tabs;
@@ -7,8 +7,21 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      loading:false,
+      hasMore:true,
+      data:[
+        {key:1},{key:2},{key:3},{key:4},{key:5},{key:6},{key:7},{key:8},{key:9},{key:10},{key:11},{key:13},{key:14},{key:15},{key:16},{key:1},{key:2},{key:3},{key:4},{key:5},{key:6},{key:7},{key:8},{key:9},{key:10},{key:11},{key:13},{key:14},{key:15},{key:16},
+      ]
     };
+  }
+  handleInfiniteOnLoad=()=>{
+    // this.setState({loading:true})
+    console.log("加载更多");
+    let newData=[...this.state.data]
+    // this.state.data.map((item,index)=>{
+    //   newData.push({key:this.state.data.length+index});
+    // });
+    // this.setState({data:newData,loading:false});
   }
   render() {
     return (
@@ -26,18 +39,36 @@ export default class Home extends Component {
                   </div>
                 </div>
               </div>
-              <Tabs defaultActiveKey="1" type="card">
-                <TabPane tab={<span> <MessageOutlined /> 消息 </span>} key="1" >
-                  <div className={s.chatPage}>
+              <Tabs defaultActiveKey="1" type="card" className={s.tab}>
+                <TabPane className={s.chatPage} tab={<span> <MessageOutlined /> 消息 </span>} key="1" >
                   <div className={s.messageLine}>
-
+                      <List
+                        dataSource={this.state.data}
+                        renderItem={item => (
+                          <List.Item key={item.key}>
+                            <List.Item.Meta
+                              avatar={
+                                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                              }
+                              title={<a href="https://ant.design">{item.key}</a>}
+                              description={item.key}
+                            />
+                            <div>Content</div>
+                          </List.Item>
+                        )}
+                      >
+                        {this.state.loading && this.state.hasMore && (
+                          <div className={s.demo_loading_container}>
+                            <Spin />
+                          </div>
+                        )}
+                      </List>
                   </div>
                   <div className={s.chatContainer}>
 
                   </div>
                   <div className={s.chatObject}>
 
-                  </div>
                   </div>
                 </TabPane>
                 <TabPane tab={<span><UserOutlined />好友 </span>} key="2">

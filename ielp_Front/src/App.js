@@ -4,11 +4,8 @@ import './App.css';
 import { PageConfig } from "@components/index.jsx";
 import React, { Component } from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
-import { PieChartOutlined } from '@ant-design/icons';
 import { createHashHistory } from 'history'; // hash路由
-import routesConfig from "@src/route";
-import { Link } from "react-router-dom";
-import { Login,Translate } from '@views/index';
+import { Login } from '@views/index';
 
 const history = createHashHistory();
 const { Header, Content, Footer, Sider } = Layout;
