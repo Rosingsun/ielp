@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+originimport React, { Component } from 'react';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
@@ -96,7 +96,7 @@ class Login extends Component {
               <Form.Item name="remember" valuePropName="checked" noStyle>
                 <Checkbox style={{ color: "#Fff" }}>记住密码</Checkbox>
               </Form.Item>
-              <a className={s.login_form_forgot} href=""> 忘记密码？忘记密码？ </a>
+              <a className={s.login_form_forgot} href=""> 忘记密码？origin忘记密码？ </a>
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" className={s.login_form_button} onClick={() => { }}>
