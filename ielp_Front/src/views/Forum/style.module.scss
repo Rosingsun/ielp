@@ -1,4 +1,4 @@
- @import "@scss/_global.scss";
+@import "@scss/_global.scss";
 *{
     padding: 0px;
     margin: 0px ;
@@ -10,22 +10,18 @@
 .one{
     margin-top: 200px;
     margin-left: 200px;
-    width: 400px;
-    height:250px;
+    width: 300px;
+    height:200px;
     background-color:#f5734f;
     border-radius: 15px;
     box-shadow: 2px  1px   2px  2px rgb(117, 112, 112);
-    display: flex;
 }
 .two{
-    width: 75%;
-    height: 13%;
+    width: 130px;
+    height: 30px;
     background-color: #f9d340;
     border-radius: 8px;
     display: flex;
-    margin: auto;
-    margin-top: 10px;
-    margin-left: 20px;
 }
 .three{
 
@@ -37,40 +33,15 @@
 }
 .text1{
     font-size: 3px;
-    margin: auto;
+    text-align: left;
 }
 .btn{
-    // background-color:red;
-    // margin: auto;
-    // border: none;]
-    background-color:red
-     
-
+    background-color: #f9d340;
+    border: none;
+    text-align: left;
 }
 .t1{
     text-align: left;
-}
-.left{
-    width: 60%;
-    height: 100%;
-}
-.right{
-    width: 40%;
-    height: 100%;
-    margin-left: -80px;
-    margin-top: 30px;
-
-}
-.btn1{
-    background-color: #f9d340;
-    border: none;
-    margin: auto;
-    
-}
-.time{
-    width: 100%;
-    height: 60%;
-
 }
 .qf-editor{
 position: relative;

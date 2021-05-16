@@ -1,4 +1,4 @@
-package com.company.ielp.app.model.translate;
+package com.company.ielp.app.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

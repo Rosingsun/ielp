@@ -3,11 +3,12 @@ package com.company.ielp.app.service.impl;
 import cn.hutool.core.lang.Validator;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.company.ielp.app.mapper.UserMapper;
-import com.company.ielp.app.model.User;
+import com.company.ielp.app.model.dto.UserDTO;
+import com.company.ielp.app.model.entity.User;
+import com.company.ielp.app.model.params.LoginParam;
 import com.company.ielp.app.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,36 +20,36 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUser() {
-        return userMapper.selectList(null);
+    public UserDTO getUserById(int id) {
+        UserDTO userDTO = new UserDTO();
+        User user = userMapper.selectById(id);
+        BeanUtils.copyProperties(user, userDTO);
+
+        return userDTO;
     }
 
     @Override
-    public User getUserById(int id) {
-        return userMapper.selectById(id);
-    }
+    public UserDTO login(LoginParam loginParam) {
+        UserDTO userDTO = new UserDTO();
 
-    @Override
-    public User login(User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
 
-        queryWrapper.eq("email", user.getEmail()).eq("pass_word", user.getPassWord());
-        User getUser = userMapper.selectOne(queryWrapper);
+        String accountNum = loginParam.getAccountNum();
+        String passWord = loginParam.getPassWord();
 
-        // 通过邮箱无法验证
-        if (getUser == null) {
-            queryWrapper.clear();
-            queryWrapper.eq("phone_number", user.getPhoneNumber()).eq("pass_word", user.getPassWord());
-            getUser = userMapper.selectOne(queryWrapper);
+        if (Validator.isEmail(accountNum)) {
+            queryWrapper.eq("email", accountNum).eq("pass_word", passWord);
+        } else if (Validator.isMobile(accountNum)) {
+            queryWrapper.eq("phone_number", accountNum).eq("pass_word", passWord);
+        } else {
+            return null;
         }
 
-        return getUser;
-    }
+        User user = userMapper.selectOne(queryWrapper);
+        BeanUtils.copyProperties(user, userDTO);
 
-    @Override
-    public Boolean beUsed(String accNumber) {
-        User user = userMapper.beUsed(accNumber);
-        return user != null;
+        return userDTO;
+
     }
 
     @Override
@@ -62,7 +63,6 @@ public class UserServiceImpl implements UserService {
             System.out.println("注册失败，账号格式出错！");
             return;
         }
-        user.setId(userMapper.lastId() + 1);
         user.setPassWord(passWord);
         userMapper.insert(user);
     }

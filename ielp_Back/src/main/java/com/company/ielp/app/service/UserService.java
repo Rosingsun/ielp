@@ -1,8 +1,8 @@
 package com.company.ielp.app.service;
 
-import com.company.ielp.app.model.User;
-
-import java.util.List;
+import com.company.ielp.app.model.dto.UserDTO;
+import com.company.ielp.app.model.entity.User;
+import com.company.ielp.app.model.params.LoginParam;
 
 /**
  * 为用户提供相关服务
@@ -12,31 +12,18 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * 获取所有成员
-     * @return 成员列表
-     */
-    List<User> getAllUser();
-
-    /**
      * 根据id获取成员
      * @param id 成员id
      * @return 返回成员
      */
-    User getUserById(int id);
+    UserDTO getUserById(int id);
 
     /**
      * 判断是否登陆成功
-     * @param user 用户
+     * @param loginParam 登陆表单
      * @return 成功与否
      */
-    User login(User user);
-
-    /**
-     * 判断这个用户是否存在
-     * @param accNumber 用户名
-     * @return 成功与否
-     */
-    Boolean beUsed(String accNumber);
+    UserDTO login(LoginParam loginParam);
 
     /**
      * 注册功能

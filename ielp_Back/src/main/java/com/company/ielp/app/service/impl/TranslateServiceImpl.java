@@ -1,22 +1,22 @@
 package com.company.ielp.app.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.company.ielp.app.mapper.TranslateCollectionMapper;
 import com.company.ielp.app.mapper.TranslateHistoryMapper;
 import com.company.ielp.app.mapper.TranslateWordPictureMapper;
-import com.company.ielp.app.model.translate.Translate;
-import com.company.ielp.app.model.translate.TranslateCollection;
-import com.company.ielp.app.model.translate.TranslateHistory;
-import com.company.ielp.app.model.translate.TranslateWordPicture;
+import com.company.ielp.app.model.dto.TranslateDTO;
+import com.company.ielp.app.model.entity.TranslateHistory;
+import com.company.ielp.app.model.entity.TranslateWordPicture;
+import com.company.ielp.app.model.params.TranslateParam;
 import com.company.ielp.app.service.TranslateService;
 import com.company.ielp.app.utils.PictureFormatUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -26,46 +26,73 @@ public class TranslateServiceImpl implements TranslateService {
     private final static String PATH_NAME = "D:\\缓存\\ielp\\pictureUrl\\";
 
     final TranslateHistoryMapper translateHistoryMapper;
-    final TranslateCollectionMapper translateCollectionMapper;
     final TranslateWordPictureMapper translateWordPictureMapper;
 
-    public TranslateServiceImpl(TranslateHistoryMapper translateHistoryMapper, TranslateCollectionMapper translateCollectionMapper, TranslateWordPictureMapper translateWordPictureMapper) {
+    public TranslateServiceImpl(TranslateHistoryMapper translateHistoryMapper, TranslateWordPictureMapper translateWordPictureMapper) {
         this.translateHistoryMapper = translateHistoryMapper;
-        this.translateCollectionMapper = translateCollectionMapper;
         this.translateWordPictureMapper = translateWordPictureMapper;
     }
 
+    private List<TranslateDTO> toTranslateDTOList(List<TranslateHistory> histories) {
+        List<TranslateDTO> list = new ArrayList<>();
+        // 在对付大数据的时候这个真的有必要吗？
+        // 值得考虑
+        for (TranslateHistory history : histories) {
+            TranslateDTO dto;
+            BeanUtils.copyProperties(history, dto = new TranslateDTO());
+            list.add(dto);
+        }
+        return list;
+    }
+
     @Override
-    public List<TranslateHistory> getTranslateHistoryByUid(int userId) {
+    public List<TranslateDTO> getTranslateHistoryByUid(int userId) {
         QueryWrapper<TranslateHistory> queryWrapper = new QueryWrapper<>();
         // 需要使用数据库中的名称
         queryWrapper.eq("user_id", userId);
-        return translateHistoryMapper.selectList(queryWrapper);
+
+        return toTranslateDTOList(translateHistoryMapper.selectList(queryWrapper));
     }
 
     @Override
-    public void translateWord(TranslateHistory translateHistory) {
+    public TranslateDTO translateWord(TranslateParam translateParam) {
+        TranslateHistory history = new TranslateHistory();
+        TranslateDTO translateDTO = new TranslateDTO();
         // 插入历史记录
-        translateHistoryMapper.insert(translateHistory);
+        BeanUtils.copyProperties(translateParam, history);
+        translateHistoryMapper.insert(history);
+
+        // 转换为DTO
+        BeanUtils.copyProperties(history, translateDTO);
+        return translateDTO;
     }
 
     @Override
-    public TranslateCollection collectionWord(int translateHistoryId) {
-        // 提取
-        Translate select = translateHistoryMapper.selectById(translateHistoryId);
-        // 赋值
-        TranslateCollection newCollection = new TranslateCollection(select);
-        // 插入
-        newCollection.setCollectionTime(new Date());
-        translateCollectionMapper.insert(newCollection);
-        return newCollection;
+    public TranslateDTO collectionWord(int translateHistoryId) {
+
+
+        TranslateHistory history = translateHistoryMapper.selectById(translateHistoryId);
+
+        history.setIsCollection(true);
+
+        translateHistoryMapper.updateById(history);
+
+
+        // 转换为DTO
+        // 我开始考虑这个转换为DTO是否有必要了……
+        // 但为了分层，好像，确实有那么点必要
+        TranslateDTO translateDTO = new TranslateDTO();
+        BeanUtils.copyProperties(history, translateDTO);
+        return translateDTO;
     }
 
     @Override
-    public List<TranslateCollection> getCollectionsByUid(int userId) {
-        QueryWrapper<TranslateCollection> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id", userId);
-        return translateCollectionMapper.selectList(queryWrapper);
+    public List<TranslateDTO> getCollectionsByUid(int userId) {
+        QueryWrapper<TranslateHistory> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.eq("user_id", userId).eq("is_collection", 1);
+
+        return toTranslateDTOList(translateHistoryMapper.selectList(queryWrapper));
     }
 
     @Override
