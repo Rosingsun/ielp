@@ -1,16 +1,55 @@
 @import "@scss/_global.scss";
-*{
+* {
   padding: 0px;
   margin: 0px;
 }
-.body{
+.Chatbody {
   height: 100vh;
   width: 100vw;
   background-color: $ChatBackGround;
   overflow: hidden;
 }
-.chatBox{
-  background-color: red;
-  width: 1310/$rem;
-  height: 698/$rem;
+
+.chatBox {
+  height: 80vh;
+  margin-top: 10vh;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 20px;
+
+  .titleLine {
+    height: 10%;
+    width: 100%;
+    background-color: #e7a146;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    display: flex;
+    justify-content: flex-end;
+    .userInfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      color: #fff;
+      background-color: rebeccapurple;
+      font-weight: 600;
+    }
+  }
+  .container {
+  }
+  .chatPage {
+    display: flex;
+    flex-direction: row;
+    .messageLine{
+
+    }
+    .chatContainer{
+
+    }
+    .chatObject{
+      
+    }
+  }
+}
+:gloabl(.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap) {
+  background-color: #e7a146;
 }

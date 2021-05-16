@@ -96,15 +96,15 @@ class Login extends Component {
               <Form.Item name="remember" valuePropName="checked" noStyle>
                 <Checkbox style={{ color: "#Fff" }}>记住密码</Checkbox>
               </Form.Item>
-              <a className={s.login_form_forgot} href=""> 忘记密码？origin忘记密码？ </a>
+              <a className={s.login_form_forgot} href=""> 忘记密码？</a>
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" className={s.login_form_button} onClick={() => { }}>
-                登录  </Button>
+                登录 | Login  </Button>
             </Form.Item>
             <Form.Item>
               <Button className={s.regesit_form_button} onClick={() => { }}>
-                注册  </Button>
+                注册 | Regedit  </Button>
             </Form.Item>
           </Form>
         </div>
