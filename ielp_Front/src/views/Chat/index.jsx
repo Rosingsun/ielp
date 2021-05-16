@@ -12,7 +12,7 @@ export default class Home extends Component {
     return (
       <div className={s.body}>
         <Row justify="center" align="top">
-          <Col span={4}>
+          <Col span={18}>
             <div className={s.chatBox}></div>
           </Col>
         </Row>

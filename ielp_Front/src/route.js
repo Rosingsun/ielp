@@ -34,7 +34,13 @@ const routesConfig = [
   {
     path: "/Chat",
     component: page.Chat,
-    title:"翻译页面",
+    title:"即时聊天",
+    acehe:true,
+  },
+  {
+    path: "/Forum",
+    component: page.Forum,
+    title:"论坛",
     acehe:true,
   },
 ];
