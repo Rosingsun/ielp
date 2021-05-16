@@ -1,4 +1,4 @@
-originimport React, { Component } from 'react';
+import React, { Component } from 'react';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
