@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Divider, Avatar, List, Tabs, Spin } from 'antd';
 import { MessageOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import InfiniteScroll from 'react-infinite-scroller';
 import s from "./style.module.scss";
 const { TabPane } = Tabs;
 export default class Home extends Component {
@@ -10,7 +11,7 @@ export default class Home extends Component {
       loading:false,
       hasMore:true,
       data:[
-        {key:1},{key:2},{key:3},{key:4},{key:5},{key:6},{key:7},{key:8},{key:9},{key:10},{key:11},{key:13},{key:14},{key:15},{key:16},{key:1},{key:2},{key:3},{key:4},{key:5},{key:6},{key:7},{key:8},{key:9},{key:10},{key:11},{key:13},{key:14},{key:15},{key:16},
+        {key:1},{key:2},{key:3},{key:4},{key:5},{key:6},{key:7},{key:8},{key:9},{key:10},{key:11},{key:13},{key:14},{key:15},{key:16},
       ]
     };
   }
@@ -18,10 +19,11 @@ export default class Home extends Component {
     // this.setState({loading:true})
     console.log("加载更多");
     let newData=[...this.state.data]
-    // this.state.data.map((item,index)=>{
-    //   newData.push({key:this.state.data.length+index});
-    // });
-    // this.setState({data:newData,loading:false});
+    this.state.data.map((item,index)=>{
+      newData.push({key:this.state.data.length+index+1});
+    });
+    // console.log(newData)
+    this.setState({data:newData,loading:false});
   }
   render() {
     return (
@@ -42,6 +44,13 @@ export default class Home extends Component {
               <Tabs defaultActiveKey="1" type="card" className={s.tab}>
                 <TabPane className={s.chatPage} tab={<span> <MessageOutlined /> 消息 </span>} key="1" >
                   <div className={s.messageLine}>
+                    <InfiniteScroll
+                      initialLoad={true}
+                      pageStart={0}
+                      loadMore={this.handleInfiniteOnLoad}
+                      hasMore={!this.state.loading && this.state.hasMore}
+                      useWindow={false}
+                    >
                       <List
                         dataSource={this.state.data}
                         renderItem={item => (
@@ -63,6 +72,7 @@ export default class Home extends Component {
                           </div>
                         )}
                       </List>
+                    </InfiniteScroll>
                   </div>
                   <div className={s.chatContainer}>
 
