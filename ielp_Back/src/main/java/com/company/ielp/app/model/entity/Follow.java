@@ -1,5 +1,7 @@
 package com.company.ielp.app.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -8,7 +10,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class Follow extends BaseEntity {
-    int id;
-    int u1;
-    int u2;
+    @TableId(type= IdType.AUTO)
+    private Integer id;
+    private Integer u1;
+    private Integer u2;
 }

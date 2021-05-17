@@ -5,11 +5,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.company.ielp.app.mapper.FollowMapper;
 import com.company.ielp.app.mapper.UserMapper;
 import com.company.ielp.app.model.dto.UserDTO;
+import com.company.ielp.app.model.entity.Follow;
 import com.company.ielp.app.model.entity.User;
+import com.company.ielp.app.model.params.FollowParam;
 import com.company.ielp.app.model.params.LoginParam;
 import com.company.ielp.app.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,6 +25,18 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserMapper userMapper, FollowMapper followMapper) {
         this.userMapper = userMapper;
         this.followMapper = followMapper;
+    }
+
+    private List<UserDTO> toUserDTOList(List<User> users) {
+        List<UserDTO> list = new ArrayList<>();
+        // 在对付大数据的时候这个真的有必要吗？
+        // 值得考虑
+        for (User u : users) {
+            UserDTO dto;
+            BeanUtils.copyProperties(u, dto = new UserDTO());
+            list.add(dto);
+        }
+        return list;
     }
 
     @Override
@@ -68,6 +85,66 @@ public class UserServiceImpl implements UserService {
         }
         user.setPassWord(passWord);
         userMapper.insert(user);
+    }
+
+    @Override
+    public String follow(FollowParam followParam) {
+        Follow follow = new Follow();
+
+        follow.setU1(followParam.getUid());
+        follow.setU2(followParam.getFollowId());
+
+        try {
+            followMapper.insert(follow);
+        } catch (Exception e) {
+            return "关注失败！";
+        }
+
+        return "关注成功！";
+    }
+
+    @Override
+    public String unfollow(FollowParam followParam) {
+        QueryWrapper<Follow> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.eq("u1", followParam.getUid()).eq("u2", followParam.getFollowId());
+
+        try {
+            followMapper.delete(queryWrapper);
+        } catch (Exception e) {
+            return "取关失败！";
+        }
+        return "关注成功！";
+    }
+
+    @Override
+    public List<UserDTO> getAllFollows(int id) {
+        QueryWrapper<Follow> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("u1", id);
+
+        List<Follow> follows = followMapper.selectList(queryWrapper);
+        List<User> users = new ArrayList<>();
+
+        for (Follow f : follows) {
+            users.add(userMapper.selectById(f.getU2()));
+        }
+
+        return toUserDTOList(users);
+    }
+
+    @Override
+    public List<UserDTO> getAllFollowers(int id) {
+        QueryWrapper<Follow> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("u2", id);
+
+        List<Follow> follows = followMapper.selectList(queryWrapper);
+        List<User> users = new ArrayList<>();
+
+        for (Follow f : follows) {
+            users.add(userMapper.selectById(f.getU1()));
+        }
+
+        return toUserDTOList(users);
     }
 
     @Override
