@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 16/05/2021 21:51:15
+ Date: 17/05/2021 15:30:50
 */
 
 SET NAMES utf8mb4;
@@ -39,15 +39,21 @@ CREATE TABLE `enwords`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for follower
+-- Table structure for follow
 -- ----------------------------
-DROP TABLE IF EXISTS `follower`;
-CREATE TABLE `follower`  (
+DROP TABLE IF EXISTS `follow`;
+CREATE TABLE `follow`  (
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `u1` int NULL DEFAULT NULL COMMENT '用户1',
-  `u2` int NULL DEFAULT NULL COMMENT '用户2',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `u1` int UNSIGNED NULL DEFAULT NULL COMMENT '用户1',
+  `u2` int UNSIGNED NULL DEFAULT NULL COMMENT '用户2',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `u1`(`u1`) USING BTREE,
+  INDEX `u2`(`u2`) USING BTREE,
+  CONSTRAINT `u1` FOREIGN KEY (`u1`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `u2` FOREIGN KEY (`u2`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for translate_history
@@ -65,7 +71,7 @@ CREATE TABLE `translate_history`  (
   `is_collection` tinyint(1) NULL DEFAULT NULL COMMENT '是否收藏',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `uid`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for translate_word_picture
@@ -78,7 +84,7 @@ CREATE TABLE `translate_word_picture`  (
   `word` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `picture_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user

@@ -49,7 +49,7 @@ public class TranslateController {
         TranslateVO vo = new TranslateVO();
         vo.setTime(new Date());
         vo.setMsg("翻译记录传入成功！");
-        vo.setState("成功！");
+        vo.setState(200);
         vo.setData(Collections.singletonList(translateDTO));
 
         return vo;
@@ -70,7 +70,7 @@ public class TranslateController {
         TranslateVO vo = new TranslateVO();
         vo.setTime(new Date());
         vo.setMsg("翻译记录收藏成功！");
-        vo.setState("成功！");
+        vo.setState(500);
         vo.setData(Collections.singletonList(translateDTO));
 
         return vo;

@@ -32,6 +32,8 @@ public interface UserService {
      */
     void register(String accNumber, String passWord);
 
+
+
     /**
      * 更新
      * @param user 用户

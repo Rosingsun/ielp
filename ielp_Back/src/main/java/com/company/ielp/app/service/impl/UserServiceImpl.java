@@ -2,6 +2,7 @@ package com.company.ielp.app.service.impl;
 
 import cn.hutool.core.lang.Validator;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.company.ielp.app.mapper.FollowMapper;
 import com.company.ielp.app.mapper.UserMapper;
 import com.company.ielp.app.model.dto.UserDTO;
 import com.company.ielp.app.model.entity.User;
@@ -14,9 +15,11 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     final UserMapper userMapper;
+    final FollowMapper followMapper;
 
-    public UserServiceImpl(UserMapper userMapper) {
+    public UserServiceImpl(UserMapper userMapper, FollowMapper followMapper) {
         this.userMapper = userMapper;
+        this.followMapper = followMapper;
     }
 
     @Override

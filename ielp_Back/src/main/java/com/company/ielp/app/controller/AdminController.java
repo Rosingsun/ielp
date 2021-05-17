@@ -54,10 +54,10 @@ public class AdminController {
         if (user != null) {
             data.setUser(user);
             data.setMsg("获取用户成功！");
-            data.setState("成功");
+            data.setState(200);
         } else {
             data.setMsg("获取用户失败！");
-            data.setState("失败");
+            data.setState(500);
         }
         return data;
     }
@@ -103,7 +103,7 @@ public class AdminController {
         TranslateVO vo = new TranslateVO();
         vo.setTime(new Date());
         vo.setMsg("翻译记录");
-        vo.setState("成功！");
+        vo.setState(500);
         vo.setData(histories);
 
         return vo;
@@ -117,7 +117,7 @@ public class AdminController {
         TranslateVO vo = new TranslateVO();
         vo.setTime(new Date());
         vo.setMsg("收藏记录");
-        vo.setState("成功！");
+        vo.setState(200);
         vo.setData(collections);
 
         return vo;

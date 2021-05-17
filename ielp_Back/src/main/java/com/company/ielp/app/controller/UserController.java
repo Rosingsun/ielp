@@ -2,6 +2,7 @@ package com.company.ielp.app.controller;
 
 import com.company.ielp.app.model.dto.UserDTO;
 import com.company.ielp.app.model.params.LoginParam;
+import com.company.ielp.app.model.vo.BaseVO;
 import com.company.ielp.app.model.vo.UserVO;
 import com.company.ielp.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * 为前端的用户操作提供接口
@@ -57,17 +57,16 @@ public class UserController {
         UserVO data = new UserVO();
 
         UserDTO userDTO = userService.login(loginParam);
- 
-        data.setTime(new Date());
+
         if (userDTO != null) {
             data.setUser(userDTO);
             data.setLogin(true);
             data.setMsg("登陆成功！");
-            data.setState("成功");
+            data.setState(BaseVO.SUCCESS);
         } else {
             data.setLogin(false);
             data.setMsg("登陆失败，请检查账号密码！");
-            data.setState("失败");
+            data.setState(BaseVO.INTERNAL_SERVER_ERROR);
         }
 
         return data;
