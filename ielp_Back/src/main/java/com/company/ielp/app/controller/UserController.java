@@ -3,6 +3,7 @@ package com.company.ielp.app.controller;
 import com.company.ielp.app.model.dto.UserDTO;
 import com.company.ielp.app.model.params.LoginParam;
 import com.company.ielp.app.model.vo.BaseVO;
+import com.company.ielp.app.model.vo.FollowVO;
 import com.company.ielp.app.model.vo.UserVO;
 import com.company.ielp.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 为前端的用户操作提供接口
@@ -70,7 +72,28 @@ public class UserController {
         }
 
         return data;
+    }
 
+    /**
+     * 获取关注与粉丝
+     * @param uid 用户id
+     * @return 用户识图单
+     */
+    @PostMapping("/getFollow")
+    @ResponseBody
+    public FollowVO getFollow(int uid) {
+        List<UserDTO> follows = userService.getAllFollows(uid);
+        List<UserDTO> followers = userService.getAllFollowers(uid);
+
+        FollowVO followVO = new FollowVO();
+
+        if (follows.isEmpty() && followers.isEmpty()) {
+            followVO.setState(BaseVO.INTERNAL_SERVER_ERROR);
+        } else {
+            followVO.setFollows(follows);
+            followVO.setFollowers(followers);
+        }
+        return followVO;
     }
 
     /**
