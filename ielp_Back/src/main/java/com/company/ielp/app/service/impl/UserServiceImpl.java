@@ -2,13 +2,16 @@ package com.company.ielp.app.service.impl;
 
 import cn.hutool.core.lang.Validator;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.company.ielp.app.mapper.FollowMapper;
+import com.company.ielp.app.mapper.UserInfoMapper;
 import com.company.ielp.app.mapper.UserMapper;
-import com.company.ielp.app.model.dto.UserDTO;
-import com.company.ielp.app.model.entity.Follow;
+import com.company.ielp.app.mapper.UserRelationMapper;
+import com.company.ielp.app.model.dto.UserInfoDTO;
 import com.company.ielp.app.model.entity.User;
+import com.company.ielp.app.model.entity.UserInfo;
+import com.company.ielp.app.model.entity.UserRelation;
 import com.company.ielp.app.model.params.FollowParam;
 import com.company.ielp.app.model.params.LoginParam;
+import com.company.ielp.app.model.params.RegisterParam;
 import com.company.ielp.app.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -20,43 +23,35 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     final UserMapper userMapper;
-    final FollowMapper followMapper;
+    final UserInfoMapper userInfoMapper;
+    final UserRelationMapper userRelationMapper;
 
-    public UserServiceImpl(UserMapper userMapper, FollowMapper followMapper) {
+    public UserServiceImpl(UserMapper userMapper, UserInfoMapper userInfoMapper, UserRelationMapper userRelationMapper) {
         this.userMapper = userMapper;
-        this.followMapper = followMapper;
+        this.userInfoMapper = userInfoMapper;
+        this.userRelationMapper = userRelationMapper;
     }
 
-    private List<UserDTO> toUserDTOList(List<User> users) {
-        List<UserDTO> list = new ArrayList<>();
+    private List<UserInfoDTO> toUserDTOList(List<UserInfo> users) {
+        List<UserInfoDTO> list = new ArrayList<>();
         // 在对付大数据的时候这个真的有必要吗？
         // 值得考虑
-        for (User u : users) {
-            UserDTO dto;
-            BeanUtils.copyProperties(u, dto = new UserDTO());
+        for (UserInfo u : users) {
+            UserInfoDTO dto;
+            BeanUtils.copyProperties(u, dto = new UserInfoDTO());
             list.add(dto);
         }
         return list;
     }
 
     @Override
-    public UserDTO getUserById(int id) {
-        UserDTO userDTO = new UserDTO();
-        User user = userMapper.selectById(id);
-        BeanUtils.copyProperties(user, userDTO);
+    public UserInfoDTO login(LoginParam loginParam) {
 
-        return userDTO;
-    }
 
-    @Override
-    public UserDTO login(LoginParam loginParam) {
-        UserDTO userDTO = new UserDTO();
-
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-
+        // 验证信息
         String accountNum = loginParam.getAccountNum();
         String passWord = loginParam.getPassWord();
-
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         if (Validator.isEmail(accountNum)) {
             queryWrapper.eq("email", accountNum).eq("pass_word", passWord);
         } else if (Validator.isMobile(accountNum)) {
@@ -66,36 +61,49 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = userMapper.selectOne(queryWrapper);
-        BeanUtils.copyProperties(user, userDTO);
 
-        return userDTO;
-
+        try {
+            // 查询信息
+            UserInfo userInfo = userInfoMapper.getUserInfo(user.getId());
+            // 构建
+            UserInfoDTO userInfoDTO = new UserInfoDTO();
+            BeanUtils.copyProperties(userInfo, userInfoDTO);
+            return userInfoDTO;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
-    public void register(String accNumber, String passWord) {
+    public void register(RegisterParam registerParam) {
+        // 构建
         User user = new User();
-        if (Validator.isEmail(accNumber)) {
-            user.setEmail(accNumber);
-        } else if (Validator.isMobile(accNumber)) {
-            user.setPhoneNumber(accNumber);
-        } else {
-            System.out.println("注册失败，账号格式出错！");
-            return;
-        }
-        user.setPassWord(passWord);
+        UserInfo userInfo = new UserInfo();
+
+        user.setEmail(registerParam.getEmail());
+        user.setPhoneNumber(registerParam.getPhoneNumber());
+        user.setPassWord(registerParam.getPassWord());
+
+        // 插入
         userMapper.insert(user);
+
+        // 获取id，构建信息
+        userInfo.setUserId(user.getId());
+        userInfo.setNickName(registerParam.getNickName());
+
+        // 插入
+        userInfoMapper.insert(userInfo);
     }
 
     @Override
     public String follow(FollowParam followParam) {
-        Follow follow = new Follow();
+        UserRelation userRelation = new UserRelation();
 
-        follow.setU1(followParam.getUid());
-        follow.setU2(followParam.getFollowId());
+        userRelation.setUserId(followParam.getUserId());
+        userRelation.setTargetUserId(followParam.getTargetUserId());
 
         try {
-            followMapper.insert(follow);
+            userRelationMapper.insert(userRelation);
         } catch (Exception e) {
             return "关注失败！";
         }
@@ -105,85 +113,52 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String unfollow(FollowParam followParam) {
-        QueryWrapper<Follow> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<UserRelation> queryWrapper = new QueryWrapper<>();
 
-        queryWrapper.eq("u1", followParam.getUid()).eq("u2", followParam.getFollowId());
+        queryWrapper.eq("u1", followParam.getUserId()).eq("u2", followParam.getTargetUserId());
 
         try {
-            followMapper.delete(queryWrapper);
+            userRelationMapper.delete(queryWrapper);
         } catch (Exception e) {
             return "取关失败！";
         }
-        return "关注成功！";
+        return "取关成功！";
     }
 
     @Override
-    public List<UserDTO> getAllFollows(int id) {
-        QueryWrapper<Follow> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("u1", id);
+    public List<UserInfoDTO> getAllFollows(int id) {
+        QueryWrapper<UserRelation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", id);
 
-        List<Follow> follows = followMapper.selectList(queryWrapper);
-        List<User> users = new ArrayList<>();
+        List<UserRelation> userRelationList = userRelationMapper.selectList(queryWrapper);
 
-        for (Follow f : follows) {
-            users.add(userMapper.selectById(f.getU2()));
+        List<UserInfo> userInfos = new ArrayList<>();
+
+        QueryWrapper<UserInfo> queryWrapper2 = new QueryWrapper<>();
+        for (UserRelation u : userRelationList) {
+            queryWrapper2.eq("user_id", u.getTargetUserId());
+            userInfos.add(userInfoMapper.selectOne(queryWrapper2));
+            queryWrapper2.clear();
         }
 
-        return toUserDTOList(users);
+        return toUserDTOList(userInfos);
     }
 
     @Override
-    public List<UserDTO> getAllFollowers(int id) {
-        QueryWrapper<Follow> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("u2", id);
+    public List<UserInfoDTO> getAllFollowers(int id) {
+        QueryWrapper<UserRelation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("target_user_id", id);
 
-        List<Follow> follows = followMapper.selectList(queryWrapper);
-        List<User> users = new ArrayList<>();
+        List<UserRelation> userRelationList = userRelationMapper.selectList(queryWrapper);
+        List<UserInfo> userInfos = new ArrayList<>();
 
-        for (Follow f : follows) {
-            users.add(userMapper.selectById(f.getU1()));
+        QueryWrapper<UserInfo> queryWrapper2 = new QueryWrapper<>();
+        for (UserRelation u : userRelationList) {
+            queryWrapper2.eq("user_id", u.getUserId());
+            userInfos.add(userInfoMapper.selectOne(queryWrapper2));
+            queryWrapper2.clear();
         }
 
-        return toUserDTOList(users);
-    }
-
-    @Override
-    public int updateById(User user) {
-        return userMapper.updateById(user);
-    }
-
-    @Override
-    public int addClockInContinuity(int id) {
-        User user = userMapper.selectById(id);
-        user.setClockInContinuity(user.getClockInContinuity() + 1);
-        return userMapper.updateById(user);
-    }
-
-    @Override
-    public int clearClockInContinuity(int id) {
-        User user = userMapper.selectById(id);
-        user.setClockInContinuity(0);
-        return userMapper.updateById(user);
-    }
-
-    @Override
-    public int addClockInTotal(int id) {
-        User user = userMapper.selectById(id);
-        user.setClockInTotal(user.getClockInTotal() + 1);
-        return userMapper.updateById(user);
-    }
-
-    @Override
-    public int addStudyTime(int id) {
-        User user = userMapper.selectById(id);
-        user.setStudyTime(user.getStudyTime() + 1);
-        return userMapper.updateById(user);
-    }
-
-    @Override
-    public int addIdentifyImg(int id) {
-        User user = userMapper.selectById(id);
-        user.setIdentifyImg(user.getIdentifyImg() + 1);
-        return userMapper.updateById(user);
+        return toUserDTOList(userInfos);
     }
 }

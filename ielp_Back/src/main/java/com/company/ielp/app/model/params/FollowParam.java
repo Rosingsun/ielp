@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class FollowParam {
 
-    int uid;
+    int userId;
 
-    int followId;
+    int targetUserId;
 
 }

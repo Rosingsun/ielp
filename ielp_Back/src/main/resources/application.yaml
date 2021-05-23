@@ -29,3 +29,6 @@ spring:
   servlet:
     multipart:
       max-file-size: 10MB
+
+mybatis-plus:
+  type-aliases-package: package com.company.ielp.app.model.entity
