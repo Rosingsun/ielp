@@ -24,4 +24,12 @@ public class Dynamic extends BaseEntity {
     private Integer comment;
     private Integer userId;
 
+    public void addLike() {
+        like += 1;
+    }
+
+    public void addComment() {
+        comment += 1;
+    }
+
 }

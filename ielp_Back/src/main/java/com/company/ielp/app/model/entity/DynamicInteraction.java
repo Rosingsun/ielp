@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 与的动态互动
+ * 与其他用户的动态互动
  *
  * @author 幕冬儿
  */
