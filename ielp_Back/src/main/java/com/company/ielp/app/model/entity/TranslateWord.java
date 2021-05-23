@@ -7,16 +7,18 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 用户安全信息
+ * 翻译单词
  * @author 幕冬儿
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class User extends BaseEntity {
-    @TableId(type= IdType.AUTO)
+public class TranslateWord extends BaseEntity {
+    @TableId(type = IdType.AUTO)
     private Integer id;
-    private String email;
-    private String phoneNumber;
-    private String passWord;
+    private String word;
+    private String translation;
+    private String picture_url;
+    private String lyric;
+    private Integer uid;
 }

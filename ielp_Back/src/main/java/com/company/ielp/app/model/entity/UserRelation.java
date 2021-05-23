@@ -7,16 +7,16 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 用户安全信息
+ * 用户关系
  * @author 幕冬儿
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class User extends BaseEntity {
+public class UserRelation extends BaseEntity {
     @TableId(type= IdType.AUTO)
     private Integer id;
-    private String email;
-    private String phoneNumber;
-    private String passWord;
+    private Integer userId;
+    private Integer targetUserId;
+
 }
