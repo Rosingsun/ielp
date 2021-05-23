@@ -2,6 +2,8 @@ package com.company.ielp.app;
 
 import com.company.ielp.app.model.dto.UserInfoDTO;
 import com.company.ielp.app.model.entity.Dynamic;
+import com.company.ielp.app.model.entity.DynamicInteraction;
+import com.company.ielp.app.model.params.DynamicInteractionParam;
 import com.company.ielp.app.model.params.DynamicParam;
 import com.company.ielp.app.model.params.LoginParam;
 import com.company.ielp.app.model.params.RegisterParam;
@@ -51,6 +53,22 @@ public class ServiceTest {
         Dynamic dynamic = dynamicService.publishDynamic(dynamicParam);
 
         System.out.println(dynamic);
+    }
+
+    @Test
+    void dynamicServiceTest_publishInteraction() {
+        DynamicInteractionParam param = new DynamicInteractionParam();
+
+        param.setIsLike(true);
+        param.setIsComment(true);
+        param.setCommentInfo("66666啊");
+        param.setDynamicId(1);
+        param.setUserId(1);
+
+        DynamicInteraction interaction = dynamicService.publishInteraction(param);
+
+        System.out.println(interaction);
+
     }
 
 }

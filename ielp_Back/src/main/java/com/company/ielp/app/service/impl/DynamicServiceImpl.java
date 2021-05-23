@@ -35,21 +35,26 @@ public class DynamicServiceImpl implements DynamicService {
 
     @Override
     public DynamicInteraction publishInteraction(DynamicInteractionParam dynamicInteractionParam) {
-        DynamicInteraction dynamicInteraction = new DynamicInteraction();
 
+        // 构建互动对象
+        DynamicInteraction dynamicInteraction = new DynamicInteraction();
         BeanUtils.copyProperties(dynamicInteractionParam, dynamicInteraction);
 
-        Dynamic dynamic = dynamicMapper.selectById(dynamicInteractionParam.getDynamicId());
+        // 根据互动对象获取动态信息
+        Dynamic dynamic = dynamicMapper.selectById(dynamicInteraction.getDynamicId());
 
-        if (dynamicInteractionParam.getIsLike()) {
+        // 修改动态信息
+        if (dynamicInteraction.getIsLike()) {
             dynamic.addLike();
         }
 
-        if (dynamicInteractionParam.getIsComment()) {
+        if (dynamicInteraction.getIsComment()) {
             dynamic.addComment();
         }
 
+        // 插入互动信息
         dynamicInteractionMapper.insert(dynamicInteraction);
+        // 更新动态信息
         dynamicMapper.updateById(dynamic);
 
         return dynamicInteraction;

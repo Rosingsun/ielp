@@ -1,6 +1,7 @@
 package com.company.ielp.app.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +21,9 @@ public class Dynamic extends BaseEntity {
     private Integer id;
     private Integer history;
     private String info;
+    @TableField(value = "`like`")
     private Integer like;
+    @TableField(value = "`comment`")
     private Integer comment;
     private Integer userId;
 
