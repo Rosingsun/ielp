@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Divider, Avatar, Input, Tabs, Spin } from 'antd';
 import { MessageOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 import InfiniteScroll from 'react-infinite-scroller';
+import { FriendBox } from "../../components/index";
 import s from "./style.module.scss";
 const { TabPane } = Tabs;
 export default class Home extends Component {
@@ -12,7 +13,7 @@ export default class Home extends Component {
       hasMore: true,
       data: [
         { key: 1 }, { key: 2 }, { key: 3 },
-        { key: 1 }, { key: 2 }, { key: 3 },        { key: 1 }, { key: 2 }, { key: 3 },
+        { key: 1 }, { key: 2 }, { key: 3 }, { key: 1 }, { key: 2 }, { key: 3 },
         { key: 1 }, { key: 2 }, { key: 3 },
         { key: 1 }, { key: 2 }, { key: 3 },
         { key: 1 }, { key: 2 }, { key: 3 },
@@ -47,7 +48,7 @@ export default class Home extends Component {
                           return (
                             <div className={s.userInfo}>
                               <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" size={60} />
-                              <div className={s.userName}>我的用户名超级惨我的用户名超级惨我的用户名超级惨我的用户名超级惨</div>
+                              <div className={s.userName}>我的用户名超</div>
                             </div>
                           )
                         })
@@ -62,11 +63,51 @@ export default class Home extends Component {
                     3
                   </div>
                 </TabPane>
-                <TabPane tab={<span><UserOutlined />好友 </span>} key="2">
-
+                <TabPane className={s.chatPage} tab={<span><UserOutlined />好友 </span>} key="2">
+                  <div className={s.friendList}>
+                    <Input placeholder="Basic usage" />
+                    <div className={s.messageLine}>
+                      {
+                        this.state.data.map((item, index) => {
+                          return (
+                         
+                            <FriendBox />
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+                  <div className={s.chatContainer}>
+                    <div className={s.chatWindow}></div>
+                    {/* <div clas> */}
+                  </div>
+                  <div className={s.chatObject}>
+                    3
+                  </div>
                 </TabPane>
-                <TabPane tab={<span><TeamOutlined />聊天室 </span>} key="3">
-
+                <TabPane className={s.chatPage} tab={<span><TeamOutlined />聊天室 </span>} key="3">
+                  <div className={s.friendList}>
+                    <Input placeholder="Basic usage" />
+                    <div className={s.messageLine}>
+                      {
+                        this.state.data.map((item, index) => {
+                          return (
+                            <div className={s.userInfo}>
+                              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" size={60} />
+                              <div className={s.userName}>我的用户名超</div>
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+                  <div className={s.chatContainer}>
+                    <div className={s.chatWindow}></div>
+                    {/* <div clas> */}
+                  </div>
+                  <div className={s.chatObject}>
+                    3
+                  </div>
                 </TabPane>
               </Tabs>
             </div>
