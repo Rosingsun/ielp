@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.company.ielp.app.mapper.UserInfoMapper;
 import com.company.ielp.app.mapper.UserMapper;
 import com.company.ielp.app.mapper.UserRelationMapper;
+import com.company.ielp.app.model.dto.UserDTO;
 import com.company.ielp.app.model.dto.UserInfoDTO;
 import com.company.ielp.app.model.entity.User;
 import com.company.ielp.app.model.entity.UserInfo;
@@ -93,6 +94,22 @@ public class UserServiceImpl implements UserService {
 
         // 插入
         userInfoMapper.insert(userInfo);
+    }
+
+    @Override
+    public UserDTO getUserById(int userId) {
+        // 突然意识到这个方法不能被随意调用，至少得确认是否登陆
+        User user = userMapper.selectById(userId);
+        UserDTO userDTO = new UserDTO();
+
+        BeanUtils.copyProperties(user, userDTO);
+
+        return userDTO;
+    }
+
+    @Override
+    public UserInfoDTO getUserInfoById(int userId) {
+        return null;
     }
 
     @Override

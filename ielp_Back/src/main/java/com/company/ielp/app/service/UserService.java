@@ -1,5 +1,6 @@
 package com.company.ielp.app.service;
 
+import com.company.ielp.app.model.dto.UserDTO;
 import com.company.ielp.app.model.dto.UserInfoDTO;
 import com.company.ielp.app.model.params.FollowParam;
 import com.company.ielp.app.model.params.LoginParam;
@@ -25,6 +26,21 @@ public interface UserService {
      * @param registerParam 注册表单
      */
     void register(RegisterParam registerParam);
+
+    /**
+     * 通过id获取用户安全信息
+     * @param userId 用户id
+     * @return 用户安全信息
+     */
+    UserDTO getUserById(int userId);
+
+    /**
+     * 通过id获取用户详情信息
+     * @param userId 用户id
+     * @return 用户详情信息
+     */
+    UserInfoDTO getUserInfoById(int userId);
+
 
     /**
      * 关注
