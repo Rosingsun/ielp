@@ -36,16 +36,13 @@
     padding-top: 120px;
 }
 .text1{
-    font-size: 3px;
+    font-size: 5px;
     margin: auto;
 }
 .btn{
-    // background-color:red;
-    // margin: auto;
-    // border: none;]
-    background-color:red
-     
-
+    margin: auto;
+    border: none;
+    background-color:rgba(245, 211, 63, 1)
 }
 .t1{
     text-align: left;
@@ -70,6 +67,7 @@
 .time{
     width: 100%;
     height: 60%;
+    // background-color: white;
 
 }
 .qf-editor{
@@ -83,4 +81,64 @@ z-index:0;
   }
   .input {
     width: 220px;
+  }
+  .up{
+      width: 100%;
+      height: 40%;
+    //   background-color: red;
+      display: flex;
+  }
+  .month{
+      width: 60%;
+      height: 100%;
+    //   background-color: palegreen;
+      margin: auto;
+  }
+  .week{
+      width: 35%;
+      height: 100%;
+    //   background-color: palevioletred;
+      margin: auto;
+    
+  }
+  .down{
+      width: 100%;
+      height: 40%;
+      display: flex;
+    //   background-color: purple;
+  }
+  .day{
+    width: 60%;
+    height: 100%;
+    margin: auto;
+    border-top:5px solid white;
+
+  }
+  .weather{
+    width: 35%;
+    height: 100%;
+    // background-color: rgb(7, 1, 3);
+    margin: auto;
+
+  }
+  .weektext{
+    font-size: 20px;
+    color: white;
+    // margin: auto;
+   
+
+  }
+  .monthtext{
+    font-size: 30px;
+    color: white;
+    // margin: auto;
+    margin-left: 35px;
+
+  }
+  .daytext{
+    font-size: 30px;
+    color: white;
+    // margin: auto;
+    margin-left: 50px;
+
   }
