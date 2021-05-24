@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>请登录</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <div class="main">
@@ -15,13 +15,13 @@
         <span>请输入登录账户和密码</span>
     </div>
 
-    <form class="login-form" method="post" th:action="@{/login}">
+    <form class="login-form" method="post" th:action="@{/user/login}">
         <!--输入框-->
         <div class="input-content">
             <!--autoFocus-->
             <div>
                 <label>
-                    <input type="text" name="email" class="form-control" placeholder="用户名" autofocus>
+                    <input type="text" name="accountNum" class="form-control" placeholder="用户名" autofocus>
                 </label>
             </div>
 

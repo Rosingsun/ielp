@@ -1,20 +1,20 @@
 package com.company.ielp.app.controller;
 
+import com.company.ielp.app.annotation.PassToken;
 import com.company.ielp.app.model.dto.UserDTO;
+import com.company.ielp.app.model.dto.UserInfoDTO;
 import com.company.ielp.app.model.params.LoginParam;
+import com.company.ielp.app.model.params.TokenParam;
+import com.company.ielp.app.model.vo.BaseVO;
 import com.company.ielp.app.model.vo.UserVO;
 import com.company.ielp.app.service.UserService;
+import com.company.ielp.app.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
 
 /**
  * 为前端的用户操作提供接口
@@ -25,10 +25,6 @@ import java.util.Date;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
-    // 关于这个缓存的问题找个时间解决了
-    final static String PATH_NAME = "D:\\缓存\\ielp\\";
-
     final UserService userService;
 
     public UserController(UserService userService) {
@@ -40,7 +36,8 @@ public class UserController {
      *
      * @return 登陆界面
      */
-    @GetMapping(value = {"/", "/loginPage"})
+    @PassToken
+    @GetMapping(value = {"/loginPage"})
     public String loginPage() {
         return "login_page";
     }
@@ -51,45 +48,65 @@ public class UserController {
      * @param loginParam 登陆表单
      * @return 用户
      */
+    @PassToken
     @PostMapping("/login")
     @ResponseBody
     public UserVO login(LoginParam loginParam) {
         UserVO data = new UserVO();
 
-        UserDTO userDTO = userService.login(loginParam);
- 
-        data.setTime(new Date());
-        if (userDTO != null) {
-            data.setUser(userDTO);
+        UserInfoDTO login = userService.login(loginParam);
+
+        if (login != null) {
+            // 创建token
+            String token = JwtUtil.createToken(login.getUserId());
+            // 传递给前端
+            data.setUserInfo(login);
             data.setLogin(true);
+            data.setToken(token);
             data.setMsg("登陆成功！");
-            data.setState("成功");
+            data.setState(BaseVO.SUCCESS);
+
         } else {
             data.setLogin(false);
             data.setMsg("登陆失败，请检查账号密码！");
-            data.setState("失败");
+            data.setState(BaseVO.INTERNAL_SERVER_ERROR);
         }
 
         return data;
-
     }
 
-    /**
-     * 上传图像
-     * @param profile 头像
-     * @return 上传成功
-     * @throws IOException 传输异常
-     */
-    @PostMapping("/upload-profile")
+    @GetMapping("/getSelf")
     @ResponseBody
-    public String upload(MultipartFile profile) throws IOException {
-        log.info("上传文件：{}，{}", profile.getOriginalFilename(), profile.getSize());
+    public UserVO getSelf(TokenParam tokenParam) {
+        UserVO data = new UserVO();
 
-        if (!profile.isEmpty()) {
-            String originalFilename = profile.getOriginalFilename();
-            profile.transferTo(new File(PATH_NAME + originalFilename));
+        String token = tokenParam.getToken();
+
+        // 对于这一步，是可能因为会产生空指针的问题
+        // 但都到了这一步，理应是不会出现空token的事情
+        // 准备之后再优化
+
+        Integer s = JwtUtil.getAudience(token);
+
+        if (s == null) {
+            log.info("token异常，请检查token或者重新登陆！");
+            data.setMsg("token异常，请检查token或者重新登陆！");
+            data.setState(BaseVO.INTERNAL_SERVER_ERROR);
+            return null;
         }
 
-        return "上传成功！";
+        UserDTO userDTO = userService.getUserById(s);
+
+        if (userDTO == null) {
+            data.setMsg("没有该用户，请注册！");
+            data.setState(BaseVO.INTERNAL_SERVER_ERROR);
+        }
+
+        data.setUser(userDTO);
+        data.setMsg("获取成功！");
+        data.setState(BaseVO.SUCCESS);
+
+        return data;
     }
+
 }

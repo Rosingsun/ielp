@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * 登陆表单
+ * @author 幕冬
  */
 @Data
 public class LoginParam {

@@ -9,6 +9,7 @@ import lombok.ToString;
 
 /**
  * 翻译历史记录
+ *
  * @author 幕冬儿
  * @see TranslateDTO
  */
@@ -17,12 +18,12 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 public class TranslateHistory extends BaseEntity {
 
-    @TableId(type= IdType.AUTO)
+    @TableId(type = IdType.AUTO)
     private Integer id;
     private String languageFrom;
     private String languageTo;
     private String translatedWord;
-    private String picUrl;
+    private String pictureUrl;
     private Integer userId;
     private Boolean isCollection = false;
 }
