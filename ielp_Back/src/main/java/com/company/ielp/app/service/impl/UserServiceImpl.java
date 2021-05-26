@@ -2,6 +2,7 @@ package com.company.ielp.app.service.impl;
 
 import cn.hutool.core.lang.Validator;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.company.ielp.app.exception.BadRequestException;
 import com.company.ielp.app.mapper.UserInfoMapper;
 import com.company.ielp.app.mapper.UserMapper;
 import com.company.ielp.app.mapper.UserRelationMapper;
@@ -14,6 +15,7 @@ import com.company.ielp.app.model.params.FollowParam;
 import com.company.ielp.app.model.params.LoginParam;
 import com.company.ielp.app.model.params.RegisterParam;
 import com.company.ielp.app.service.UserService;
+import com.company.ielp.app.utils.JwtUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    final String LOGIN_FAIL = "登陆失败，账号密码错误！";
 
     final UserMapper userMapper;
     final UserInfoMapper userInfoMapper;
@@ -46,9 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfoDTO login(LoginParam loginParam) {
-
-
+    public String login(LoginParam loginParam) {
         // 验证信息
         String accountNum = loginParam.getAccountNum();
         String passWord = loginParam.getPassWord();
@@ -63,15 +65,10 @@ public class UserServiceImpl implements UserService {
 
         User user = userMapper.selectOne(queryWrapper);
 
-        try {
-            // 查询信息
-            UserInfo userInfo = userInfoMapper.getUserInfo(user.getId());
-            // 构建
-            UserInfoDTO userInfoDTO = new UserInfoDTO();
-            BeanUtils.copyProperties(userInfo, userInfoDTO);
-            return userInfoDTO;
-        } catch (Exception e) {
-            return null;
+        if (user != null) {
+            return JwtUtil.createToken(user.getId());
+        } else {
+            throw new BadRequestException(LOGIN_FAIL);
         }
     }
 

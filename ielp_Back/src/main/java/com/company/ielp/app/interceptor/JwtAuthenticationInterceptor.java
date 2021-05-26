@@ -1,6 +1,7 @@
 package com.company.ielp.app.interceptor;
 
 import com.company.ielp.app.annotation.PassToken;
+import com.company.ielp.app.mapper.UserMapper;
 import com.company.ielp.app.model.dto.UserDTO;
 import com.company.ielp.app.service.UserService;
 import com.company.ielp.app.utils.JwtUtil;
@@ -21,8 +22,13 @@ import java.lang.reflect.Method;
 @Slf4j
 public class JwtAuthenticationInterceptor implements HandlerInterceptor {
 
+    final String INTERCEPTOR_SUCCESS = "方法已被拦截。";
+
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object)  {
@@ -43,11 +49,12 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
                 return true;
             }
         } else {    // 执行拦截
-            log.info("Jwt拦截执行拦截");
+            log.info("Jwt拦截器执行拦截，尝试拦截：{}", method);
             // 执行认证
             if (token == null) {
                 // 没有token，需要登陆
-                log.info("前端传入缺失token，需要登陆账户");
+                log.info("前端传入缺失token，需要登陆账户。");
+                log.info(INTERCEPTOR_SUCCESS);
                 return false;
             }
 
@@ -56,6 +63,7 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
 
             if (userId == null) {
                 log.info("token异常，请检查token或者重新登陆！");
+                log.info(INTERCEPTOR_SUCCESS);
                 return false;
             }
 
@@ -65,10 +73,11 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
             // 若数据库中没有对象
             if (userDTO == null) {
                 log.info("token信息错误，数据库中不存在该用户，请重新登陆或注册。");
+                log.info(INTERCEPTOR_SUCCESS);
                 return false;
             }
         }
-        log.info("放行！");
+        log.info("token信息正确，放行！");
         return true;
     }
 

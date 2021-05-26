@@ -17,9 +17,9 @@ public interface UserService {
     /**
      * 判断是否登陆成功
      * @param loginParam 登陆表单
-     * @return 成功与否
+     * @return Token信息
      */
-    UserInfoDTO login(LoginParam loginParam);
+    String login(LoginParam loginParam);
 
     /**
      * 注册功能
