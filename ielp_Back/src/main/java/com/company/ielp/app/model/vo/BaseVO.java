@@ -14,7 +14,14 @@ public class BaseVO {
     public final static int NOT_FOUND = 404;
     public final static int INTERNAL_SERVER_ERROR = 500;
 
-    BaseVO() {
+    public BaseVO() {
         time = new Date();
     }
+
+    public BaseVO(String msg, int state) {
+        this.msg = msg;
+        this.state = state;
+        time = new Date();
+    }
+
 }

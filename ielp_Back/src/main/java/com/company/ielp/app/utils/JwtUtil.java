@@ -3,7 +3,6 @@ package com.company.ielp.app.utils;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.Claim;
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,15 +61,21 @@ public class JwtUtil {
      * @param token token信息
      * @return 签发对象信息
      */
-    public static Integer getAudience(String token) {
+    public static int getAudience(String token) {
         String audience;
         try {
             audience = JWT.decode(token).getAudience().get(0);
-        } catch (JWTDecodeException j) {
+        } catch (Exception e) {
             //这里是token解析失败
-            j.printStackTrace();
-            return null;
+            log.info("token异常，请检查token或者重新登陆！");
+            throw new RuntimeException("token异常，请检查token或者重新登陆！");
         }
+
+        if (audience == null) {
+            log.info("token中不存在用户id，请检查token或者重新登陆！");
+            throw new RuntimeException("token中不存在用户id，请检查token或者重新登陆！");
+        }
+
         return Integer.parseInt(audience);
     }
 

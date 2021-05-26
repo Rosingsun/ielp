@@ -14,4 +14,14 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class TranslateVO extends BaseVO {
     private List<TranslateDTO> data;
+
+    public TranslateVO() {
+
+    }
+
+    public TranslateVO(List<TranslateDTO> data, String msg, Integer state) {
+        super(msg, state);
+        this.data = data;
+    }
+
 }

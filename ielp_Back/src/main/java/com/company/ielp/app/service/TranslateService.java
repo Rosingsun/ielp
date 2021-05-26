@@ -25,11 +25,18 @@ public interface TranslateService {
     TranslateDTO collectionWord(int translateHistoryId);
 
     /**
+     * 获取用户历史记录
+     * @param userId 用户id
+     * @return 历史记录列表
+     */
+    List<TranslateDTO> getHistories(int userId);
+
+    /**
      * 通过用户ID获取收藏单词
      * @param userId 用户记录
      * @return 收藏列表
      */
-    List<TranslateDTO> getCollectionsByUid(int userId);
+    List<TranslateDTO> getCollections(int userId);
 
 
     // 有一个功能是，通过单词获取图片，但目前考虑的是图片部署到哪里

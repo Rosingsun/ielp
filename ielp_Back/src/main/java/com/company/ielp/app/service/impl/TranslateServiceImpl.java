@@ -25,6 +25,17 @@ public class TranslateServiceImpl implements TranslateService {
         this.translateHistoryMapper = translateHistoryMapper;
     }
 
+    private List<TranslateDTO> getHistoriesByUid(int userId, boolean isCollection) {
+        // 新建查询
+        QueryWrapper<TranslateHistory> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId);
+        if (isCollection) {
+            queryWrapper.eq("is_collection", true);
+        }
+        // 查询，包装，返回
+        return toTranslateDTOList(translateHistoryMapper.selectList(queryWrapper));
+    }
+
     private List<TranslateDTO> toTranslateDTOList(List<TranslateHistory> histories) {
         List<TranslateDTO> list = new ArrayList<>();
         // 在对付大数据的时候这个真的有必要吗？
@@ -43,8 +54,8 @@ public class TranslateServiceImpl implements TranslateService {
         TranslateDTO translateDTO = new TranslateDTO();
         // 插入历史记录
         BeanUtils.copyProperties(translateParam, history);
+        log.info("传入翻译记录：{}", history);
         translateHistoryMapper.insert(history);
-
         // 转换为DTO
         BeanUtils.copyProperties(history, translateDTO);
         return translateDTO;
@@ -53,13 +64,10 @@ public class TranslateServiceImpl implements TranslateService {
     @Override
     public TranslateDTO collectionWord(int translateHistoryId) {
 
-
         TranslateHistory history = translateHistoryMapper.selectById(translateHistoryId);
-
         history.setIsCollection(true);
-
+        log.info("收藏记录：{}", history);
         translateHistoryMapper.updateById(history);
-
 
         // 转换为DTO
         // 我开始考虑这个转换为DTO是否有必要了……
@@ -70,12 +78,13 @@ public class TranslateServiceImpl implements TranslateService {
     }
 
     @Override
-    public List<TranslateDTO> getCollectionsByUid(int userId) {
-        QueryWrapper<TranslateHistory> queryWrapper = new QueryWrapper<>();
+    public List<TranslateDTO> getHistories(int userId) {
+        return getHistoriesByUid(userId, false);
+    }
 
-        queryWrapper.eq("user_id", userId).eq("is_collection", 1);
-
-        return toTranslateDTOList(translateHistoryMapper.selectList(queryWrapper));
+    @Override
+    public List<TranslateDTO> getCollections(int userId) {
+        return getHistoriesByUid(userId, true);
     }
 
 }

@@ -14,6 +14,8 @@ import com.company.ielp.app.model.params.FollowParam;
 import com.company.ielp.app.model.params.LoginParam;
 import com.company.ielp.app.model.params.RegisterParam;
 import com.company.ielp.app.service.UserService;
+import com.company.ielp.app.utils.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
+
+    final String LOGIN_FAIL = "登陆失败，账号密码错误！";
 
     final UserMapper userMapper;
     final UserInfoMapper userInfoMapper;
@@ -45,10 +50,38 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    /**
+     * 获取用户id
+     * @param userId 用户id
+     * @return 用户信息
+     */
+    private UserDTO getUserById(int userId) {
+        // 获取
+        User user = userMapper.selectById(userId);
+        // 转换
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+        // 返回
+        return userDTO;
+    }
+
+    /**
+     * 获取用户id
+     * @param userId 用户id
+     * @return 用户信息
+     */
+    private UserInfoDTO getUserInfoById(int userId) {
+        // 获取
+        UserInfo userInfo = userInfoMapper.selectById(userId);
+        // 转换
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+        BeanUtils.copyProperties(userInfo, userInfoDTO);
+        // 返回
+        return userInfoDTO;
+    }
+
     @Override
-    public UserInfoDTO login(LoginParam loginParam) {
-
-
+    public String login(LoginParam loginParam) {
         // 验证信息
         String accountNum = loginParam.getAccountNum();
         String passWord = loginParam.getPassWord();
@@ -63,14 +96,11 @@ public class UserServiceImpl implements UserService {
 
         User user = userMapper.selectOne(queryWrapper);
 
-        try {
-            // 查询信息
-            UserInfo userInfo = userInfoMapper.getUserInfo(user.getId());
-            // 构建
-            UserInfoDTO userInfoDTO = new UserInfoDTO();
-            BeanUtils.copyProperties(userInfo, userInfoDTO);
-            return userInfoDTO;
-        } catch (Exception e) {
+        if (user != null) {
+            return JwtUtil.createToken(user.getId());
+        } else {
+            // 这里还可以继续多样化
+            log.info("用户：{} 尝试登陆失败", loginParam.getAccountNum());
             return null;
         }
     }
@@ -97,19 +127,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getUserById(int userId) {
-        // 突然意识到这个方法不能被随意调用，至少得确认是否登陆
-        User user = userMapper.selectById(userId);
-        UserDTO userDTO = new UserDTO();
-
-        BeanUtils.copyProperties(user, userDTO);
-
-        return userDTO;
+    public UserDTO getUser(String token) {
+        int userId;
+        try {
+            userId = JwtUtil.getAudience(token);
+        } catch (RuntimeException e) {
+            return null;
+        }
+        return this.getUserById(userId);
     }
 
     @Override
-    public UserInfoDTO getUserInfoById(int userId) {
-        return null;
+    public UserInfoDTO getUserInfo(String token) {
+        int userId;
+        try {
+            userId = JwtUtil.getAudience(token);
+        } catch (RuntimeException e) {
+            return null;
+        }
+        return this.getUserInfoById(userId);
     }
 
     @Override

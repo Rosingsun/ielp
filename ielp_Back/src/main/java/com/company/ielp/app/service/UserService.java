@@ -17,9 +17,9 @@ public interface UserService {
     /**
      * 判断是否登陆成功
      * @param loginParam 登陆表单
-     * @return 成功与否
+     * @return Token信息
      */
-    UserInfoDTO login(LoginParam loginParam);
+    String login(LoginParam loginParam);
 
     /**
      * 注册功能
@@ -29,18 +29,17 @@ public interface UserService {
 
     /**
      * 通过id获取用户安全信息
-     * @param userId 用户id
+     * @param token token信息
      * @return 用户安全信息
      */
-    UserDTO getUserById(int userId);
+    UserDTO getUser(String token);
 
     /**
      * 通过id获取用户详情信息
-     * @param userId 用户id
+     * @param token token信息
      * @return 用户详情信息
      */
-    UserInfoDTO getUserInfoById(int userId);
-
+    UserInfoDTO getUserInfo(String token);
 
     /**
      * 关注
