@@ -16,6 +16,7 @@ import com.company.ielp.app.model.params.LoginParam;
 import com.company.ielp.app.model.params.RegisterParam;
 import com.company.ielp.app.service.UserService;
 import com.company.ielp.app.utils.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     final String LOGIN_FAIL = "登陆失败，账号密码错误！";
@@ -37,6 +39,17 @@ public class UserServiceImpl implements UserService {
         this.userRelationMapper = userRelationMapper;
     }
 
+    private Integer tokenAnalysis(String token) {
+        Integer i = JwtUtil.getAudience(token);
+
+        if (i == null) {
+            log.info("token异常，请检查token或者重新登陆！");
+            throw new RuntimeException("token异常，请检查token或者重新登陆！");
+        }
+
+        return i;
+    }
+
     private List<UserInfoDTO> toUserDTOList(List<UserInfo> users) {
         List<UserInfoDTO> list = new ArrayList<>();
         // 在对付大数据的时候这个真的有必要吗？
@@ -47,6 +60,36 @@ public class UserServiceImpl implements UserService {
             list.add(dto);
         }
         return list;
+    }
+
+    /**
+     * 获取用户id
+     * @param userId 用户id
+     * @return 用户信息
+     */
+    private UserDTO getUserById(int userId) {
+        // 获取
+        User user = userMapper.selectById(userId);
+        // 转换
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+        // 返回
+        return userDTO;
+    }
+
+    /**
+     * 获取用户id
+     * @param userId 用户id
+     * @return 用户信息
+     */
+    private UserInfoDTO getUserInfoById(int userId) {
+        // 获取
+        UserInfo userInfo = userInfoMapper.selectById(userId);
+        // 转换
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+        BeanUtils.copyProperties(userInfo, userInfoDTO);
+        // 返回
+        return userInfoDTO;
     }
 
     @Override
@@ -68,6 +111,8 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             return JwtUtil.createToken(user.getId());
         } else {
+            // 这里还可以继续多样化
+            log.info("用户：{} 尝试登陆失败", loginParam.getAccountNum());
             throw new BadRequestException(LOGIN_FAIL);
         }
     }
@@ -94,19 +139,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getUserById(int userId) {
-        // 突然意识到这个方法不能被随意调用，至少得确认是否登陆
-        User user = userMapper.selectById(userId);
-        UserDTO userDTO = new UserDTO();
-
-        BeanUtils.copyProperties(user, userDTO);
-
-        return userDTO;
+    public UserDTO getUser(String token) {
+        int userId;
+        try {
+            userId = tokenAnalysis(token);
+        } catch (RuntimeException e) {
+            return null;
+        }
+        return this.getUserById(userId);
     }
 
     @Override
-    public UserInfoDTO getUserInfoById(int userId) {
-        return null;
+    public UserInfoDTO getUserInfo(String token) {
+        int userId;
+        try {
+            userId = tokenAnalysis(token);
+        } catch (RuntimeException e) {
+            return null;
+        }
+        return this.getUserInfoById(userId);
     }
 
     @Override

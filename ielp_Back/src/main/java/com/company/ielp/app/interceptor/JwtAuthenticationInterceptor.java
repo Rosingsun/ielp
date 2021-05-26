@@ -2,8 +2,7 @@ package com.company.ielp.app.interceptor;
 
 import com.company.ielp.app.annotation.PassToken;
 import com.company.ielp.app.mapper.UserMapper;
-import com.company.ielp.app.model.dto.UserDTO;
-import com.company.ielp.app.service.UserService;
+import com.company.ielp.app.model.entity.User;
 import com.company.ielp.app.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,6 @@ import java.lang.reflect.Method;
 public class JwtAuthenticationInterceptor implements HandlerInterceptor {
 
     final String INTERCEPTOR_SUCCESS = "方法已被拦截。";
-
-    @Autowired
-    UserService userService;
 
     @Autowired
     UserMapper userMapper;
@@ -67,11 +63,9 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
                 return false;
             }
 
-            // 获取id，检查是否存在
-            UserDTO userDTO = userService.getUserById(userId);
-
+            User user = userMapper.selectById(userId);
             // 若数据库中没有对象
-            if (userDTO == null) {
+            if (user == null) {
                 log.info("token信息错误，数据库中不存在该用户，请重新登陆或注册。");
                 log.info(INTERCEPTOR_SUCCESS);
                 return false;

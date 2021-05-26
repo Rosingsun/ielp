@@ -21,5 +21,5 @@ public class TokenVO extends BaseVO {
         super.setState(state);
     }
 
-    String token;
+    private String token;
 }

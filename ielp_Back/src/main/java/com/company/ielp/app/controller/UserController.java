@@ -2,12 +2,12 @@ package com.company.ielp.app.controller;
 
 import com.company.ielp.app.annotation.PassToken;
 import com.company.ielp.app.model.dto.UserDTO;
+import com.company.ielp.app.model.dto.UserInfoDTO;
 import com.company.ielp.app.model.params.LoginParam;
 import com.company.ielp.app.model.vo.BaseVO;
 import com.company.ielp.app.model.vo.TokenVO;
 import com.company.ielp.app.model.vo.UserVO;
 import com.company.ielp.app.service.UserService;
-import com.company.ielp.app.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,23 +24,11 @@ public class UserController {
 
     final String GET_SUCCESS = "用户获取成功！";
     final String NO_USER = "没有该用户！";
-    final String OTHER_FAIL = "其他异常！";
 
     final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
-    }
-
-    private Integer tokenAnalysis(String token) {
-        Integer i = JwtUtil.getAudience(token);
-
-        if (i == null) {
-            log.info("token异常，请检查token或者重新登陆！");
-            return null;
-        }
-
-        return i;
     }
 
     /**
@@ -76,30 +64,27 @@ public class UserController {
     @GetMapping("/getUser")
     @ResponseBody
     public UserVO getUser(@RequestHeader String token) {
-        UserVO data = new UserVO();
-
-        Integer userId = tokenAnalysis(token);
-
-        if (userId != null) {
-            UserDTO userDTO = userService.getUserById(userId);
-
-            if (userDTO == null) {
-                data.setMsg(NO_USER);
-                data.setState(BaseVO.INTERNAL_SERVER_ERROR);
-                return null;
-            }
-
-            data.setUser(userDTO);
-            data.setMsg(GET_SUCCESS);
-            data.setState(BaseVO.SUCCESS);
-
-            return data;
+        UserVO data;
+        UserDTO userDTO = userService.getUser(token);
+        if (userDTO != null) {
+            data = new UserVO(userDTO, GET_SUCCESS, BaseVO.SUCCESS);
+        } else {
+            data = new UserVO(NO_USER, BaseVO.INTERNAL_SERVER_ERROR);
         }
+        return data;
+    }
 
-        data.setMsg("token异常！");
-        data.setState(BaseVO.INTERNAL_SERVER_ERROR);
-        return null;
-
+    @GetMapping("/getUserInfo")
+    @ResponseBody
+    public UserVO getUserInfo(@RequestHeader String token) {
+        UserVO data;
+        UserInfoDTO userInfoDTO = userService.getUserInfo(token);
+        if (userInfoDTO != null) {
+            data = new UserVO(userInfoDTO, GET_SUCCESS, BaseVO.SUCCESS);
+        } else {
+            data = new UserVO(NO_USER, BaseVO.INTERNAL_SERVER_ERROR);
+        }
+        return data;
     }
 
 
