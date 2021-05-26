@@ -40,6 +40,7 @@
     margin: auto;
 }
 .btn{
+    width: 50%;
     margin: auto;
     border: none;
     background-color:rgba(245, 211, 63, 1)
@@ -59,10 +60,11 @@
 
 }
 .btn1{
+    width: 50%;
     background-color: #f9d340;
     border: none;
     margin: auto;
-    
+    border-right:2px solid black;
 }
 .time{
     width: 100%;
@@ -89,16 +91,19 @@ z-index:0;
       display: flex;
   }
   .month{
-      width: 60%;
-      height: 100%;
-    //   background-color: palegreen;
+      // width: 60%;
+      // height: 100%;
+      // background-color: palegreen;
       margin: auto;
+      margin-top: 20px;
   }
   .week{
-      width: 35%;
-      height: 100%;
+      // width: 35%;
+      // height: 100%;
     //   background-color: palevioletred;
       margin: auto;
+      margin-top: 40px;
+    
     
   }
   .down{
@@ -108,23 +113,26 @@ z-index:0;
     //   background-color: purple;
   }
   .day{
-    width: 60%;
-    height: 100%;
+    width: 100px;
+    // height: 100%;
     margin: auto;
     border-top:5px solid white;
+    // background-color: lawngreen;
 
   }
   .weather{
     width: 35%;
-    height: 100%;
+    // height: 100%;
     // background-color: rgb(7, 1, 3);
     margin: auto;
+    text-align: center;
 
   }
   .weektext{
     font-size: 20px;
     color: white;
     // margin: auto;
+    text-align: center;
    
 
   }
@@ -132,13 +140,22 @@ z-index:0;
     font-size: 30px;
     color: white;
     // margin: auto;
-    margin-left: 35px;
-
+    // text-align: center;
+    text-align: center;
   }
   .daytext{
     font-size: 30px;
     color: white;
     // margin: auto;
-    margin-left: 50px;
+    text-align: center;
+    margin-left: 30px;
+
+  }
+  .weathertext{
+    font-size: 20px;
+    color: white;
+    // margin: auto;
+    text-align: center;
+    // background-color: black;
 
   }

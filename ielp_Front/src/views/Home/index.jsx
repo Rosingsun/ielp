@@ -46,7 +46,9 @@ tick() {
             <div className={a.day}>
             <a className={a.daytext}>{moment().format("YY")}</a>
             </div>
-            <div className={a.weather}></div>
+            <div className={a.weather}>
+              <a className={a.weathertext}>晴</a>
+            </div>
             </div>
            
           </div>
