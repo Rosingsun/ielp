@@ -2,7 +2,6 @@ package com.company.ielp.app.service.impl;
 
 import cn.hutool.core.lang.Validator;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.company.ielp.app.exception.BadRequestException;
 import com.company.ielp.app.mapper.UserInfoMapper;
 import com.company.ielp.app.mapper.UserMapper;
 import com.company.ielp.app.mapper.UserRelationMapper;
@@ -37,17 +36,6 @@ public class UserServiceImpl implements UserService {
         this.userMapper = userMapper;
         this.userInfoMapper = userInfoMapper;
         this.userRelationMapper = userRelationMapper;
-    }
-
-    private Integer tokenAnalysis(String token) {
-        Integer i = JwtUtil.getAudience(token);
-
-        if (i == null) {
-            log.info("token异常，请检查token或者重新登陆！");
-            throw new RuntimeException("token异常，请检查token或者重新登陆！");
-        }
-
-        return i;
     }
 
     private List<UserInfoDTO> toUserDTOList(List<UserInfo> users) {
@@ -113,7 +101,7 @@ public class UserServiceImpl implements UserService {
         } else {
             // 这里还可以继续多样化
             log.info("用户：{} 尝试登陆失败", loginParam.getAccountNum());
-            throw new BadRequestException(LOGIN_FAIL);
+            return null;
         }
     }
 
@@ -142,7 +130,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO getUser(String token) {
         int userId;
         try {
-            userId = tokenAnalysis(token);
+            userId = JwtUtil.getAudience(token);
         } catch (RuntimeException e) {
             return null;
         }
@@ -153,7 +141,7 @@ public class UserServiceImpl implements UserService {
     public UserInfoDTO getUserInfo(String token) {
         int userId;
         try {
-            userId = tokenAnalysis(token);
+            userId = JwtUtil.getAudience(token);
         } catch (RuntimeException e) {
             return null;
         }

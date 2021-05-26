@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
+    final String LOGIN_FAIL = "登陆失败，账号密码错误！";
     final String GET_SUCCESS = "用户获取成功！";
     final String NO_USER = "没有该用户！";
 
@@ -53,10 +54,11 @@ public class UserController {
     @ResponseBody
     public TokenVO login(LoginParam loginParam) {
         TokenVO tokenVO;
-        try {
-            tokenVO = new TokenVO(userService.login(loginParam), "登陆成功！", BaseVO.SUCCESS);
-        } catch (Exception e) {
-            tokenVO= new TokenVO("null", e.getMessage(), BaseVO.INTERNAL_SERVER_ERROR);
+        String token = userService.login(loginParam);
+        if (token != null) {
+            tokenVO = new TokenVO(token, "登陆成功！", BaseVO.SUCCESS);
+        } else {
+            tokenVO= new TokenVO(null, LOGIN_FAIL, BaseVO.INTERNAL_SERVER_ERROR);
         }
         return tokenVO;
     }
