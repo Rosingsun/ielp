@@ -1,7 +1,9 @@
 package com.company.ielp.app.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.company.ielp.app.mapper.DynamicInteractionMapper;
 import com.company.ielp.app.mapper.DynamicMapper;
+import com.company.ielp.app.model.dto.DynamicDTO;
 import com.company.ielp.app.model.entity.Dynamic;
 import com.company.ielp.app.model.entity.DynamicInteraction;
 import com.company.ielp.app.model.params.DynamicInteractionParam;
@@ -9,6 +11,9 @@ import com.company.ielp.app.model.params.DynamicParam;
 import com.company.ielp.app.service.DynamicService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DynamicServiceImpl implements DynamicService {
@@ -58,6 +63,26 @@ public class DynamicServiceImpl implements DynamicService {
         dynamicMapper.updateById(dynamic);
 
         return dynamicInteraction;
+    }
+
+    @Override
+    public List<DynamicDTO> getUserDynamic(int userId) {
+        QueryWrapper<Dynamic> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId);
+
+        List<DynamicDTO> dynamicDTOS = new ArrayList<>();
+        for (Dynamic dynamic : dynamicMapper.selectList(queryWrapper)) {
+            dynamicDTOS.add(new DynamicDTO(dynamic, getDynamicInteractionList(dynamic.getId())));
+        }
+
+        return dynamicDTOS;
+    }
+
+    private List<DynamicInteraction> getDynamicInteractionList(int dynamicId) {
+        QueryWrapper<DynamicInteraction> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("dynamic_id", dynamicId);
+
+        return dynamicInteractionMapper.selectList(queryWrapper);
     }
 
 }
