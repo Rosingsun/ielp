@@ -32,7 +32,7 @@ public class DynamicServiceImpl implements DynamicService {
 
         BeanUtils.copyProperties(dynamicParam, dynamic);
 
-        // 数据库的默认是不会影响到这里的，所以劲量不要使用此处返回的数据
+        // 数据库的默认设置是不会影响到这里的，所以劲量不要使用此处返回的数据
         dynamicMapper.insert(dynamic);
 
         return dynamic;

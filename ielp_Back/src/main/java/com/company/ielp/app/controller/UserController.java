@@ -63,7 +63,7 @@ public class UserController {
         return tokenVO;
     }
 
-    @GetMapping("/getUser")
+    @GetMapping("/get-user")
     @ResponseBody
     public UserVO getUser(@RequestHeader String token) {
         UserVO data;
@@ -76,7 +76,7 @@ public class UserController {
         return data;
     }
 
-    @GetMapping("/getUserInfo")
+    @GetMapping("/get-user-info")
     @ResponseBody
     public UserVO getUserInfo(@RequestHeader String token) {
         UserVO data;

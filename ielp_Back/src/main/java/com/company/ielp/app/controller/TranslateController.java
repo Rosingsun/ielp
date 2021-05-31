@@ -63,7 +63,7 @@ public class TranslateController {
      * @param userId 历史记录Id
      * @return 记录列表
      */
-    @GetMapping("/getHistories")
+    @GetMapping("/get-histories")
     @ResponseBody
     public TranslateVO getHistories(int userId) {
         return new TranslateVO(translateService.getHistories(userId), COLLECTION_SUCCESS, BaseVO.SUCCESS);
