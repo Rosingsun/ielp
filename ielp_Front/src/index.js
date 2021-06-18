@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
-import App from './views/Home/index';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>

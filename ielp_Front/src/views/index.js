@@ -10,3 +10,6 @@ export{default as Chat} from "./Chat/index.jsx"//及时聊天页面
 
 export{default as Forum} from "./Forum/index.jsx"//论坛页面
 
+export{default as Test} from "./Test/index.jsx"//测试页面
+
+

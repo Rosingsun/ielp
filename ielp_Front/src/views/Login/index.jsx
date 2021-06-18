@@ -17,6 +17,7 @@ class Login extends Component {
 
   onFinish = (values) => {
     this.props.onLoaded(true);
+    this.props.history.push("/Home");
     // let data = {
     //   'username': values.username,
     //   'password': values.password,

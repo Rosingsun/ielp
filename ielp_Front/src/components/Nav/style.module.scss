@@ -1,0 +1,43 @@
+.navBody {
+  width: 100%;
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.leftBar,
+.rightBar,
+.minBarr {
+  height: 1rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  margin-top: 1rem;
+}
+.leftBar {
+  width: 5vw;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.minBarr {
+  width: 70vw;
+}
+.rightBar {
+  width: 7vw;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+img {
+  // height: 3vw;
+  width: 4rem;
+}
+.goBack{
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  font-size: 50px;
+  color: #fff;
+}

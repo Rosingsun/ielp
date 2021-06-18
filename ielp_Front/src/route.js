@@ -43,5 +43,11 @@ const routesConfig = [
     title:"论坛",
     acehe:true,
   },
+  {
+    path: "/Test",
+    component: page.Test,
+    title:"测试",
+    acehe:true,
+  },
 ];
 export default routesConfig;

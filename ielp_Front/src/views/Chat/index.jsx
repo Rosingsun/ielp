@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col, Divider, Avatar, Input, Tabs, Spin } from 'antd';
 import { MessageOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
-import InfiniteScroll from 'react-infinite-scroller';
+// import InfiniteScroll from 'react-infinite-scroller';
+import {Nav} from"@components/index";
 import { FriendBox } from "../../components/index";
 import s from "./style.module.scss";
 const { TabPane } = Tabs;
@@ -24,6 +25,7 @@ export default class Home extends Component {
   render() {
     return (
       <div className={s.Chatbody}>
+        <Nav/>
         <Row justify="center" align="top">
           <Col span={18}>
             <div className={s.chatBox}>
@@ -31,7 +33,7 @@ export default class Home extends Component {
                 <div className={s.userInfo}>
                   <div className={s.userName}>
                     用户名
-                </div>
+                  </div>
                   <div className={s.userHead}>
                     <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" size={60} />
                   </div>
@@ -46,10 +48,8 @@ export default class Home extends Component {
                       {
                         this.state.data.map((item, index) => {
                           return (
-                            <div className={s.userInfo}>
-                              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" size={60} />
-                              <div className={s.userName}>我的用户名超</div>
-                            </div>
+
+                            <FriendBox />
                           )
                         })
                       }
@@ -70,8 +70,10 @@ export default class Home extends Component {
                       {
                         this.state.data.map((item, index) => {
                           return (
-                         
-                            <FriendBox />
+                            <div className={s.userInfo}>
+                              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" size={60} />
+                              <div className={s.userName}>我的用户名超</div>
+                            </div>
                           )
                         })
                       }

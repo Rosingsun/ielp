@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Button, message, Select } from 'antd';
+import {Nav} from"@components/index";
 import s from "./style.module.scss";
 import * as common from '@actions/common';
 import { APPID, pass } from "@constants/apiConstants.js";
@@ -54,6 +55,7 @@ class Translate extends Component {
   render() {
     return (
       <div className={s.body}>
+        <Nav/>
         <div className={s.translateBox}>
           <div className={s.left}>
             <div className={s.leftTop}>
