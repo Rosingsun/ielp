@@ -12,4 +12,7 @@ export{default as Forum} from "./Forum/index.jsx"//论坛页面
 
 export{default as Test} from "./Test/index.jsx"//测试页面
 
+export{default as Learn} from "./learn/index.jsx"//测试页面
+
+
 

@@ -13,6 +13,7 @@ class PageConfig extends Component {
                 <Route
                   path={route.path}
                   history={route.path}
+                  key={index}
                   render={props => (
                     <route.component {...props} routes={route.routes} />
                   )}

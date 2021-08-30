@@ -49,5 +49,11 @@ const routesConfig = [
     title:"测试",
     acehe:true,
   },
+  {
+    path: "/learn",
+    component: page.Learn,
+    title:"测试",
+    acehe:true,
+  },
 ];
 export default routesConfig;

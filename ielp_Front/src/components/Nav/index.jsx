@@ -15,7 +15,7 @@ class Nav extends Component {
     console.log("这里有回调函数", this.props);
     if (this.props) {
       console.log("回调函数是GObACK");
-      his.props.history.push("/Home");
+    this.props.history.push("/Home");
     }
   }
   render() {
