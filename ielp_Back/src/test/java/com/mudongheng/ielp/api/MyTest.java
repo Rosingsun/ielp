@@ -1,6 +1,6 @@
 package com.mudongheng.ielp.api;
 
-import com.mudongheng.ielp.api.model.param.LoginParam;
+import com.mudongheng.ielp.api.mapper.UserMapper;
 import com.mudongheng.ielp.api.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,18 @@ public class MyTest {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserMapper userMapper;
+
     @Test
     void test1() {
-        System.out.println(userService.getById(123));
-        System.out.println(userService.getBaseMapper().selectById(123214214));
+
+        try {
+            System.out.println(userMapper.deleteById(2));
+            System.out.println(userMapper.deleteById(12314211));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -6,12 +6,12 @@ import lombok.EqualsAndHashCode;
 
 /**
  * @author 幕冬
- * @since 2021年10月24日
+ * @since 2021年10月26日
  */
 @Data
-@TableName(value ="dynamic_interaction")
+@TableName(value ="dynamic_comment")
 @EqualsAndHashCode(callSuper = true)
-public class DynamicInteraction extends BaseEntity {
+public class DynamicComment extends BaseEntity {
 
     /**
      * 用户id
@@ -24,23 +24,12 @@ public class DynamicInteraction extends BaseEntity {
     private Integer dynamicId;
 
     /**
-     * 是否点赞
+     * 评论内容
      */
-    private Boolean isLike;
+    private String comment;
 
     /**
      * 是否评论
      */
     private Boolean isComment;
-
-    /**
-     * 是否收藏
-     */
-    private Boolean isCollect;
-
-    /**
-     * 评论内容
-     */
-    private String commentInfo;
-
 }
