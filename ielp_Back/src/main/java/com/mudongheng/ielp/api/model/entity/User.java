@@ -74,11 +74,6 @@ public class User extends BaseEntity {
     private Integer studyTime;
 
     /**
-     * 用户id
-     */
-    private Integer userId;
-
-    /**
      * 识图总数
      */
     private Integer identifyImg;

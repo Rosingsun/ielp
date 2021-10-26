@@ -1,5 +1,6 @@
 package com.mudongheng.ielp.api.model.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -22,17 +23,19 @@ public class BaseEntity implements Serializable {
      * id
      */
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    protected Integer id;
 
     /**
      * 创建时间
      */
-    private Date createTime;
+    @TableField(fill = FieldFill.INSERT)
+    protected Date createTime;
 
     /**
      * 更新时间
      */
-    private Date updateTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    protected Date updateTime;
 
 
 

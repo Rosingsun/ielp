@@ -1,11 +1,8 @@
 package com.mudongheng.ielp.api.model.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
 
 /**
  * @author 幕冬
@@ -29,17 +26,17 @@ public class DynamicInteraction extends BaseEntity {
     /**
      * 是否点赞
      */
-    private Byte isLike;
+    private Boolean isLike;
 
     /**
      * 是否评论
      */
-    private Byte isComment;
+    private Boolean isComment;
 
     /**
      * 是否收藏
      */
-    private Byte isCollect;
+    private Boolean isCollect;
 
     /**
      * 评论内容
