@@ -13,6 +13,6 @@ public interface UserService extends IService<User> {
 
     String login(LoginParam loginParam) throws UserException;
 
-    String register(LoginParam loginParam);
+    String register(LoginParam loginParam) throws UserException;
 
 }

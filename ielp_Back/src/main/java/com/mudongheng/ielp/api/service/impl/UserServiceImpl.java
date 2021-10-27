@@ -47,19 +47,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public String register(LoginParam loginParam) {
+    public String register(LoginParam loginParam) throws UserException {
+
+        // 不得为空
+        if (loginParam.getUsername().equals("") || loginParam.getPassword().equals("")) {
+            throw new UserException("账号密码不得为空");
+        }
+
         User user = new User();
 
         user.setUsername(loginParam.getUsername());
 
         String password = PasswordEncoderUtil.encode(loginParam.getPassword());
-        user.setPassword(password);
 
+        user.setPassword(password);
         user.setBirthday(new Date());
 
         this.save(user);
 
-        return "注册成功";
+        return JWTUtil.sign(user);
     }
 }
 
