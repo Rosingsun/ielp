@@ -1,5 +1,6 @@
 package com.mudongheng.ielp.api.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,11 +27,18 @@ public class Dynamic extends BaseEntity {
     /**
      * 点赞数量
      */
+    @TableField("`like`")
     private Integer like;
 
     /**
      * 评论
      */
+    @TableField("`comment`")
     private Integer comment;
+
+    /**
+     * 收藏
+     */
+    private Integer collect;
 
 }

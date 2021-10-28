@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * @author 幕冬
  * @since 2021年10月26日
@@ -27,25 +25,13 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginParam loginParam, HttpServletResponse response) {
-        try {
-            return userService.login(loginParam);
-        } catch (UserException e) {
-            log.error(e.getMessage());
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return e.getMessage();
-        }
+    public String login(@RequestBody LoginParam loginParam) throws UserException {
+        return userService.login(loginParam);
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody LoginParam loginParam, HttpServletResponse response) {
-        try {
-            return userService.register(loginParam);
-        } catch (UserException e) {
-            log.error(e.getMessage());
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return e.getMessage();
-        }
+    public String register(@RequestBody LoginParam loginParam) throws UserException {
+        return userService.register(loginParam);
     }
 
 }

@@ -36,6 +36,7 @@ public class TokenFilter extends OncePerRequestFilter {
 
             Integer userId = JWTUtil.getUserId(token);
             if (userId != null) {
+                request.setAttribute("userId", userId);
                 filterChain.doFilter(request, response);
             } else {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "未知token，不允放行");

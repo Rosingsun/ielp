@@ -9,8 +9,6 @@ import lombok.Data;
 @Data
 public class CommentParam {
 
-    private Integer userId;
-
     private Integer dynamicId;
 
     private String comment;

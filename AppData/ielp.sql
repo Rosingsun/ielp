@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 26/10/2021 22:24:07
+ Date: 28/10/2021 18:19:56
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,14 @@ CREATE TABLE `dynamic`  (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `d_uid`(`user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of dynamic
+-- ----------------------------
+INSERT INTO `dynamic` VALUES (1, 1, '{\r\n    \"dynamicInfo\": \"诶嘿，诶嘿嘿IEhi额hi和\"\r\n}', 0, 0, '2021-10-28 16:59:50', '2021-10-28 16:59:50');
+INSERT INTO `dynamic` VALUES (2, 1, '\"诶嘿，诶嘿嘿IEhi额hi和\"\r\n', 0, 0, '2021-10-28 17:00:45', '2021-10-28 17:00:45');
+INSERT INTO `dynamic` VALUES (3, 1, '诶嘿，诶嘿嘿IEhi额hi和', 0, 0, '2021-10-28 17:01:36', '2021-10-28 17:01:36');
 
 -- ----------------------------
 -- Table structure for dynamic_collect
@@ -45,7 +52,11 @@ CREATE TABLE `dynamic_collect`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of dynamic_collect
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for dynamic_comment
@@ -60,7 +71,11 @@ CREATE TABLE `dynamic_comment`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of dynamic_comment
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for dynamic_like
@@ -74,7 +89,12 @@ CREATE TABLE `dynamic_like`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of dynamic_like
+-- ----------------------------
+INSERT INTO `dynamic_like` VALUES (1, 1, 1, 0, '2021-10-28 17:18:12', '2021-10-28 17:21:15');
 
 -- ----------------------------
 -- Table structure for test_listen
@@ -85,7 +105,11 @@ CREATE TABLE `test_listen`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of test_listen
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for test_read
@@ -96,7 +120,11 @@ CREATE TABLE `test_read`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of test_read
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for test_word
@@ -107,7 +135,11 @@ CREATE TABLE `test_word`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of test_word
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for translate_history
@@ -124,6 +156,10 @@ CREATE TABLE `translate_history`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of translate_history
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -131,10 +167,10 @@ CREATE TABLE `user`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '账户id',
   `username` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
   `password` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
-  `nickname` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '昵称',
-  `email` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '邮箱',
-  `phone_number` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '电话号码',
-  `profile` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户头像',
+  `nickname` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '昵称',
+  `email` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '邮箱',
+  `phone_number` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '电话号码',
+  `profile` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户头像',
   `sex` enum('男','女','保密') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '保密' COMMENT '性别',
   `birthday` date NOT NULL COMMENT '生日',
   `clock_in_continuity` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '持续打卡时间',
@@ -145,7 +181,12 @@ CREATE TABLE `user`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `index_user_username`(`username`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (1, 'root', '$2a$10$f1nl5TkUrbdCdF97szaPauxhZfC/cr5EO7y/mhmrlwpQ.VtHJBiqq', '', '', '', '', '保密', '2021-10-28', 0, 0, 0, 0, '2021-10-28 16:18:34', '2021-10-28 16:18:34');
 
 -- ----------------------------
 -- Table structure for user_follow
@@ -160,6 +201,10 @@ CREATE TABLE `user_follow`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ur_uid`(`user_id`) USING BTREE,
   INDEX `ur_tuid`(`follow_user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of user_follow
+-- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
