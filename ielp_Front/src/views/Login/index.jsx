@@ -14,7 +14,6 @@ class Login extends Component {
   }
   componentWillMount() {
   }
-
   onFinish = (values) => {
     this.props.onLoaded(true);
     this.props.history.push("/Home");
@@ -47,7 +46,7 @@ class Login extends Component {
     return (
       <div className={s.loginBody}>
         <div className={s.topPic}>
-          <img src={require("@assets/images/login/top.png").default}/>
+          <img src={require("@assets/images/login/top.png").default} />
         </div>
         <div className={s.loginBox}>
           <Form
@@ -100,7 +99,7 @@ class Login extends Component {
               <a className={s.login_form_forgot} href=""> 忘记密码？</a>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit"  className={s.login_form_button} onClick={() => { }}>
+              <Button type="primary" htmlType="submit" className={s.login_form_button} onClick={() => { }}>
                 登录 | Login  </Button>
             </Form.Item>
             <Form.Item>

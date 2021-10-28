@@ -15,10 +15,10 @@ class FriendBox extends Component {
           <div className={s.userState}>
             <div className={s.time}>
               3min
-          </div>
+            </div>
             <div className={s.unRead}>
               3
-          </div>
+            </div>
           </div>
         </div>
         <div className={s.userInfo}>

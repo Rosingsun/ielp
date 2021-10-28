@@ -1,6 +1,3 @@
-// import Home from "@views/Home";
-// import Data from "@views/Data";
-// import Login from "@views/Login";
 import * as page from "@views/index.js"
 //顶部引入页面
 /*
