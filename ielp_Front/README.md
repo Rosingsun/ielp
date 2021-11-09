@@ -38,3 +38,5 @@
     9、actions 接口初步对接的函数，其他地方要用，直接调用(其实应该拿来做redux)。
 
     10、common 为公共使用，包括接口，组件，方法等。
+### 报错信息
+    尝试使用 npm rebuild node-sass
