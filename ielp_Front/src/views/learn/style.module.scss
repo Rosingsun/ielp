@@ -4,17 +4,15 @@
   padding: 0px;
   margin: 0px;
 }
-
 .body {
   height: 100vh;
   width: 100vw;
   background-color: $answerBackGround;
   overflow: hidden;
 }
-
 .container {
   height: 60%;
-  max-width: 1024*0.8px;
+  max-width: 1024 * 0.8px;
   background-color: rgba(255, 255, 255, 0.5);
   margin: 0 auto;
   margin-top: 10%;
@@ -23,7 +21,6 @@
   justify-content: space-around;
   align-items: center;
 }
-
 .search {
   display: flex;
   width: 100%;
@@ -31,10 +28,21 @@
   align-items: center;
   margin-top: 10px;
 }
-
 .listBox {
   position: fixed;
   left: 20px;
   top: 20%;
-
 }
+:global {
+  .avatar-uploader {
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ant-upload.ant-upload-select-picture-card{
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+  }
+}
+
