@@ -3,15 +3,15 @@
 
  Source Server         : 本地连接
  Source Server Type    : MySQL
- Source Server Version : 80022
+ Source Server Version : 80026
  Source Host           : localhost:3306
  Source Schema         : ielp
 
  Target Server Type    : MySQL
- Target Server Version : 80022
+ Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 28/10/2021 18:19:56
+ Date: 16/11/2021 14:19:05
 */
 
 SET NAMES utf8mb4;
@@ -24,9 +24,16 @@ DROP TABLE IF EXISTS `dynamic`;
 CREATE TABLE `dynamic`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '动态id',
   `user_id` int NOT NULL COMMENT '用户id',
+  `type` enum('图文消息','翻译分享') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图文消息，翻译分享',
   `info` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '动态信息',
+  `
+related_articles` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '相关文章',
+  `music_path` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '音乐路径',
+  `translate_history_id` int NOT NULL COMMENT '翻译记录id',
+  `image_num` int NOT NULL COMMENT '图片数量',
   `like` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '点赞数量',
   `comment` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '评论',
+  `collect` int NOT NULL DEFAULT 0 COMMENT '收藏',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
@@ -36,9 +43,6 @@ CREATE TABLE `dynamic`  (
 -- ----------------------------
 -- Records of dynamic
 -- ----------------------------
-INSERT INTO `dynamic` VALUES (1, 1, '{\r\n    \"dynamicInfo\": \"诶嘿，诶嘿嘿IEhi额hi和\"\r\n}', 0, 0, '2021-10-28 16:59:50', '2021-10-28 16:59:50');
-INSERT INTO `dynamic` VALUES (2, 1, '\"诶嘿，诶嘿嘿IEhi额hi和\"\r\n', 0, 0, '2021-10-28 17:00:45', '2021-10-28 17:00:45');
-INSERT INTO `dynamic` VALUES (3, 1, '诶嘿，诶嘿嘿IEhi额hi和', 0, 0, '2021-10-28 17:01:36', '2021-10-28 17:01:36');
 
 -- ----------------------------
 -- Table structure for dynamic_collect
@@ -66,8 +70,8 @@ CREATE TABLE `dynamic_comment`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '动态id',
   `user_id` int NOT NULL COMMENT '用户id',
   `dynamic_id` int NOT NULL COMMENT '动态id',
-  `is_comment` tinyint NULL DEFAULT NULL COMMENT '是否点赞',
-  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '是否点赞',
+  `is_comment` tinyint NULL DEFAULT NULL COMMENT '是否评论',
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '评论内容',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
@@ -75,6 +79,23 @@ CREATE TABLE `dynamic_comment`  (
 
 -- ----------------------------
 -- Records of dynamic_comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for dynamic_image
+-- ----------------------------
+DROP TABLE IF EXISTS `dynamic_image`;
+CREATE TABLE `dynamic_image`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '动态与音乐文件的关系表',
+  `dynamic_id` int NOT NULL COMMENT '动态id',
+  `file_image_id` int NOT NULL COMMENT '音乐文件id',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of dynamic_image
 -- ----------------------------
 
 -- ----------------------------
@@ -94,7 +115,55 @@ CREATE TABLE `dynamic_like`  (
 -- ----------------------------
 -- Records of dynamic_like
 -- ----------------------------
-INSERT INTO `dynamic_like` VALUES (1, 1, 1, 0, '2021-10-28 17:18:12', '2021-10-28 17:21:15');
+
+-- ----------------------------
+-- Table structure for dynamic_music
+-- ----------------------------
+DROP TABLE IF EXISTS `dynamic_music`;
+CREATE TABLE `dynamic_music`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '动态与音乐文件的关系表',
+  `dynamic_id` int NOT NULL COMMENT '动态id',
+  `file_music_id` int NOT NULL COMMENT '音乐文件id',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '动态与音乐文件的关系表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of dynamic_music
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for file_image
+-- ----------------------------
+DROP TABLE IF EXISTS `file_image`;
+CREATE TABLE `file_image`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '动态id',
+  `file_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '文件路径',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of file_image
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for file_music
+-- ----------------------------
+DROP TABLE IF EXISTS `file_music`;
+CREATE TABLE `file_music`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '动态id',
+  `file_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '文件路径',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of file_music
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for test_listen
@@ -186,7 +255,6 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'root', '$2a$10$f1nl5TkUrbdCdF97szaPauxhZfC/cr5EO7y/mhmrlwpQ.VtHJBiqq', '', '', '', '', '保密', '2021-10-28', 0, 0, 0, 0, '2021-10-28 16:18:34', '2021-10-28 16:18:34');
 
 -- ----------------------------
 -- Table structure for user_follow
