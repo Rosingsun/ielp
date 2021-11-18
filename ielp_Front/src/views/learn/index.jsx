@@ -31,19 +31,21 @@ export default class Learn extends Component {
     )
   }
   handleChange = info => {
+    console.log(info)
     if (info.file.status === 'uploading') {
       this.setState({ loading: true });
       return;
     }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl =>
+    // if (info.file.status === 'done') {
+      getBase64(info.file.originFileObj, imageUrl => {
+        console.log('imageUrl',imageUrl);
         this.setState({
           imageUrl,
           loading: false,
-        }),
+        })
+      },
       );
-    }
+    // }
   };
   render() {
     const { imageUrl } = this.state
@@ -62,7 +64,7 @@ export default class Learn extends Component {
           >
             {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> :
               <div>
-                {this.state.loading ? <LoadingOutlined style={{ fontSize: '10vw', color: "#fff" }}/> : <PlusOutlined style={{ fontSize: '10vw', color: "#fff" }} />}
+                {this.state.loading ? <LoadingOutlined style={{ fontSize: '10vw', color: "#fff" }} /> : <PlusOutlined style={{ fontSize: '10vw', color: "#fff" }} />}
                 {/* <div style={{ marginTop: 8 }}>Upload</div> */}
               </div >
             }
@@ -70,7 +72,7 @@ export default class Learn extends Component {
           {/* <PlusOutlined style={{ fontSize: '10vw', color: "#fff" }} /> */}
         </div>
         <div className={a.listBox}>
-          <DownList list={this.state.listData} />
+          {/* <DownList list={this.state.listData} /> */}
         </div>
         <div className={a.search}>
           <Button type="primary" shape="round" icon={<ZoomInOutlined />} size='large'>
