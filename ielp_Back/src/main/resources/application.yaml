@@ -32,3 +32,6 @@ spring:
 
 mybatis-plus:
   type-aliases-package: package com.company.ielp.app.model.entity
+
+mudongheng:
+  path: '/cache/.ielp'

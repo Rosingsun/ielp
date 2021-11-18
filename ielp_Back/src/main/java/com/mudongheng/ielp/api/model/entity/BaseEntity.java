@@ -14,7 +14,7 @@ import java.util.Date;
  * @since 2021年10月24日
  */
 @Data
-public class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

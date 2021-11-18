@@ -1,7 +1,6 @@
 package com.mudongheng.ielp.api;
 
-import com.mudongheng.ielp.api.mapper.UserMapper;
-import com.mudongheng.ielp.api.service.UserService;
+import com.mudongheng.ielp.api.service.FileService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,20 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class MyTest {
 
     @Autowired
-    UserService userService;
-
-    @Autowired
-    UserMapper userMapper;
+    FileService fileService;
 
     @Test
     void test1() {
-
-        try {
-            System.out.println(userMapper.deleteById(2));
-            System.out.println(userMapper.deleteById(12314211));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 
