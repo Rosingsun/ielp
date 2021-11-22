@@ -2,6 +2,7 @@ package com.mudongheng.ielp.api.controller;
 
 import com.mudongheng.ielp.api.exception.DynamicException;
 import com.mudongheng.ielp.api.model.param.CommentParam;
+import com.mudongheng.ielp.api.model.vo.DynamicVO;
 import com.mudongheng.ielp.api.service.DynamicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,12 @@ public class DynamicController {
 
     private Integer getUserId(HttpServletRequest request) {
         return (Integer) request.getAttribute("userId");
+    }
+
+    @PostMapping("/get-dynamic-by-id")
+    public DynamicVO getDynamicById(@RequestBody Integer id) throws DynamicException {
+        log.info("获取id为：{} 的动态", id);
+        return dynamicService.getDynamicById(id);
     }
 
     @PostMapping("/publish")

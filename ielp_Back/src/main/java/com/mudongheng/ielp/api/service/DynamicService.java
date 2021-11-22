@@ -3,12 +3,15 @@ package com.mudongheng.ielp.api.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mudongheng.ielp.api.exception.DynamicException;
 import com.mudongheng.ielp.api.model.entity.Dynamic;
+import com.mudongheng.ielp.api.model.vo.DynamicVO;
 
 /**
  * @author 幕冬
  * @since 2021年10月24日
  */
 public interface DynamicService extends IService<Dynamic> {
+
+    DynamicVO getDynamicById(Integer id) throws DynamicException;
 
     void publish(Integer userId, String dynamicInfo) throws DynamicException;
 

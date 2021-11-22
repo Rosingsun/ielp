@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mudongheng.ielp.api.mapper.DynamicImageMapper">
+    <select id="listImageFileIdByDynamicId" resultType="int">
+        select file_image_id from dynamic_image where dynamic_id = #{id}
+    </select>
+</mapper>

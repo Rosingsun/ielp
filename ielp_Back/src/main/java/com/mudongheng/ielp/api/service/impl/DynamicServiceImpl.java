@@ -3,16 +3,14 @@ package com.mudongheng.ielp.api.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mudongheng.ielp.api.exception.DynamicException;
-import com.mudongheng.ielp.api.mapper.DynamicCollectMapper;
-import com.mudongheng.ielp.api.mapper.DynamicCommentMapper;
-import com.mudongheng.ielp.api.mapper.DynamicLikeMapper;
-import com.mudongheng.ielp.api.mapper.DynamicMapper;
-import com.mudongheng.ielp.api.model.entity.Dynamic;
-import com.mudongheng.ielp.api.model.entity.DynamicCollect;
-import com.mudongheng.ielp.api.model.entity.DynamicComment;
-import com.mudongheng.ielp.api.model.entity.DynamicLike;
+import com.mudongheng.ielp.api.mapper.*;
+import com.mudongheng.ielp.api.model.entity.*;
+import com.mudongheng.ielp.api.model.vo.DynamicVO;
 import com.mudongheng.ielp.api.service.DynamicService;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 幕冬
@@ -27,10 +25,37 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic> impl
 
     private final DynamicCollectMapper dynamicCollectMapper;
 
-    public DynamicServiceImpl(DynamicLikeMapper dynamicLikeMapper, DynamicCommentMapper dynamicCommentMapper, DynamicCollectMapper dynamicCollectMapper) {
+    private final DynamicImageMapper dynamicImageMapper;
+
+    private final DynamicMusicMapper dynamicMusicMapper;
+
+    public DynamicServiceImpl(DynamicLikeMapper dynamicLikeMapper,
+                              DynamicCommentMapper dynamicCommentMapper,
+                              DynamicCollectMapper dynamicCollectMapper,
+                              DynamicImageMapper dynamicImageMapper,
+                              DynamicMusicMapper dynamicMusicMapper) {
         this.dynamicLikeMapper = dynamicLikeMapper;
         this.dynamicCommentMapper = dynamicCommentMapper;
         this.dynamicCollectMapper = dynamicCollectMapper;
+        this.dynamicImageMapper = dynamicImageMapper;
+        this.dynamicMusicMapper = dynamicMusicMapper;
+    }
+
+    @Override
+    public DynamicVO getDynamicById(Integer id) throws DynamicException {
+        Dynamic dynamic = this.getById(id);
+        if (dynamic == null) {
+            throw new DynamicException("动态不存在");
+        }
+        DynamicVO dynamicVO = new DynamicVO();
+
+        List<Integer> dynamicImagesId = dynamicImageMapper.listImageFileIdByDynamicId(dynamic.getId());
+        dynamicVO.setImageIdList(dynamicImagesId);
+
+        Integer dynamicMusicId = dynamicMusicMapper.getMusicFileIdByDynamicId(dynamic.getId());
+        dynamicVO.setMusicId(dynamicMusicId);
+
+        return dynamicVO;
     }
 
     @Override
