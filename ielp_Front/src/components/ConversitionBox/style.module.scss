@@ -1,1 +1,16 @@
 @import "@scss/_global.scss";
+
+.ConversitionBox {
+  display: flex;
+
+  .questin {
+    min-height: 120px;
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  .redQuestin{
+    border-color: 1px 1px 11px 1px red;
+  }
+}
