@@ -1,9 +1,11 @@
 package com.mudongheng.ielp.controller;
 
 import com.mudongheng.ielp.exception.DynamicException;
+import com.mudongheng.ielp.exception.UserException;
 import com.mudongheng.ielp.model.param.CommentParam;
 import com.mudongheng.ielp.model.vo.DynamicVO;
 import com.mudongheng.ielp.service.DynamicService;
+import com.mudongheng.ielp.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,10 +29,6 @@ public class DynamicController {
         this.dynamicService = dynamicService;
     }
 
-    private Integer getUserId(HttpServletRequest request) {
-        return (Integer) request.getAttribute("userId");
-    }
-
     @PostMapping("/get-dynamic-by-id")
     public DynamicVO getDynamicById(@RequestBody Integer id) throws DynamicException {
         log.info("获取id为：{} 的动态", id);
@@ -39,26 +37,26 @@ public class DynamicController {
 
     @PostMapping("/publish")
     public void publish(@RequestBody String dynamicInfo,
-                        HttpServletRequest request) throws DynamicException {
-        dynamicService.publish(this.getUserId(request), dynamicInfo);
+                        HttpServletRequest request) throws DynamicException, UserException {
+        dynamicService.publish(UserUtil.getUserIdFromRequest(request), dynamicInfo);
     }
 
     @PostMapping("/un-publish")
     public void unPublish(@RequestBody Integer dynamicId,
-                          HttpServletRequest request) throws DynamicException {
-        dynamicService.unPublish(this.getUserId(request), dynamicId);
+                          HttpServletRequest request) throws DynamicException, UserException {
+        dynamicService.unPublish(UserUtil.getUserIdFromRequest(request), dynamicId);
     }
 
     @PostMapping("/like")
     public void like(@RequestBody Integer dynamicId,
-                     HttpServletRequest request) throws DynamicException {
-        dynamicService.like(this.getUserId(request), dynamicId);
+                     HttpServletRequest request) throws DynamicException, UserException {
+        dynamicService.like(UserUtil.getUserIdFromRequest(request), dynamicId);
     }
 
     @PostMapping("/comment")
     public void comment(@RequestBody CommentParam commentParam,
-                        HttpServletRequest request) throws DynamicException {
-        dynamicService.comment(this.getUserId(request), commentParam.getDynamicId(), commentParam.getComment());
+                        HttpServletRequest request) throws DynamicException, UserException {
+        dynamicService.comment(UserUtil.getUserIdFromRequest(request), commentParam.getDynamicId(), commentParam.getComment());
     }
 
     @PostMapping("/un-comment")
@@ -68,8 +66,8 @@ public class DynamicController {
 
     @PostMapping("/collect")
     public void collect(@RequestBody Integer dynamicId,
-                        HttpServletRequest request) throws DynamicException {
-        dynamicService.collect(this.getUserId(request), dynamicId);
+                        HttpServletRequest request) throws DynamicException, UserException {
+        dynamicService.collect(UserUtil.getUserIdFromRequest(request), dynamicId);
     }
     
 }
