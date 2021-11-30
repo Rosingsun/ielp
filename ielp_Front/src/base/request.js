@@ -58,4 +58,17 @@ const getApi = (url, params, method) => {
 // const spacialGetApi(url,params,method){
 
 // }
-export default getApi
+
+
+/**
+ * 个人用接口
+ * @author 幕冬
+ * @data 2021年11月25日
+ */
+export const requestService = axios.create({
+  baseURL: "http://localhost:8080/",
+  timeout: 50000,
+  headers: { 'Content-Type': 'application/json' },
+});
+
+export default getApi;

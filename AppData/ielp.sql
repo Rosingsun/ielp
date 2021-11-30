@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 16/11/2021 14:19:05
+ Date: 22/11/2021 09:17:21
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,6 @@ CREATE TABLE `dynamic`  (
   `info` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '动态信息',
   `
 related_articles` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '相关文章',
-  `music_path` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '音乐路径',
   `translate_history_id` int NOT NULL COMMENT '翻译记录id',
   `image_num` int NOT NULL COMMENT '图片数量',
   `like` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '点赞数量',
