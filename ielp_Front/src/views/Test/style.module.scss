@@ -8,13 +8,27 @@
   align-items: center;
   justify-content: center;
 
-  .menu{
+  .menu {
     // height: 100vh;
     // background-color: #fff;
   }
-  .mainBody{
-    height: 78vh;
-    // display: flex;
 
+  .mainBody {
+    height: 78vh;
+
+  }
+
+  .hardChoice {
+    display: flex;
+    padding: 20px 15px;
+
+    .choice {
+      padding: 5px 10px;
+      background-color: #fff;
+      border-radius: 5px;
+      min-width: 60px;
+      text-align: center;
+      margin-left: 5px;
+    }
   }
 }

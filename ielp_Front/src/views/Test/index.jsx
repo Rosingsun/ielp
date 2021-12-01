@@ -20,8 +20,17 @@ export default class Test extends Component {
           <Col span={18} push={6}>
             <div className={s.mainBody}>
               <Daka />
-              <SpreadLine mainColor='red'/>
-              <SpreadLine mainColor='blue'/>
+
+              <SpreadLine mainColor='red' />
+              <div className={s.hardChoice}>
+                <div className={s.choice}>12</div>
+                <div className={s.choice}>12</div>
+              </div>
+              <SpreadLine mainColor='blue' />
+              <div className={s.hardChoice}>
+                <div className={s.choice}>12</div>
+                <div className={s.choice}>12</div>
+              </div>
             </div>
           </Col>
           {/* 菜单栏 */}
