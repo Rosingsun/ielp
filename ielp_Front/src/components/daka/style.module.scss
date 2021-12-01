@@ -16,6 +16,7 @@
   border-radius: 15px;
   box-shadow: 2px 1px 2px 2px rgb(117, 112, 112);
   display: flex;
+  position: relative;
 }
 .two {
   width: 75%;
@@ -50,12 +51,23 @@
 .left {
   width: 60%;
   height: 100%;
+  z-index: 2;
 }
 .right {
   width: 40%;
+  z-index: 1;
   height: 100%;
-  margin-left: -80px;
-  margin-top: 30px;
+  // margin-left: -80px;
+  // margin-top: 30px;
+  position: absolute;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  img{
+    width: 100%;
+    height: auto;
+  }
 }
 .btn1 {
   width: 50%;

@@ -53,16 +53,16 @@ export default class Daka extends Component {
 
           </div>
           <div className={a.two}>
-            <Button type="primary" className={a.btn1}>
+            <Button  className={a.btn1}>
               <a className={a.text1}>今日未打卡</a>
             </Button>
-            <Button type="primary" className={a.btn} onClick={() => { }}>
+            <Button className={a.btn} onClick={() => { }}>
               <a className={a.text1}>马上去打卡</a>
             </Button>
           </div>
         </div>
         <div className={a.right}>
-          <img src={require('../../assets/home/abc.png').default} width='170%' height='75%' margin-right='50px' ></img>
+          <img src={require('../../assets/home/abc.png').default} height="100%" width="100%" ></img>
         </div>
       </div>
     );
