@@ -16,8 +16,8 @@ export default class SpreadLine extends Component {
   render() {
     return (
       <div className={s.SpreadLine}>
-        <div className={s.headCircle} style={{ backgroundColor: this.props.mainColor||'#efefef' }}>标题</div>
-        <div className={s.line} style={{ borderColor: this.props.borderColor||'rgba(151,143,183,1)' }}></div>
+        <div className={s.headCircle} style={{ backgroundColor: this.props.mainColor || '#efefef' }}>{this.props.title || '标题'}</div>
+        <div className={s.line} style={{ borderColor: this.props.borderColor || 'rgba(151,143,183,1)' }}></div>
       </div>
     )
   }

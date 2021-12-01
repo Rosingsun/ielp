@@ -21,15 +21,15 @@ export default class Test extends Component {
             <div className={s.mainBody}>
               <Daka />
 
-              <SpreadLine mainColor='red' />
+              <SpreadLine mainColor='#613fde' title="分类"/>
               <div className={s.hardChoice}>
-                <div className={s.choice}>12</div>
-                <div className={s.choice}>12</div>
+                <div className={s.choice} style={{ backgroundColor: "#613fde" }}>12</div>
+                <div className={s.choice} style={{ backgroundColor: "#613fde" }}>12</div>
               </div>
-              <SpreadLine mainColor='blue' />
+              <SpreadLine mainColor='#cd4848' title="目的" />
               <div className={s.hardChoice}>
-                <div className={s.choice}>12</div>
-                <div className={s.choice}>12</div>
+                <div className={s.choice} style={{ backgroundColor: "#cd4848"}}>12</div>
+                <div className={s.choice} style={{ backgroundColor: "#cd4848" }}>12</div>
               </div>
             </div>
           </Col>
