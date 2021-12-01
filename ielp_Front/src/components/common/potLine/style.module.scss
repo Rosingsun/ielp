@@ -1,0 +1,16 @@
+@import "@scss/_global.scss";
+
+.potLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+
+  .pot {
+    height: 26px;
+    width: 26px;
+    border-radius: 13px;
+    background-color: #efefef;
+    margin: 0px 15px;
+  }
+}
