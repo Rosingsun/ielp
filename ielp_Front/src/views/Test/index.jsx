@@ -9,7 +9,9 @@ export default class Test extends Component {
       questionIndex: 0,
     }
   }
-
+  goOpration(){//去详情页
+    this.props.history.push("/Choice/index");
+  }
   render() {
     return (
       <Row>
@@ -23,12 +25,12 @@ export default class Test extends Component {
 
               <SpreadLine mainColor='#613fde' title="分类"/>
               <div className={s.hardChoice}>
-                <div className={s.choice} style={{ backgroundColor: "#613fde" }}>12</div>
+                <div className={s.choice} style={{ backgroundColor: "#613fde" }} onClick={()=>{this.goOpration()}}>背单词</div>
                 <div className={s.choice} style={{ backgroundColor: "#613fde" }}>12</div>
               </div>
               <SpreadLine mainColor='#cd4848' title="目的" />
               <div className={s.hardChoice}>
-                <div className={s.choice} style={{ backgroundColor: "#cd4848"}}>12</div>
+                <div className={s.choice} style={{ backgroundColor: "#cd4848"}}>背单词</div>
                 <div className={s.choice} style={{ backgroundColor: "#cd4848" }}>12</div>
               </div>
             </div>

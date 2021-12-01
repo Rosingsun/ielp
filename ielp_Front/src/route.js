@@ -45,11 +45,16 @@ const routesConfig = [
     component: page.Test,
     title:"测试",
     acehe:true,
+  },{
+    path: "/choice",
+    component: page.Choice,
+    title:"测试",
+    acehe:true,
   },
   {
     path: "/learn",
     component: page.Learn,
-    title:"测试",
+    title:"学习",
     acehe:true,
   },
 ];
