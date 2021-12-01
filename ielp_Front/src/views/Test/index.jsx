@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Nav, ConversitionBox } from "../../components/index";
+import React, { Component } from 'react';
+import { Row, Col } from 'antd';
+import { Nav, ConversitionBox, Daka, SpreadLine } from "@components/index";
 import s from "./style.module.scss";
-
 export default class Test extends Component {
   constructor(props) {
     super(props);
@@ -12,19 +12,27 @@ export default class Test extends Component {
 
   render() {
     return (
-      <div className={s.testBody}>
-        <Nav />
-        <div className={s.mainBox}>
-          {
-            this.state.questionIndex == 0 ?
-              <div>
-                <ConversitionBox isBlue={true} title='blue' />
-                <ConversitionBox isBlue={false} title='red' />
-              </div>
-              : <div>123123</div>
-          }
+      <Row>
+        <div className={s.testBody}>
+          {/* 导航栏 */}
+          <Nav />
+          {/* 页面主内容 */}
+          <Col span={18} push={6}>
+            <div className={s.mainBody}>
+              <Daka />
+              <SpreadLine mainColor='red'/>
+              <SpreadLine mainColor='blue'/>
+            </div>
+          </Col>
+          {/* 菜单栏 */}
+          <Col span={6} pull={18}>
+            <div className={s.menu}>菜单栏</div>
+          </Col>
+
+
         </div>
-      </div>
+      </Row>
+
     )
   }
 }

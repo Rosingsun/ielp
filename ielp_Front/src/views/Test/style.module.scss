@@ -8,10 +8,13 @@
   align-items: center;
   justify-content: center;
 
-  .mainBox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+  .menu{
+    // height: 100vh;
+    // background-color: #fff;
+  }
+  .mainBody{
+    height: 78vh;
+    // display: flex;
+
   }
 }

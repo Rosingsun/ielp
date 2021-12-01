@@ -1,3 +1,8 @@
+/**
+ * 回答框
+ * @param {String} title 题目标题
+ * @param {Boolean} isBlue是否是蓝色的框（蓝色问题，红色回答）
+ */
 import React, { Component } from 'react';
 import s from "./style.module.scss";
 export default class ConversitionBox extends Component {
@@ -13,7 +18,6 @@ export default class ConversitionBox extends Component {
   render() {
     return (
       <div className={s.ConversitionBox}>
-
         {
           this.props.isBlue ?
             <div className={`${s.questin}  ${s.blueQuestin}`}>

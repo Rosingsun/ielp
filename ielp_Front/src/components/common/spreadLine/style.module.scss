@@ -1,0 +1,29 @@
+@import "@scss/_global.scss";
+
+.SpreadLine {
+  width: 100%;
+  height: 50px;
+
+  .headCircle {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    // padding: 5px;
+    border-radius: 50%;
+    background-color: #fff;
+    z-index: 20;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .line {
+    z-index: -1;
+    flex: 1;
+    width: 80%;
+    height: 1px;
+    border-bottom: 0.5px solid #99900090;
+    margin-top: -24px;
+    margin-left: 50px;
+  }
+}
