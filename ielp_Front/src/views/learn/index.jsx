@@ -62,7 +62,7 @@ export default class Learn extends Component {
             beforeUpload={beforeUpload}
             onChange={this.handleChange}
           >
-            {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> :
+            {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: 'auto',height:'60vh' }} /> :
               <div>
                 {this.state.loading ? <LoadingOutlined style={{ fontSize: '10vw', color: "#fff" }} /> : <PlusOutlined style={{ fontSize: '10vw', color: "#fff" }} />}
                 {/* <div style={{ marginTop: 8 }}>Upload</div> */}
@@ -72,7 +72,7 @@ export default class Learn extends Component {
           {/* <PlusOutlined style={{ fontSize: '10vw', color: "#fff" }} /> */}
         </div>
         <div className={a.listBox}>
-          {/* <DownList list={this.state.listData} /> */}
+          <DownList list={this.state.listData} />
         </div>
         <div className={a.search}>
           <Button type="primary" shape="round" icon={<ZoomInOutlined />} size='large'>
