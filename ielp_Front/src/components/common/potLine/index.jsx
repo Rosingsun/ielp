@@ -19,7 +19,7 @@ export default class PotLine extends Component {
         {
           this.props.posNum && this.props.posNum.map((item, index) => {
             return (
-              <div className={s.pot}></div>
+              <div className={s.pot} style={{backgroundColor:item.questionState==0?'gray':item.questionState==1?"#ffc300":item.isRight?"#a5d63f":"#d43030"}}></div>
             )
           })
         }

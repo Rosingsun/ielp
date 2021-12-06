@@ -9,8 +9,94 @@
   justify-content: center;
 
   .potLine {
-    width: 30%;
-  
-    // margin-top: 10vh;
+
+    // width: 30%;
+    .pot {
+      margin-bottom: 20px;
+    }
+  }
+
+  .questionBox {
+    min-height: 400px;
+    height: 40vh;
+    max-height: 500px;
+    width: 50vw;
+    min-width: 500px;
+    max-width: 750px;
+    background-color: #efefef;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 5px #3c335b;
+    padding: 35px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .questionTitle {
+      font-size: 26px;
+      font-weight: bold;
+
+      .questionDetails {
+        font-size: 18px;
+        font-weight: normal;
+
+      }
+    }
+
+    .questionAnswer {
+
+      ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+
+        li {
+          border: 2px solid #44396d;
+          background-color: #fff;
+          border-radius: 10px;
+          padding: 8px 0px;
+          font-size: 20px;
+          width: 22%;
+          text-align: center;
+        }
+        .choiced{
+          background-color: #3c335b;
+        }
+      }
+    }
+  }
+
+  .questoinChoice {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    p {
+      background-color: #fff;                                                
+      width: 7em;
+      padding: 5px 0px;
+      text-align: center;
+      border-radius: 3px;
+      color: #3c335b;
+      font-weight: bold;
+    }
+  }
+  .thisState{
+     position: absolute;
+     bottom: 0px;
+     left: 0px;
+     width: 100vw;
+     height: 40px;
+     background-color: #fff;
+     div{
+       height: 100%;
+       width: 100%;
+     }
+     .right{
+      //  background-color: chartreuse;
+     }
+     .worng{
+       background-color: red;
+     }
   }
 }

@@ -6,7 +6,25 @@ export default class Choice extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posArr: [1, 3, 4, 54, 12,],
+      posArr: [{
+        id: 1,
+        questionState: 0,//0,表示没答题，1表示正在答题，2表示已经答过，
+        isRight: false,//isRight=true是答题正确，false是答题错误
+      }, {
+        id: 2,
+        questionState: 1,//0,表示没答题，1表示正在答题，2表示已经答过，
+        isRight: false,//isRight=true是答题正确，false是答题错误
+      }, {
+        id: 3,
+        questionState: 2,//0,表示没答题，1表示正在答题，2表示已经答过，
+        isRight: false,//isRight=true是答题正确，false是答题错误
+      }, {
+        id: 4,
+        questionState: 2,//0,表示没答题，1表示正在答题，2表示已经答过，
+        isRight: true,//isRight=true是答题正确，false是答题错误
+      },],
+      anwswer: ['A', 'B', 'C', 'D'],
+      choicedNum: 0,
     }
   }
 
@@ -17,9 +35,39 @@ export default class Choice extends Component {
         <Nav />
         {/* 页面主内容 */}
         <div className={s.potLine}>
-          <PotLine posNum={this.state.posArr} />
+          <div className={s.pot}>
+            <PotLine posNum={this.state.posArr} />
+          </div>
+          <div className={s.questionBox}>
+            <div className={s.questionTitle}>
+              这里是题目的位置
+              <div className={s.questionDetails}>也可以阅读理解</div>
+            </div>
+
+            <div className={s.questionAnswer}>
+              <ul>
+                {
+                  this.state.anwswer.map((item, index) => {
+                    return (
+                      < li className={this.choicedNum == index ? { ...s.choiced } : s.unChoiced} onClick={(e) => { this.setState({ choicedNum: index }) }} key={item}>{item}</li>
+                    )
+                  })
+                }
+
+              </ul>
+            </div>
+          </div>
+          <div className={s.questoinChoice}>
+            <p style={{ backgroundColor: "#ffc300" }}>上一题</p>
+            <p style={{ backgroundColor: "#a5d63f" }}>NEXT</p>
+          </div>
         </div>
-      </div>
+        <div className={s.thisState}>
+          {
+            this.state.isRight ? <div className={s.right}></div> : <div className={s.worng}></div>
+          }
+        </div>
+      </div >
 
     )
   }
