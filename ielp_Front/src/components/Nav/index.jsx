@@ -14,15 +14,18 @@ class Nav extends Component {
     console.log("这里有回调函数", this.props);
     if (this.props) {
       console.log("回调函数是GObACK");
-    this.props.history.push("/Home");
+      // this.props.history.push("/Home");
     }
   }
   render() {
     return (
       <div className={s.navBody}>
-        <div className={s.goBack} onClick={() => { this.goBack(); }}>
+        {
+          this.props.hideBack?'':<div className={s.goBack} onClick={() => { this.goBack(); }}>
           <LeftCircleFilled twoToneColor="#fff" />
         </div>
+        }
+        
         <div className={s.leftBar}></div>
         <div className={s.leftImg}>
           <img src={require("../../assets/images/login/top.png").default} />
