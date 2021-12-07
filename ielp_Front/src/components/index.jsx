@@ -3,6 +3,7 @@ export { default as FriendBox } from './friendBox/index';//路由
 export { default as Nav } from './Nav/index';//顶部导航（二级）
 export { default as Daka } from './daka/index';//打卡的卡片
 export { default as DownList } from "./downList/index";//下拉菜单
-export { default as ConversitionBox} from"./ConversitionBox/index"//答题页面的弹出框样式
-export {default as SpreadLine} from "./common/spreadLine/index";//分割线
-export {default as PotLine} from "./common/potLine/index";//分割线
+export { default as ConversitionBox } from "./ConversitionBox/index"//答题页面的弹出框样式
+export { default as SpreadLine } from "./common/spreadLine/index";//分割线
+export { default as PotLine } from "./common/potLine/index";//分割线
+export { default as ForumItem } from "./common/forum/index";//社区框

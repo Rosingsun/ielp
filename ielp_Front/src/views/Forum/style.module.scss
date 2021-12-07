@@ -9,15 +9,37 @@
   height: 100vh;
   width: 100vw;
   background-color: #e65054;
+  display: flex;
+  flex-direction: row;
+
+  .leftNav {
+    width: 200px;
+    position: absolute;
+  
+  }
+
+  .container {
+    width: 50%;
+    margin: 0 auto;
+    margin-left: 25%;
+    display: flex;
+    flex-direction: column;
+  }
 
   .topSection {
-    width: 60%;
-    margin-left: 20%;
-    padding-top: 5%;
+    // width: 60%;
+    // margin-left: 20%;
+    padding-top: 10%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     position: relative;
+  }
+
+  .nextBox {
+    width: 100%;
+    // background-color: #ffffffb8;
+    margin-top: 80px;
   }
 
   :global {
@@ -34,6 +56,10 @@
       }
     }
 
+    .ant-input-textarea-show-count::after {
+      color: #ffffffb8;
+    }
+
     .ant-input:focus,
     .ant-input:hover {
       border-color: #e65054;
@@ -43,7 +69,7 @@
       position: absolute !important;
       right: 0px;
       background-color: #ff9b9e;
-      height: 82px;
+      height: 83px;
       margin-top: 1px;
       width: 100px;
     }
