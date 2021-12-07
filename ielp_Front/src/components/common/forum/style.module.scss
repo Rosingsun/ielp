@@ -1,11 +1,12 @@
 @import "@scss/_global.scss";
 
 .forum {
-  .section{
+  .section {
     display: flex;
     flex-direction: row;
   }
-  .mainBody{
+
+  .mainBody {
     width: 97%;
     min-height: 110px;
     background-color: #fff;
@@ -13,15 +14,24 @@
     margin-top: 20px;
     margin-left: -60px;
     box-shadow: 1px 1px 17px 0px #663737;
-    padding: 15px 35px;
-    .userName{
+    // padding: 15px 35px;
+
+    .userName {
       font-size: 20px;
       margin-left: 25px;
     }
-    .text{
-       margin-left: 25px;
+
+    .text {
+      margin-left: 25px;
+    }
+
+    section {
+      height: 100%;
+      width: 100%;
+      margin: 15px 35px;
     }
   }
+
   :global {
     .ant-avatar-image {
       border: 5px solid #e65054;
