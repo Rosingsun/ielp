@@ -24,7 +24,7 @@ export default class Forum extends Component {
             <Button type="primary" size="small" loading={false}>发表</Button>
           </div>
           <div className={a.nextBox}>
-            <ForumItem />
+            <ForumItem type={2}/>
           </div>
         </div>
       </div>
