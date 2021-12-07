@@ -5,5 +5,30 @@
   background-color: #e2e2e2;
   height: 600px;
   border-radius: 5px;
-  
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: row;
+
+  .searchPic {
+    .pic {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+
+      }
+    }
+
+    .transfromType {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    div {
+      flex: 1;
+    }
+  }
 }

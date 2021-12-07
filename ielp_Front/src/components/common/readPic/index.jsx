@@ -17,7 +17,17 @@ export default class ReadPic extends Component {
     return (
       <div className={s.readPic}>
         {/* 最左边一列 */}
-        <div></div>
+        <div className={s.searchPic}>
+          <div className={s.pic}>
+            <img src="http://pic.51yuansu.com/pic3/cover/04/01/04/5fa50a14e46df_610.jpg"></img>
+          </div>
+          <div className={s.transfromType}>
+            <p>英语</p><p>中文</p>
+          </div>
+          <div>
+            <p>英语</p><p>中文</p>
+          </div>
+        </div>
         {/* 中间一列 */}
         <div></div>
         {/* 左右边一列 */}
