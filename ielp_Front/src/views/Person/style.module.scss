@@ -1,0 +1,20 @@
+.personBody{
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: rgb(7,27,63); 
+  .mainBody{
+    width: 76%;
+    margin-left: 12%;
+    // background-color: #efefef;
+    .personInfo{
+      :global {
+        .ant-descriptions-title{
+          color: #fff;
+        }
+        .ant-descriptions-item-label,.ant-descriptions-item-content{
+          color: #fff;
+        }
+      }
+    }
+  }
+}

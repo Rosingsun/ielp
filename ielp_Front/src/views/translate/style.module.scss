@@ -1,4 +1,5 @@
 @import "@scss/_global.scss";
+
 .body {
   height: 100vh;
   background-color: rgba(68, 57, 109, 1);
@@ -6,28 +7,33 @@
   position: relative;
   padding-top: 0px;
 }
+
 .translateBox {
   height: 50vh;
   width: 60vw;
   margin-left: 20vw;
   background-color: #fff;
   border-radius: 20px;
-  margin-top: 20vh;
+  margin-top: 10vh;
   padding: 30px;
   display: flex;
   flex-direction: row;
+  min-width: 900px;
+
   .left {
     width: 50%;
     height: 100%;
     /* background: red; */
     border-right: inset;
-    :global{
-      .ant-btn-primary{
-        background-color: rgb(41,0,100);
+
+    :global {
+      .ant-btn-primary {
+        background-color: rgb(41, 0, 100);
         border: none;
         border-radius: 3px;
       }
     }
+
     .leftTop {
       height: 50%;
       width: 100%;
@@ -39,10 +45,38 @@
         justify-content: space-between;
         width: 95%;
       }
-      .Input {
+
+      .Input {}
+    }
+
+    .leftBottom {
+      display: flex;
+      flex-direction: row;
+      word-break: keep-all;
+      flex-wrap: wrap;
+      padding-top: 10px;
+      align-items: center;
+
+      p {
+        border: 1px solid #44396d;
+        background-color: #44396d;
+        cursor: pointer;
+        color: #ffffffed;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 10px;
+        letter-spacing: 1px;
+        margin: 0px 5px;
+        box-shadow: 1px 1px 3px 0px #44396d;
+        max-width: 15em;
+        overflow: hidden;
+        margin-top: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap; //文本不换行，这样超出一行的部分被截取，显示...
       }
     }
   }
+
   .right {
     width: 50%;
     height: 100%;
@@ -50,19 +84,20 @@
     // background: red;
     // border-right:inset;
     .rightTop {
-      height: 70%;
+      height: 100%;
       width: 100%;
-      border-bottom: inset;
+
+      // border-bottom: inset;
       .content {
         margin-left: 5%;
-        height: 95%;
+        height: 100%;
         width: 90%;
-        border:1px solid #cacaca;
+        border: 1px solid #cacaca;
         border-radius: 5px;
         padding: 20px;
       }
     }
-    .rightBtm {
-    }
+
+    .rightBtm {}
   }
 }

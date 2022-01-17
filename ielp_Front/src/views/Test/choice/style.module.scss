@@ -6,10 +6,11 @@
   background-color: #44396d;
   display: flex;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
+  flex-direction: column;
 
   .potLine {
-
+    margin-top: 5%;
     // width: 30%;
     .pot {
       margin-bottom: 20px;
@@ -60,6 +61,10 @@
         }
         .choiced{
           background-color: #3c335b;
+          color: #fff;
+        }
+        .unChoiced{
+          background-color: #efefef;
         }
       }
     }
@@ -93,7 +98,7 @@
        width: 100%;
      }
      .right{
-      //  background-color: chartreuse;
+       background-color: rgba(116,197,145,1);
      }
      .worng{
        background-color: red;

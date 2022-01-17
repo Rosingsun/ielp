@@ -19,7 +19,7 @@ export default class ReadPic extends Component {
         {/* 最左边一列 */}
         <div className={s.searchPic}>
           <div className={s.pic}>
-            <img src="http://pic.51yuansu.com/pic3/cover/04/01/04/5fa50a14e46df_610.jpg"></img>
+            <img src="https://bpic.51yuansu.com/pic3/cover/04/01/93/5ff3cc57df6e1_610.jpg"></img>
           </div>
           <div className={s.transfromType}>
             <p>英语</p><p>中文</p>

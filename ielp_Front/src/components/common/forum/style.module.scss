@@ -2,43 +2,50 @@
 
 .forum {
   .section {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
+    background-color: #fff;
+    box-shadow: 1px 1px 6px 0px #663737;
+    border-radius: 4px;
+    padding: 15px;
   }
 
   .mainBody {
     width: 97%;
     min-height: 110px;
-    background-color: #fff;
     border-radius: 5px;
-    margin-top: 20px;
-    margin-left: -60px;
-    box-shadow: 1px 1px 17px 0px #663737;
-    // padding: 15px 35px;
 
     .userName {
-      font-size: 20px;
-      margin-left: 25px;
+      font-size: 16px;
+
     }
 
     .text {
-      margin-left: 25px;
+
+      font-size: 12px;
+      color: #999;
+    }
+
+    .mainWord {
+      margin-top: 10px;
     }
 
     section {
       height: 100%;
       width: 100%;
-      margin: 15px 35px;
+      margin-left: 25px;
+      // margin: 15px 35px;
     }
   }
 
-  :global {
-    .ant-avatar-image {
-      border: 5px solid #e65054;
-    }
+  // :global {
+  //   .ant-avatar-image {
+  //     border: 5px solid #e65054;
+  //   }
 
-    .ant-avatar>img {
-      border-radius: 50%;
-    }
-  }
+  //   .ant-avatar>img {
+  //     border-radius: 50%;
+  //   }
+  // }
 }

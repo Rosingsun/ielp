@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Upload } from 'antd'
+import { Button, Upload,Image } from 'antd'
 import { Daka } from "@components/index";
 import { PlusOutlined, ZoomInOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Nav, DownList } from '@components/index';
@@ -36,22 +36,21 @@ export default class Learn extends Component {
       this.setState({ loading: true });
       return;
     }
-    // if (info.file.status === 'done') {
-      getBase64(info.file.originFileObj, imageUrl => {
-        console.log('imageUrl',imageUrl);
-        this.setState({
-          imageUrl,
-          loading: false,
-        })
-      },
-      );
+    getBase64(info.file.originFileObj, imageUrl => {
+      console.log('imageUrl', imageUrl);
+      this.setState({
+        imageUrl,
+        loading: false,
+      })
+    },
+    );
     // }
   };
   render() {
     const { imageUrl } = this.state
     return (
       <div className={a.body}>
-        <Nav />
+        <Nav imgUrl={require("../../assets/images/learn/learn.png").default} />
         <div className={a.container}>
           <Upload
             name="avatar"
@@ -62,7 +61,7 @@ export default class Learn extends Component {
             beforeUpload={beforeUpload}
             onChange={this.handleChange}
           >
-            {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: 'auto',height:'60vh' }} /> :
+            {imageUrl ? <Image src={imageUrl} alt="avatar" style={{ width: 'auto', height: '60vh' }} /> :
               <div>
                 {this.state.loading ? <LoadingOutlined style={{ fontSize: '10vw', color: "#fff" }} /> : <PlusOutlined style={{ fontSize: '10vw', color: "#fff" }} />}
                 {/* <div style={{ marginTop: 8 }}>Upload</div> */}

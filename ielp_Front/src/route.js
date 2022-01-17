@@ -57,5 +57,11 @@ const routesConfig = [
     title:"学习",
     acehe:true,
   },
+  {
+    path: "/person",
+    component: page.Person,
+    title:"个人中心",
+    acehe:true,
+  },
 ];
 export default routesConfig;

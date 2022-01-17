@@ -18,13 +18,14 @@ export default class ForumItem extends Component {
     return (
       <div className={s.forum}>
         <div className={s.section}>
-          <Avatar size={90} src="http://pic.51yuansu.com/pic3/cover/04/01/04/5fa50a14e46df_610.jpg" />
+          <Avatar size={60} src="https://bpic.51yuansu.com/pic3/cover/04/01/93/5ff3cc57df6e1_610.jpg" />
           <div className={s.mainBody}>
             {this.props.type == 1 ?
               // 状态1，普通的发版言论
               <section>
                 <div className={s.userName}>发表的人的用户名称</div>
-                <div className={s.text}>发表的人发表的内容</div>
+                <div className={s.text}>发表人的个性签名</div>
+                <div className={s.mainWord}>发表人的主要内容</div>
               </section>
               : this.props.type == 2 ?
                 // 状态2,从测试页面分享过来

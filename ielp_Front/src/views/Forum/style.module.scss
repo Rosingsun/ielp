@@ -6,74 +6,111 @@
 }
 
 .forumBody {
-  height: 100vh;
-  width: 100vw;
+  // height: 100vh;
+  // width: 100vw;
   background-color: #e65054;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
-  .leftNav {
-    width: 200px;
-    position: absolute;
-  
-  }
-
-  .container {
-    width: 50%;
-    margin: 0 auto;
-    margin-left: 25%;
-    display: flex;
-    flex-direction: column;
-    min-width: 840px;
-    margin: 0 auto;
-  }
-
-  .topSection {
-    // width: 60%;
-    // margin-left: 20%;
-    padding-top: 10%;
+  .mainiContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    position: relative;
-  }
 
-  .nextBox {
-    width: 100%;
-    // background-color: #ffffffb8;
-    margin-top: 80px;
-  }
+    .borderNav {
+      flex: 0.8;
 
-  :global {
+      .navList {
 
-    .ant-input-textarea {
-      width: 85%;
-      height: 6em;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
 
-      // margin-left: 5%;
-      textarea {
-        height: 100%;
-        font-size: 18px;
-        padding-right: 120px;
+      }
+
+      .menuList {
+        height: auto;
+        width: 200px;
+        width: 120px;
+        background: #fff;
+        margin-right: 20px;
+        list-style: none;
+        border-radius: 2px;
+        li:hover{
+          color: #e65054;
+        }
+        li {
+          color: #252933;
+          padding: 10px 5px;
+          cursor: pointer;
+
+          span {
+            margin-left: 5px;
+            font-size: 16px;
+          }
+        }
       }
     }
 
-    .ant-input-textarea-show-count::after {
-      color: #ffffffb8;
+    .leftNav {}
+
+    .container {
+      width: 50%;
+      margin: 0 auto;
+      margin-left: 25%;
+      display: flex;
+      flex-direction: column;
+      min-width: 840px;
+      margin: 0 auto;
     }
 
-    .ant-input:focus,
-    .ant-input:hover {
-      border-color: #e65054;
+    .topSection {
+      // width: 60%;
+      // margin-left: 20%;
+      // padding-top: 10%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      position: relative;
+      align-items: center;
     }
 
-    .ant-btn {
-      position: absolute !important;
-      right: 0px;
-      background-color: #ff9b9e;
-      height: 83px;
-      margin-top: 1px;
-      width: 100px;
+    .nextBox {
+      width: 100%;
+      // background-color: #ffffffb8;
+      // margin-top: 80px;
+    }
+
+    :global {
+
+      .ant-input-textarea {
+        width: 85%;
+        height: 10em;
+
+        // margin-left: 5%;
+        textarea {
+          height: 100%;
+          font-size: 18px;
+          padding-right: 120px;
+        }
+      }
+
+      .ant-input-textarea-show-count::after {
+        color: #ffffffb8;
+      }
+
+      .ant-input:focus,
+      .ant-input:hover {
+        border-color: #e65054;
+      }
+
+      .ant-btn {
+        // position: absolute !important;
+        right: 0px;
+        background-color: #ff9b9e;
+        height: 83px;
+        margin-top: 1px;
+        width: 100px;
+      }
     }
   }
 }

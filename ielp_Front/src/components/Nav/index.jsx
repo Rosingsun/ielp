@@ -21,18 +21,21 @@ class Nav extends Component {
     return (
       <div className={s.navBody}>
         {
-          this.props.hideBack?'':<div className={s.goBack} onClick={() => { this.goBack(); }}>
-          <LeftCircleFilled twoToneColor="#fff" />
-        </div>
+          this.props.hideBack ? '' : <div className={s.goBack} onClick={() => { this.goBack(); }}>
+            <LeftCircleFilled twoToneColor="#fff" />
+          </div>
         }
-        
+
         <div className={s.leftBar}></div>
         <div className={s.leftImg}>
           <img src={require("../../assets/images/login/top.png").default} />
         </div>
         <div className={s.minBarr}></div>
         <div className={s.rightImg}>
-          <img src={require("../../assets/images/logo.jpg").default} />
+          {
+            this.props.imgUrl ? <img src={this.props.imgUrl} /> : <img src={require("../../assets/images/logo.jpg").default} />
+          }
+
         </div>
         <div className={s.rightBar}></div>
 
