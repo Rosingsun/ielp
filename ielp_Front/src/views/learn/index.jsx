@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Upload,Image } from 'antd'
-import { Daka } from "@components/index";
+import { Button, Upload, Image } from 'antd'
 import { PlusOutlined, ZoomInOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Nav, DownList } from '@components/index';
-import a from "./style.module.scss";
 import { beforeUpload, getBase64 } from "../../utils/conformPic";
-
+import { readPicPass, readPicKey } from "@constants/apiConstants.js";
+import { Daka } from "@components/index";
+import * as common from '@actions/common';
+import a from "./style.module.scss";
 export default class Learn extends Component {
   constructor(props) {
     super(props);
@@ -18,8 +19,13 @@ export default class Learn extends Component {
       }, {
         title: "收藏",
         listItem: [],
-      }]
+      }],
+      access_token: undefined,//百度识图的token
     };
+  }
+  componentDidMount() {
+    console.log("获取数据");
+    this.getToken();
   }
 
   uploadButton() {
@@ -29,6 +35,17 @@ export default class Learn extends Component {
         <div style={{ marginTop: 8 }}>Upload</div>
       </div >
     )
+  }
+
+  getToken() {
+    common.pic_getToekn({
+      grant_type: 'client_credentials',
+      client_id: readPicKey,
+      client_secret: readPicPass,
+    }).then((res) => {
+      console.log("Res", res);
+      this.setState({ access_token: res.data.access_token })
+    })
   }
   handleChange = info => {
     console.log(info)
@@ -42,10 +59,21 @@ export default class Learn extends Component {
         imageUrl,
         loading: false,
       })
+      this.readPic();
     },
     );
     // }
   };
+  readPic() {
+    common.pic_read({
+      access_token: this.state.access_token,
+      image: this.state.imageUrl,
+      scenes: ["animal", "plant", "ingredient", "dishs", "red_wine", "currency", "landmark"],
+    }, '?access_token=' + this.state.access_token,()=>{})
+    // .then((res)=>{
+    //   console.log("Resss",res)
+    // })
+  }
   render() {
     const { imageUrl } = this.state
     return (

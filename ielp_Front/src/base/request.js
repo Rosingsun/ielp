@@ -12,7 +12,7 @@ export const TIMEOUT = 5000;
 const instance = axios.create({
   // baseURL: BASE_URL,
   timeout: TIMEOUT,
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': '*' }
+  headers: { 'Access-Control-Allow-Origin': '*' }
 })
 
 //添加拦截
@@ -35,7 +35,7 @@ instance.interceptors.response.use(res => {
  * @param {String} url 连接后台的路由
  * @param {Object} data 传递给接口的对象数据
  */
-const getApi = (url, params, method) => {
+export const getApi = (url, params, method) => {
   const data = axios({
     url: url,
     // data: Qs.stringify(params),
@@ -55,9 +55,31 @@ const getApi = (url, params, method) => {
     });
   return data
 }
-// const spacialGetApi(url,params,method){
-
-// }
+/**
+ * 
+ * @param {String} type 传输的类型，一般就 post 和 get就好了 但是要大写
+ * @param {String} url 连接后台的路由
+ * @param {Object} data 传递给接口的对象数据
+ */
+ export const postApi = (url, data, method,urlParams) => {
+  const req = axios({
+    url: url +urlParams,
+    method: method||'post',
+    data: data,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*'
+    }
+  })
+    .then((res) => {
+      return res;
+    }).catch((err) => {
+      message.error('接口发生错误');
+      return err;
+    });
+  return req
+}
 
 
 /**
@@ -71,4 +93,6 @@ export const requestService = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-export default getApi;
+// export default {
+//   getApi,postApi
+// };
