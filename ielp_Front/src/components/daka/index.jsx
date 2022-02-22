@@ -53,7 +53,7 @@ export default class Daka extends Component {
 
           </div>
           <div className={a.two}>
-            <Button  className={a.btn1}>
+            <Button className={a.btn1}>
               <a className={a.text1}>今日未打卡</a>
             </Button>
             <Button className={a.btn} onClick={() => { }}>

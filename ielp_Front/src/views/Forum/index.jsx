@@ -30,7 +30,7 @@ export default class Forum extends Component {
   render() {
     return (
       <div className={a.forumBody}>
-        <Nav hideBack={true} />
+        <Nav hideBack={true}   imgUrl={require("../../assets/forum/forum.png").default}/>
         <div className={a.mainiContainer}>
           <div className={a.leftNav, a.borderNav}>
             <div className={a.navList}>

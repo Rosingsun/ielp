@@ -33,6 +33,12 @@
   left: 20px;
   top: 20%;
 }
+.choice{
+  position: fixed;
+  right: 20px;
+  // width: 10em;
+  top: 20%;
+}
 :global {
   .avatar-uploader {
     background-color: rgba(255, 255, 255, 0);
@@ -49,6 +55,15 @@
     // border-radius: 50px !important;
     // padding: 20px !important;
     border: 0px;
+  }
+  .ant-image-preview-img{
+    height: 80vh;
+    object-fit: contain;
+    transform:inherit;
+    width: auto;
+  }
+  .ant-select-arrow{
+    max-width: 10em;
   }
 }
 

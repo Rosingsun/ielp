@@ -11,6 +11,12 @@ const routesConfig = [
     acehe:false// 是否在主菜单上显示
   },
   {
+    path: "/Register",
+    component: page.Register,
+    title:"注册",
+    acehe:true,
+  },
+  {
     path: "/home",
     component: page.Home,
     title:'主页',
